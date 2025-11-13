@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://btrms1caarm7w"]
+
+[ext_resource type="Script" uid="uid://bomn6i44wg868" path="res://scripts/wave.gd" id="1_y5ysc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4c57u"]
+height = 53.03125
+radius = 3.5146484
+
+[node name="Wave" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+visible = false
+script = ExtResource("1_y5ysc")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8893423, 0, 0)
+shape = SubResource("CylinderShape3D_4c57u")
+
+[node name="Wave" type="CSGCylinder3D" parent="."]
+radius = 3.7407227
+height = 1000.1006

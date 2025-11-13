@@ -1,0 +1,241 @@
+[gd_scene load_steps=18 format=3 uid="uid://cablalujd6va0"]
+
+[ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://b4a2eobvwve67" path="res://sprites/peer.png" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="3_1bvp3"]
+[ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://water.gdshader" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://sprites/voronoi.png" id="6_5vw27"]
+[ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://sprites/shadow.png" id="7_272bh"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="8_5vw27"]
+[ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://sprites/star.png" id="9_kek77"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
+render_priority = 0
+shader = ExtResource("5_lquwl")
+shader_parameter/water_color = Color(0.82421875, 0.7952423, 0.59884644, 1)
+shader_parameter/light_foam_color = Color(1, 0.977437, 0.83203125, 1)
+shader_parameter/dark_foam_color = Color(0.6862745, 0.6627451, 0.49803922, 1)
+shader_parameter/voronoi_texture = ExtResource("6_5vw27")
+shader_parameter/voronoi_size = 0.06
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
+material = SubResource("ShaderMaterial_7mycd")
+size = Vector2(1000, 1000)
+subdivide_width = 400
+subdivide_depth = 400
+
+[sub_resource type="Environment" id="Environment_5vw27"]
+ambient_light_source = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_kek77"]
+font = ExtResource("8_5vw27")
+font_size = 64
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
+font = ExtResource("8_5vw27")
+font_size = 144
+outline_size = 30
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_kek77"]
+resource_name = "score_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.1415927]
+}
+
+[sub_resource type="Animation" id="Animation_4c57u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_efxa6"]
+_data = {
+&"RESET": SubResource("Animation_4c57u"),
+&"score_idle": SubResource("Animation_kek77")
+}
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_h2yge")
+
+[node name="Grid" type="Node3D" parent="."]
+script = ExtResource("1_ig7tw")
+grid_size = Vector2i(15, 6)
+tile_size = Vector2(1.1, 1.1)
+tile_height_variation = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.65307707, 0.75729156, 0, -0.75729156, 0.65307707, 1.3848572, 7.136898, 9.720946)
+
+[node name="Character" type="Node3D" parent="."]
+script = ExtResource("3_1bvp3")
+
+[node name="SpriteContainer" type="Node3D" parent="Character"]
+
+[node name="Sprite3D" type="Sprite3D" parent="Character/SpriteContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.008, -0.1)
+modulate = Color(1, 0.9647059, 0.7254902, 1)
+shaded = true
+texture = ExtResource("2_0xm2m")
+
+[node name="Shadow" type="Sprite3D" parent="Character"]
+transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0.1, 0.146)
+modulate = Color(1, 1, 1, 0.6313726)
+texture = ExtResource("7_272bh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.9321217, -0.12628701, 0.33941236, 0, 0.93722725, 0.34871927, -0.36214522, -0.3250488, 0.87360984, 0, 0, 0)
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7620473, 0)
+mesh = SubResource("PlaneMesh_1bvp3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5vw27")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Score" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_right = 81.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "125"
+label_settings = SubResource("LabelSettings_kek77")
+horizontal_alignment = 1
+
+[node name="Combo" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -554.0
+offset_top = 19.0
+offset_right = -392.0
+offset_bottom = 84.0
+grow_horizontal = 2
+text = "125"
+label_settings = SubResource("LabelSettings_kek77")
+
+[node name="MovesLeft" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 371.0
+offset_top = 19.0
+offset_right = 533.0
+offset_bottom = 84.0
+grow_horizontal = 2
+text = "125"
+label_settings = SubResource("LabelSettings_kek77")
+horizontal_alignment = 2
+
+[node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl"]
+modulate = Color(0.8515625, 0.8336174, 0.71517944, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+texture = ExtResource("9_kek77")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/TextureRect"]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.999985
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(128, 128)
+texture = ExtResource("9_kek77")
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.5
+offset_top = -72.5
+offset_right = 103.5
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "125"
+label_settings = SubResource("LabelSettings_4c57u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/FinalScoreControl"]
+libraries = {
+&"": SubResource("AnimationLibrary_efxa6")
+}

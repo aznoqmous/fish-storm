@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpwvylcnp8wi6"]
+
+[ext_resource type="Texture2D" uid="uid://3f4mefwv367p" path="res://sprites/tile.png" id="1_n3f48"]
+[ext_resource type="Script" uid="uid://cn06fnu4ouyxj" path="res://scripts/tile.gd" id="1_ywnoi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywnoi"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.9647059, 0.7254902, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ywnoi"]
+
+[node name="Tile" type="Area3D"]
+script = ExtResource("1_ywnoi")
+color = Color(0.30078125, 0.28227615, 0.1844635, 1)
+available_color = Color(1, 0.9647059, 0.7254902, 1)
+hover_color = Color(1, 0.97991073, 0.84375, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+modulate = Color(1, 0.9647059, 0.7254902, 1)
+shaded = true
+texture = ExtResource("1_n3f48")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0025024414, -0.4986992, -0.036499023)
+material_override = SubResource("StandardMaterial3D_ywnoi")
+size = Vector3(1.1339111, 0.993103, 1.045166)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5056702, 0)
+shape = SubResource("BoxShape3D_ywnoi")

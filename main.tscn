@@ -1,21 +1,59 @@
-[gd_scene load_steps=18 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=33 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://b4a2eobvwve67" path="res://sprites/peer.png" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="2_074og"]
 [ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="3_1bvp3"]
+[ext_resource type="Resource" uid="uid://bsj34scaej83e" path="res://resources/fish.tres" id="3_cegan"]
+[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://wobbly.gdshader" id="4_4c57u"]
+[ext_resource type="Resource" uid="uid://do44ensh4t8uk" path="res://resources/big_fish.tres" id="4_82xsv"]
+[ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/cane.tres" id="5_getpj"]
 [ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://water.gdshader" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://sprites/voronoi.png" id="6_5vw27"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="6_efxa6"]
+[ext_resource type="Resource" uid="uid://sy0tuxwk5ayk" path="res://resources/shoe.tres" id="6_ryguw"]
 [ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://sprites/shadow.png" id="7_272bh"]
+[ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="7_d13ii"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://sprites/particle.png" id="7_dg77c"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://sprites/star.png" id="9_kek77"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
+render_priority = 0
+shader = ExtResource("4_4c57u")
+shader_parameter/texture_albedo = ExtResource("2_0xm2m")
+shader_parameter/texture_flow_map = ExtResource("6_efxa6")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_size = 2.0
+
+[sub_resource type="Curve" id="Curve_ycdy4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w48qg"]
+curve = SubResource("Curve_ycdy4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vivmo"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_w48qg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+transparency = 1
+albedo_texture = ExtResource("7_dg77c")
+
+[sub_resource type="QuadMesh" id="QuadMesh_yaehf"]
+material = SubResource("StandardMaterial3D_2cqfq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
 shader = ExtResource("5_lquwl")
-shader_parameter/water_color = Color(0.82421875, 0.7952423, 0.59884644, 1)
-shader_parameter/light_foam_color = Color(1, 0.977437, 0.83203125, 1)
-shader_parameter/dark_foam_color = Color(0.6862745, 0.6627451, 0.49803922, 1)
+shader_parameter/water_color = Color(0, 0, 0, 1)
+shader_parameter/light_foam_color = Color(0.0390625, 0.0390625, 0.0390625, 1)
+shader_parameter/dark_foam_color = Color(0.015625, 0.015625, 0.015625, 1)
 shader_parameter/voronoi_texture = ExtResource("6_5vw27")
 shader_parameter/voronoi_size = 0.06
 
@@ -40,6 +78,21 @@ font_size = 144
 outline_size = 30
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_4c57u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_kek77"]
 resource_name = "score_idle"
 loop_mode = 1
@@ -56,21 +109,6 @@ tracks/0/keys = {
 "values": [0.0, 3.1415927]
 }
 
-[sub_resource type="Animation" id="Animation_4c57u"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_efxa6"]
 _data = {
 &"RESET": SubResource("Animation_4c57u"),
@@ -79,34 +117,49 @@ _data = {
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_h2yge")
+fishes = Array[ExtResource("2_074og")]([ExtResource("3_cegan"), ExtResource("4_82xsv")])
+upgrades = Array[ExtResource("2_074og")]([ExtResource("5_getpj"), ExtResource("6_ryguw"), ExtResource("7_d13ii")])
 
 [node name="Grid" type="Node3D" parent="."]
 script = ExtResource("1_ig7tw")
 grid_size = Vector2i(15, 6)
-tile_size = Vector2(1.1, 1.1)
+tile_size = Vector2(1.15, 1.15)
 tile_height_variation = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.65307707, 0.75729156, 0, -0.75729156, 0.65307707, 1.3848572, 7.136898, 9.720946)
+transform = Transform3D(1, 0, 0, 0, 0.65307707, 0.75729156, 0, -0.75729156, 0.65307707, 1.3848572, 7.136898, 6.4730587)
 
 [node name="Character" type="Node3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.009594381, 0, 0)
 script = ExtResource("3_1bvp3")
 
 [node name="SpriteContainer" type="Node3D" parent="Character"]
 
 [node name="Sprite3D" type="Sprite3D" parent="Character/SpriteContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.008, -0.1)
-modulate = Color(1, 0.9647059, 0.7254902, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9147905, 0.110119246)
+material_override = SubResource("ShaderMaterial_efxa6")
 shaded = true
 texture = ExtResource("2_0xm2m")
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Character/SpriteContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8284638, 0)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_vivmo")
+draw_pass_1 = SubResource("QuadMesh_yaehf")
+
 [node name="Shadow" type="Sprite3D" parent="Character"]
-transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0.1, 0.146)
+transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0.31, 0.14575745)
 modulate = Color(1, 1, 1, 0.6313726)
 texture = ExtResource("7_272bh")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Character"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0.9598488, 0.61517113)
+light_energy = 0.5
+omni_range = 7.3351545
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9321217, -0.12628701, 0.33941236, 0, 0.93722725, 0.34871927, -0.36214522, -0.3250488, 0.87360984, 0, 0, 0)
+light_energy = 0.5
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7620473, 0)

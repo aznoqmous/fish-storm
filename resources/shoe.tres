@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://sy0tuxwk5ayk"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_rulj0"]
+[ext_resource type="Texture2D" uid="uid://mmoh3uddab1c" path="res://sprites/upgrades/upgrade-shoe.png" id="2_rulj0"]
+
+[resource]
+script = ExtResource("1_rulj0")
+texture = ExtResource("2_rulj0")
+effect = 1
+value = 0.5
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

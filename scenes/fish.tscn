@@ -1,9 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfwdsaqvhdqhg"]
+[gd_scene load_steps=12 format=3 uid="uid://bfwdsaqvhdqhg"]
 
-[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/fish.png" id="1_8g0i4"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="1_8g0i4"]
 [ext_resource type="Script" uid="uid://bpxdfwkec8ehd" path="res://scripts/fish.gd" id="1_nub35"]
 [ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://sprites/shadow.png" id="2_nub35"]
+[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://wobbly.gdshader" id="3_wpvan"]
 [ext_resource type="PackedScene" uid="uid://bdf13uaow7h" path="res://scenes/splash_particles.tscn" id="4_pgks6"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="5_21k1a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bvcvt"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_wpvan")
+shader_parameter/texture_albedo = ExtResource("1_8g0i4")
+shader_parameter/texture_flow_map = ExtResource("5_21k1a")
+shader_parameter/color = Color(1, 0.6171875, 0.9042969, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_size = 2.0
 
 [sub_resource type="Animation" id="Animation_pgks6"]
 length = 0.001
@@ -18,6 +30,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSpriteContainer/SpriteContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_nub35"]
@@ -37,14 +61,57 @@ tracks/0/keys = {
 "values": [Vector3(1, 1, 1), Vector3(0.9, 1.1, 1), Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_wpvan"]
+resource_name = "looted"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShadowSpriteContainer/SpriteContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSpriteContainer/SpriteContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pgks6"]
 _data = {
 &"RESET": SubResource("Animation_pgks6"),
-&"idle": SubResource("Animation_nub35")
+&"idle": SubResource("Animation_nub35"),
+&"looted": SubResource("Animation_wpvan")
 }
 
 [node name="Fish" type="Node3D"]
 script = ExtResource("1_nub35")
+colors = Array[Color]([Color(0.835968, 0.51171875, 1, 1), Color(0.50980395, 0.5519302, 1, 1), Color(0.6171875, 0.892334, 1, 1)])
 
 [node name="ShadowSpriteContainer" type="Node3D" parent="."]
 
@@ -57,8 +124,14 @@ texture = ExtResource("2_nub35")
 
 [node name="Sprite3D" type="Sprite3D" parent="ShadowSpriteContainer/SpriteContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.429, 0.1)
+material_override = SubResource("ShaderMaterial_bvcvt")
 modulate = Color(1, 0.9647059, 0.7254902, 1)
 texture = ExtResource("1_8g0i4")
+
+[node name="SpriteLight" type="OmniLight3D" parent="ShadowSpriteContainer/SpriteContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45166868, 0.3017403)
+light_energy = 0.5
+omni_range = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

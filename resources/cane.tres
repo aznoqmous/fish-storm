@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://5q5awopw727u"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_hshjn"]
+[ext_resource type="Texture2D" uid="uid://5iqctfc5awl6" path="res://sprites/upgrades/upgrade-cane.png" id="2_hshjn"]
+
+[resource]
+script = ExtResource("1_hshjn")
+texture = ExtResource("2_hshjn")
+effect = 2
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

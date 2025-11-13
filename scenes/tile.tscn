@@ -1,31 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpwvylcnp8wi6"]
+[gd_scene load_steps=10 format=3 uid="uid://cpwvylcnp8wi6"]
 
 [ext_resource type="Texture2D" uid="uid://3f4mefwv367p" path="res://sprites/tile.png" id="1_n3f48"]
 [ext_resource type="Script" uid="uid://cn06fnu4ouyxj" path="res://scripts/tile.gd" id="1_ywnoi"]
+[ext_resource type="Material" uid="uid://dn66vhkd36puj" path="res://material/wobbly_material.tres" id="2_jy7pm"]
+[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://wobbly.gdshader" id="4_gtpg2"]
+[ext_resource type="Texture2D" uid="uid://1j3pbr27ky8v" path="res://sprites/algae.png" id="5_a2bny"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="6_284l3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3iir"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_gtpg2")
+shader_parameter/texture_albedo = ExtResource("5_a2bny")
+shader_parameter/texture_flow_map = ExtResource("6_284l3")
+shader_parameter/color = Color(0.671875, 0.671875, 0.671875, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_size = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywnoi"]
 resource_local_to_scene = true
-albedo_color = Color(1, 0.9647059, 0.7254902, 1)
+albedo_color = Color(0.13671875, 0.13671875, 0.13671875, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ywnoi"]
 
 [node name="Tile" type="Area3D"]
 script = ExtResource("1_ywnoi")
-color = Color(0.30078125, 0.28227615, 0.1844635, 1)
-available_color = Color(1, 0.9647059, 0.7254902, 1)
-hover_color = Color(1, 0.97991073, 0.84375, 1)
+available_color = Color(0.66015625, 0.66015625, 0.66015625, 1)
+hover_color = Color(1, 1, 1, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-modulate = Color(1, 0.9647059, 0.7254902, 1)
+material_override = ExtResource("2_jy7pm")
 shaded = true
 texture = ExtResource("1_n3f48")
 
+[node name="AlgaeSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.7939598, 0.42708594)
+material_override = SubResource("ShaderMaterial_j3iir")
+shaded = true
+texture = ExtResource("5_a2bny")
+
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0025024414, -0.4986992, -0.036499023)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.027770996, -0.4986992, -0.04650879)
 material_override = SubResource("StandardMaterial3D_ywnoi")
-size = Vector3(1.1339111, 0.993103, 1.045166)
+size = Vector3(0.9716797, 0.993103, 0.94091797)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5056702, 0)
 shape = SubResource("BoxShape3D_ywnoi")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.17839023, 0)
+visible = false
+text = "1231"
+font_size = 64

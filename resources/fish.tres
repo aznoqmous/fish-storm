@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bsj34scaej83e"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_sv7mc"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="2_q2jx2"]
+
+[resource]
+script = ExtResource("1_sv7mc")
+texture = ExtResource("2_q2jx2")
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

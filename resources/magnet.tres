@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://cplp8dtfasksm"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_r1kjg"]
+[ext_resource type="Texture2D" uid="uid://b2uqvd6mwnpox" path="res://sprites/upgrades/upgrade-magnet.png" id="2_r1kjg"]
+
+[resource]
+script = ExtResource("1_r1kjg")
+texture = ExtResource("2_r1kjg")
+effect = 3
+value = 0.1
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

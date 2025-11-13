@@ -41,3 +41,6 @@ func grid_to_world_position(grid_position: Vector2):
 	
 func get_tile(pos: Vector2):
 	return tiles[pos] if tiles.has(pos) else null
+	
+func get_fish_tiles():
+	return tiles.values().filter(func(a): return a.object)

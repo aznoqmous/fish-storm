@@ -44,15 +44,9 @@ func move_to(tile: Tile):
 func _process(delta: float) -> void:
 	#global_position = lerp(global_position, target_position, delta * 5.0)
 	if target_tile and is_jumping and (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration > 1.0:
-		target_tile.bump()
-		if target_tile.object:
-			target_tile.object.queue_free()
-			main.gain_score(1)
-			main.gain_combo(1)
-		else: 
-			main.reset_combo()
+		global_position = target_tile.global_position
 		moved.emit()
-		main.update_tiles_color()
+		
 		
 	jump_life = (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration
 	

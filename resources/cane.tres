@@ -7,4 +7,5 @@
 script = ExtResource("1_hshjn")
 texture = ExtResource("2_hshjn")
 effect = 2
+description = "+1 combo move"
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

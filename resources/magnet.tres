@@ -8,4 +8,5 @@ script = ExtResource("1_r1kjg")
 texture = ExtResource("2_r1kjg")
 effect = 3
 value = 0.1
+description = "fishes spawns closer"
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

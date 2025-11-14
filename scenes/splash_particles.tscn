@@ -2,6 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://sprites/particle.png" id="1_mhpbq"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg77c"]
+transparency = 1
+albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
+albedo_texture = ExtResource("1_mhpbq")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="Curve" id="Curve_tbltv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -18,20 +28,10 @@ scale_min = 0.19999999
 scale_max = 0.5
 scale_curve = SubResource("CurveTexture_2c5cg")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg77c"]
-transparency = 1
-albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
-albedo_texture = ExtResource("1_mhpbq")
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
 [sub_resource type="QuadMesh" id="QuadMesh_ycdy4"]
-material = SubResource("StandardMaterial3D_dg77c")
 
 [node name="SplashParticles" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_dg77c")
 emitting = false
 one_shot = true
 explosiveness = 0.7

@@ -1,11 +1,16 @@
 class_name Fish extends Node3D
+
+@onready var main: Main = $/root/Main
 @onready var sprite_container: Node3D = $ShadowSpriteContainer/SpriteContainer
 @onready var shadow_sprite_container: Node3D = $ShadowSpriteContainer
-@onready var splash_particles: GPUParticles3D = $SplashParticles
-@export var colors: Array[Color]
 @onready var sprite_3d: Sprite3D = $ShadowSpriteContainer/SpriteContainer/Sprite3D
 @onready var sprite_light: OmniLight3D = $ShadowSpriteContainer/SpriteContainer/SpriteLight
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var splash_particles: GPUParticles3D = $SplashParticles
+@onready var loot_particles: GPUParticles3D = $LootParticles
+
+@export var colors: Array[Color]
+@export var upgrade_color: Color
 
 var color: Color
 var animation := 0.0
@@ -20,9 +25,12 @@ func _ready() -> void:
 	shadow_sprite_container.scale = Vector3.ZERO
 	splash_particles.global_position = shadow_sprite_container.global_position
 	splash_particles.emitting = true
+	
 	color = colors.pick_random()
 	sprite_3d.material_override.set("shader_parameter/color", color)
 	sprite_light.light_color = color
+	splash_particles.material_override.set("albedo_color", color)
+	loot_particles.material_override.set("albedo_color", color)
 	
 func _process(delta: float) -> void:
 	if animation < 1.0:
@@ -38,3 +46,8 @@ func load_resource(res: ObjectResource):
 	resource = res
 	sprite_3d.texture = res.texture
 	sprite_3d.material_override.set("shader_parameter/texture_albedo", res.texture)
+	if res.effect != ObjectResource.ObjectEffect.None:
+		sprite_3d.material_override.set("shader_parameter/color", upgrade_color)
+		splash_particles.material_override.set("albedo_color", upgrade_color)
+		loot_particles.material_override.set("albedo_color", upgrade_color)
+		color = upgrade_color

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://brwaam4on8k8b"]
+
+[ext_resource type="Material" uid="uid://cj3h6h30di7sp" path="res://materials/canvas_wobbly_material.tres" id="1_ox02a"]
+[ext_resource type="Script" uid="uid://5urx2s6oequb" path="res://scripts/combo_unit_control.gd" id="1_pxciq"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="2_pxciq"]
+
+[node name="ComboUnitControl" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pxciq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("1_ox02a")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -58.0
+offset_right = 57.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pxciq")
+expand_mode = 1
+stretch_mode = 5

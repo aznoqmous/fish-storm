@@ -3,9 +3,10 @@ class_name Tile extends Area3D
 @onready var main: Main = $/root/Main
 @onready var area_3d: Area3D = $Area3D
 @onready var sprite_3d: Sprite3D = $Sprite3D
-@onready var csg_box_3d: CSGBox3D = $CSGBox3D
 @onready var label_3d: Label3D = $Label3D
 @onready var algae_sprite: Sprite3D = $AlgaeSprite
+@onready var csg_box_3d: CSGBox3D = $CSGBox3D
+@onready var cube: MeshInstance3D = $TileModel/Cube
 
 @export var color: Color
 @export var available_color: Color
@@ -40,17 +41,20 @@ func _input(event: InputEvent) -> void:
 			main.character.move_to(self)
 
 func _process(delta):
+	update_color()
+	
 	scale = lerp(scale, Vector3.ONE, delta * 5.0)
 	
 	current_color = lerp(current_color, target_color, delta * 5.0)
 	sprite_3d.material_override.set("shader_parameter/color", current_color)
-	#csg_box_3d.material_override.set("albedo_color", current_color)
+	algae_sprite.material_override.set("shader_parameter/color", current_color.lightened(0.4))
+	cube.material_override.set("albedo_color", current_color.darkened(0.8))
 
 func bump():
 	scale = Vector3(1.2, 1.0/1.2, 1.2);
 
 func get_color() -> Color:
-	if not is_available: return color
+	if not is_available: return main.colors.current_color.darkened(0.8)
 	if is_hovered: return hover_color
 	return available_color if main.combo < 1 else main.last_color
 	

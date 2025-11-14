@@ -2,8 +2,9 @@ shader_type spatial;
 uniform sampler2D texture_albedo;
 uniform sampler2D texture_flow_map;
 uniform vec3 color: source_color = vec3(1.0);
-uniform int displacement_steps = 4;
-uniform float displacement_size = 2.0;
+const int displacement_steps = 10;
+const float displacement_power = 1.5;
+const float displacement_size = 5.0;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -11,8 +12,8 @@ void vertex() {
 
 void fragment() {
 	// Called for every pixel the material is visible on.
-	vec3 displacement = texture(texture_flow_map, UV / 5.0 + vec2(float(int(TIME * 8.0) % displacement_steps) / 10.0)).xyz;
-	vec2 pos = UV + displacement.xy * 0.02 * displacement_size;
+	vec3 displacement = texture(texture_flow_map, UV / displacement_size + vec2(float(int(TIME * 8.0) % displacement_steps) / 10.0)).xyz;
+	vec2 pos = UV + displacement.xy * 0.02 * displacement_power;
 	vec4 tex = texture(texture_albedo, pos);
     ALBEDO = tex.rgb * color;
     ALPHA = tex.a;

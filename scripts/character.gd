@@ -40,7 +40,12 @@ func move_to(tile: Tile):
 	last_jump = Time.get_ticks_msec() / 1000.0
 	start_jump_position = global_position
 	sprite_3d.scale = Vector3(1.0 / 1.2, 1.2, 1.0)
-
+	
+func set_tile(tile: Tile):
+	target_tile = tile
+	target_position = tile.global_position
+	global_position = target_tile.global_position
+	
 func _process(delta: float) -> void:
 	#global_position = lerp(global_position, target_position, delta * 5.0)
 	if target_tile and is_jumping and (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration > 1.0:

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://b14uynij41wa7"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_rguya"]
+[ext_resource type="Texture2D" uid="uid://mle8rjelmqhx" path="res://sprites/upgrades/portal.png" id="2_rguya"]
+
+[resource]
+script = ExtResource("1_rguya")
+texture = ExtResource("2_rguya")
+effect = 4
+value = 10.0
+description = "teleport !"
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

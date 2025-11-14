@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bfwdsaqvhdqhg"]
+[gd_scene load_steps=17 format=3 uid="uid://bfwdsaqvhdqhg"]
 
 [ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="1_8g0i4"]
 [ext_resource type="Script" uid="uid://bpxdfwkec8ehd" path="res://scripts/fish.gd" id="1_nub35"]
 [ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://sprites/shadow.png" id="2_nub35"]
-[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://wobbly.gdshader" id="3_wpvan"]
+[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="3_wpvan"]
 [ext_resource type="PackedScene" uid="uid://bdf13uaow7h" path="res://scenes/splash_particles.tscn" id="4_pgks6"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="5_21k1a"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://sprites/particle.png" id="7_21k1a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvcvt"]
 resource_local_to_scene = true
@@ -15,6 +16,7 @@ shader_parameter/texture_albedo = ExtResource("1_8g0i4")
 shader_parameter/texture_flow_map = ExtResource("5_21k1a")
 shader_parameter/color = Color(1, 0.6171875, 0.9042969, 1)
 shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 2.0
 shader_parameter/displacement_size = 2.0
 
 [sub_resource type="Animation" id="Animation_pgks6"]
@@ -42,6 +44,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShadowSpriteContainer/Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.8, 0.8, 0.8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LootParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_nub35"]
@@ -101,6 +127,30 @@ tracks/2/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ShadowSpriteContainer/Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.8, 0.8, 0.8), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LootParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pgks6"]
 _data = {
@@ -109,9 +159,37 @@ _data = {
 &"looted": SubResource("Animation_wpvan")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvcvt"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
+albedo_texture = ExtResource("7_21k1a")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_tbltv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2c5cg"]
+curve = SubResource("Curve_tbltv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wpvan"]
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 2.0
+initial_velocity_max = 6.0
+scale_min = 0.19999999
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_2c5cg")
+
 [node name="Fish" type="Node3D"]
 script = ExtResource("1_nub35")
 colors = Array[Color]([Color(0.835968, 0.51171875, 1, 1), Color(0.50980395, 0.5519302, 1, 1), Color(0.6171875, 0.892334, 1, 1)])
+upgrade_color = Color(0.6170343, 1, 0.50980395, 1)
 
 [node name="ShadowSpriteContainer" type="Node3D" parent="."]
 
@@ -123,13 +201,14 @@ texture = ExtResource("2_nub35")
 [node name="SpriteContainer" type="Node3D" parent="ShadowSpriteContainer"]
 
 [node name="Sprite3D" type="Sprite3D" parent="ShadowSpriteContainer/SpriteContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.429, 0.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6836207, 0.1)
 material_override = SubResource("ShaderMaterial_bvcvt")
 modulate = Color(1, 0.9647059, 0.7254902, 1)
 texture = ExtResource("1_8g0i4")
 
 [node name="SpriteLight" type="OmniLight3D" parent="ShadowSpriteContainer/SpriteContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45166868, 0.3017403)
+visible = false
 light_energy = 0.5
 omni_range = 1.0
 
@@ -141,3 +220,8 @@ autoplay = "idle"
 
 [node name="SplashParticles" parent="." instance=ExtResource("4_pgks6")]
 lifetime = 0.5
+
+[node name="LootParticles" parent="." instance=ExtResource("4_pgks6")]
+material_override = SubResource("StandardMaterial3D_bvcvt")
+lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_wpvan")

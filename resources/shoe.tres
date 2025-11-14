@@ -8,4 +8,5 @@ script = ExtResource("1_rulj0")
 texture = ExtResource("2_rulj0")
 effect = 1
 value = 0.5
+description = "+1 movement"
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

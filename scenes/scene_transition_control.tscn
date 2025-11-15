@@ -1,0 +1,98 @@
+[gd_scene load_steps=15 format=3 uid="uid://ioeg753fcpyw"]
+
+[ext_resource type="Shader" uid="uid://kk5eotwckwoj" path="res://scene_transition.gdshader" id="1_2gjj2"]
+[ext_resource type="Script" uid="uid://cxxlycrtk431o" path="res://scripts/scene_transition_control.gd" id="1_rs54f"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="2_rs54f"]
+[ext_resource type="Texture2D" uid="uid://dgejme745lw38" path="res://sprites/upgrades/big-fish.png" id="3_73exn"]
+[ext_resource type="Texture2D" uid="uid://dwlnn5k58fa00" path="res://sprites/upgrades/clover.png" id="4_h7gdl"]
+[ext_resource type="Texture2D" uid="uid://b2uqvd6mwnpox" path="res://sprites/upgrades/upgrade-magnet.png" id="5_h3c5i"]
+[ext_resource type="Texture2D" uid="uid://5iqctfc5awl6" path="res://sprites/upgrades/upgrade-cane.png" id="6_bmsr1"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="7_jco3r"]
+[ext_resource type="Texture2D" uid="uid://dep7pgsiwc7x3" path="res://sprites/rect.png" id="8_3i8tq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kq58d"]
+shader = ExtResource("1_2gjj2")
+shader_parameter/textures = Array[Texture2D]([ExtResource("3_73exn"), ExtResource("4_h7gdl"), ExtResource("5_h3c5i"), ExtResource("6_bmsr1"), ExtResource("7_jco3r")])
+shader_parameter/texture_size = Vector2(156, 136)
+shader_parameter/screen_size = Vector2(1160, 650)
+shader_parameter/alpha = 1.0
+shader_parameter/texture_flow_map = ExtResource("2_rs54f")
+shader_parameter/fsize = 1.345
+
+[sub_resource type="Animation" id="Animation_73exn"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_h7gdl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_h3c5i"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bmsr1"]
+_data = {
+&"RESET": SubResource("Animation_h7gdl"),
+&"close": SubResource("Animation_h3c5i"),
+&"open": SubResource("Animation_73exn")
+}
+
+[node name="SceneTransitionControl" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_rs54f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_kq58d")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_3i8tq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bmsr1")
+}
+speed_scale = 2.0

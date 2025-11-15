@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://cuerunb6u1f1g"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_mrywp"]
+[ext_resource type="Texture2D" uid="uid://mle8rjelmqhx" path="res://sprites/upgrades/portal.png" id="2_2gcdi"]
+
+[resource]
+script = ExtResource("1_mrywp")
+texture = ExtResource("2_2gcdi")
+effect = 6
+description = "well played !"
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=2 format=3 uid="uid://bbpocc62orq55"]
+
+[ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="1_x4xt6"]
+
+[resource]
+script = ExtResource("1_x4xt6")
+grid_size = Vector2(5, 5)
+base_color = Color(0.3019608, 0.4862745, 0.69803923, 1)
+starting_credits = 8
+metadata/_custom_type_script = "uid://b2n4reby476q"

@@ -15,9 +15,6 @@ shader = ExtResource("3_wpvan")
 shader_parameter/texture_albedo = ExtResource("1_8g0i4")
 shader_parameter/texture_flow_map = ExtResource("5_21k1a")
 shader_parameter/color = Color(1, 0.6171875, 0.9042969, 1)
-shader_parameter/displacement_steps = 4
-shader_parameter/displacement_power = 2.0
-shader_parameter/displacement_size = 2.0
 
 [sub_resource type="Animation" id="Animation_pgks6"]
 length = 0.001
@@ -159,7 +156,7 @@ _data = {
 &"looted": SubResource("Animation_wpvan")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvcvt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21k1a"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
@@ -190,8 +187,10 @@ scale_curve = SubResource("CurveTexture_2c5cg")
 script = ExtResource("1_nub35")
 colors = Array[Color]([Color(0.835968, 0.51171875, 1, 1), Color(0.50980395, 0.5519302, 1, 1), Color(0.6171875, 0.892334, 1, 1)])
 upgrade_color = Color(0.6170343, 1, 0.50980395, 1)
+end_portal_color = Color(1, 1, 1, 1)
 
 [node name="ShadowSpriteContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12390545)
 
 [node name="Shadow" type="Sprite3D" parent="ShadowSpriteContainer"]
 transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0.2, 0.146)
@@ -222,6 +221,6 @@ autoplay = "idle"
 lifetime = 0.5
 
 [node name="LootParticles" parent="." instance=ExtResource("4_pgks6")]
-material_override = SubResource("StandardMaterial3D_bvcvt")
+material_override = SubResource("StandardMaterial3D_21k1a")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_wpvan")

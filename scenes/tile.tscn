@@ -15,15 +15,13 @@ shader = ExtResource("4_gtpg2")
 shader_parameter/texture_albedo = ExtResource("5_a2bny")
 shader_parameter/texture_flow_map = ExtResource("6_284l3")
 shader_parameter/color = Color(0.671875, 0.671875, 0.671875, 1)
-shader_parameter/displacement_steps = 4
-shader_parameter/displacement_power = 2.0
-shader_parameter/displacement_size = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywnoi"]
 resource_local_to_scene = true
 albedo_color = Color(0.13671875, 0.13671875, 0.13671875, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2bny"]
+resource_local_to_scene = true
 albedo_color = Color(0.17166138, 0.23041964, 0.29296875, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ywnoi"]

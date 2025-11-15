@@ -4,6 +4,7 @@ class_name Character extends Node3D
 @onready var sprite_container: Node3D = $SpriteContainer
 @onready var sprite_3d: Sprite3D = $SpriteContainer/Sprite3D
 @onready var shadow: Sprite3D = $Shadow
+@onready var character_moves_left_label: Label3D = $SpriteContainer/Sprite3D/CharacterMovesLeftLabel
 
 var last_jump: float
 var jump_life: float
@@ -64,5 +65,6 @@ func _process(delta: float) -> void:
 		global_position = target_position
 		
 	sprite_3d.scale = lerp(sprite_3d.scale, Vector3.ONE, delta * 5.0)
+	character_moves_left_label.scale = lerp(character_moves_left_label.scale, Vector3.ONE, delta * 5.0)
 	
 signal moved

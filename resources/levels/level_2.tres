@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=2 format=3 uid="uid://bflmrepi3u4v2"]
+
+[ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="1_ia1ul"]
+
+[resource]
+script = ExtResource("1_ia1ul")
+grid_size = Vector2(10, 6)
+base_color = Color(0.47215074, 0.3019608, 0.69803923, 1)
+fish_before_end_portal = 15
+starting_credits = 12
+ground_ratio = 0.6
+metadata/_custom_type_script = "uid://b2n4reby476q"

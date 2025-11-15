@@ -11,9 +11,15 @@ class_name ObjectResource extends Resource
 
 enum ObjectEffect {
 	None,
+	
+#	Upgrades
 	IncreaseMovement,
 	IncreaseComboMovement,
 	IncreaseMagnet,
 	TemporaryMoveDistance,
-	UpgradeDropChance
+	UpgradeDropChance,
+	
+#	Meta
+	EndLevel,
+	
 }

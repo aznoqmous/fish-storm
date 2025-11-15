@@ -11,6 +11,7 @@ class_name Fish extends Node3D
 
 @export var colors: Array[Color]
 @export var upgrade_color: Color
+@export var end_portal_color: Color
 
 var color: Color
 var animation := 0.0
@@ -41,13 +42,19 @@ func _process(delta: float) -> void:
 
 func loot():
 	animation_player.play("looted")
-	
+
+func set_color(value):
+	color = value
+	sprite_3d.material_override.set("shader_parameter/color", value)
+	splash_particles.material_override.set("albedo_color", value)
+	loot_particles.material_override.set("albedo_color", value)
+
 func load_resource(res: ObjectResource):
 	resource = res
 	sprite_3d.texture = res.texture
 	sprite_3d.material_override.set("shader_parameter/texture_albedo", res.texture)
-	if res.effect != ObjectResource.ObjectEffect.None:
-		sprite_3d.material_override.set("shader_parameter/color", upgrade_color)
-		splash_particles.material_override.set("albedo_color", upgrade_color)
-		loot_particles.material_override.set("albedo_color", upgrade_color)
-		color = upgrade_color
+	
+	if res.effect == ObjectResource.ObjectEffect.EndLevel:
+		set_color(end_portal_color)
+	elif res.effect != ObjectResource.ObjectEffect.None:
+		set_color(upgrade_color)

@@ -1,41 +1,40 @@
-[gd_scene load_steps=48 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=47 format=3 uid="uid://cablalujd6va0"]
 
-[ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_h2yge"]
-[ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://b4a2eobvwve67" path="res://sprites/peer.png" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="2_074og"]
-[ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_lswn8"]
-[ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="3_1bvp3"]
-[ext_resource type="Resource" uid="uid://bbpocc62orq55" path="res://resources/levels/level_0.tres" id="3_a6jrf"]
-[ext_resource type="Resource" uid="uid://bsj34scaej83e" path="res://resources/fishes/fish.tres" id="3_cegan"]
-[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="4_4c57u"]
-[ext_resource type="Resource" uid="uid://do44ensh4t8uk" path="res://resources/fishes/big_fish.tres" id="4_82xsv"]
-[ext_resource type="Resource" uid="uid://72umxngdtnt3" path="res://resources/levels/level_1.tres" id="4_a6jrf"]
-[ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/cane.tres" id="5_getpj"]
-[ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="5_lquwl"]
-[ext_resource type="Resource" uid="uid://bflmrepi3u4v2" path="res://resources/levels/level_2.tres" id="5_xuqvo"]
-[ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://sprites/voronoi.png" id="6_5vw27"]
-[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="6_efxa6"]
-[ext_resource type="Resource" uid="uid://bj6rjtusa32mn" path="res://resources/levels/level_3.tres" id="6_kq58d"]
-[ext_resource type="Resource" uid="uid://sy0tuxwk5ayk" path="res://resources/shoe.tres" id="6_ryguw"]
-[ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://sprites/shadow.png" id="7_272bh"]
-[ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="7_d13ii"]
-[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://sprites/particle.png" id="7_dg77c"]
-[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="8_5vw27"]
-[ext_resource type="Script" uid="uid://b87jek5xw2ya2" path="res://scripts/colors.gd" id="8_getpj"]
-[ext_resource type="Resource" uid="uid://b14uynij41wa7" path="res://resources/portal.tres" id="8_ryguw"]
-[ext_resource type="Resource" uid="uid://d2acphkags8fd" path="res://resources/clover.tres" id="9_d13ii"]
-[ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://sprites/star.png" id="9_kek77"]
-[ext_resource type="Resource" uid="uid://cuerunb6u1f1g" path="res://resources/end_portal.tres" id="10_1u8w0"]
-[ext_resource type="Script" uid="uid://drt20frltyy3q" path="res://scripts/combo_control.gd" id="18_82xsv"]
-[ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/combo_unit_control.tscn" id="19_getpj"]
-[ext_resource type="PackedScene" uid="uid://ioeg753fcpyw" path="res://scenes/scene_transition_control.tscn" id="25_qsp4k"]
+[ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
+[ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
+[ext_resource type="Resource" uid="uid://bbpocc62orq55" path="res://resources/levels/level_0.tres" id="3_qkpxi"]
+[ext_resource type="Resource" uid="uid://72umxngdtnt3" path="res://resources/levels/level_1.tres" id="4_5q0nq"]
+[ext_resource type="Resource" uid="uid://bflmrepi3u4v2" path="res://resources/levels/level_2.tres" id="5_dgi5k"]
+[ext_resource type="Resource" uid="uid://bj6rjtusa32mn" path="res://resources/levels/level_3.tres" id="6_j8jky"]
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="7_kmb1v"]
+[ext_resource type="Resource" uid="uid://bsj34scaej83e" path="res://resources/fishes/fish.tres" id="8_fuf3a"]
+[ext_resource type="Resource" uid="uid://do44ensh4t8uk" path="res://resources/fishes/big_fish.tres" id="9_pibwh"]
+[ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/cane.tres" id="10_c6pm6"]
+[ext_resource type="Resource" uid="uid://sy0tuxwk5ayk" path="res://resources/shoe.tres" id="11_5he1u"]
+[ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="12_5poiv"]
+[ext_resource type="Resource" uid="uid://b14uynij41wa7" path="res://resources/portal.tres" id="13_2cjbq"]
+[ext_resource type="Resource" uid="uid://d2acphkags8fd" path="res://resources/clover.tres" id="14_chjal"]
+[ext_resource type="Resource" uid="uid://cuerunb6u1f1g" path="res://resources/end_portal.tres" id="15_cjqg0"]
+[ext_resource type="Script" uid="uid://b87jek5xw2ya2" path="res://scripts/colors.gd" id="16_vchkt"]
+[ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="17_txyw0"]
+[ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="18_vc5cj"]
+[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="19_nvyfr"]
+[ext_resource type="Texture2D" uid="uid://b4a2eobvwve67" path="res://sprites/peer.png" id="20_ty1g6"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="21_j2jfr"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="22_bjg73"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://sprites/particle.png" id="23_bu4jf"]
+[ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://sprites/shadow.png" id="24_o7ddy"]
+[ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="25_0loja"]
+[ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://sprites/voronoi.png" id="26_ids8r"]
+[ext_resource type="Script" uid="uid://drt20frltyy3q" path="res://scripts/combo_control.gd" id="27_dnhof"]
+[ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/combo_unit_control.tscn" id="28_1v6qk"]
+[ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://sprites/star.png" id="29_augu2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
 render_priority = 0
-shader = ExtResource("4_4c57u")
-shader_parameter/texture_albedo = ExtResource("2_0xm2m")
-shader_parameter/texture_flow_map = ExtResource("6_efxa6")
+shader = ExtResource("19_nvyfr")
+shader_parameter/texture_albedo = ExtResource("20_ty1g6")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
 shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="Curve" id="Curve_ycdy4"]
@@ -53,18 +52,18 @@ scale_curve = SubResource("CurveTexture_w48qg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
 transparency = 1
-albedo_texture = ExtResource("7_dg77c")
+albedo_texture = ExtResource("23_bu4jf")
 
 [sub_resource type="QuadMesh" id="QuadMesh_yaehf"]
 material = SubResource("StandardMaterial3D_2cqfq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
-shader = ExtResource("5_lquwl")
+shader = ExtResource("25_0loja")
 shader_parameter/water_color = Color(0.045294113, 0.07294116, 0.10470587, 1)
 shader_parameter/light_foam_color = Color(0.060392156, 0.097254895, 0.13960783, 1)
 shader_parameter/dark_foam_color = Color(0.030196087, 0.048627462, 0.06980394, 1)
-shader_parameter/voronoi_texture = ExtResource("6_5vw27")
+shader_parameter/voronoi_texture = ExtResource("26_ids8r")
 shader_parameter/voronoi_size = 0.06
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
@@ -76,27 +75,27 @@ subdivide_depth = 400
 ambient_light_source = 3
 
 [sub_resource type="LabelSettings" id="LabelSettings_kq58d"]
-font = ExtResource("8_5vw27")
+font = ExtResource("22_bjg73")
 font_size = 64
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qsp4k"]
-font = ExtResource("8_5vw27")
+font = ExtResource("22_bjg73")
 font_size = 92
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_seu75"]
-font = ExtResource("8_5vw27")
+font = ExtResource("22_bjg73")
 font_size = 39
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kek77"]
-font = ExtResource("8_5vw27")
+font = ExtResource("22_bjg73")
 font_size = 64
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
-font = ExtResource("8_5vw27")
+font = ExtResource("22_bjg73")
 font_size = 144
 outline_size = 30
 outline_color = Color(0, 0, 0, 1)
@@ -139,19 +138,23 @@ _data = {
 }
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_h2yge")
-levels = Array[ExtResource("2_lswn8")]([ExtResource("3_a6jrf"), ExtResource("4_a6jrf"), ExtResource("5_xuqvo"), ExtResource("6_kq58d")])
-fishes = Array[ExtResource("2_074og")]([ExtResource("3_cegan"), ExtResource("4_82xsv")])
-upgrades = Array[ExtResource("2_074og")]([ExtResource("5_getpj"), ExtResource("6_ryguw"), ExtResource("7_d13ii"), ExtResource("8_ryguw"), ExtResource("9_d13ii")])
-end_portal = ExtResource("10_1u8w0")
+script = ExtResource("1_fv21b")
+levels = Array[ExtResource("2_tel4y")]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky")])
+fishes = Array[ExtResource("7_kmb1v")]([ExtResource("8_fuf3a"), ExtResource("9_pibwh")])
+upgrades = Array[ExtResource("7_kmb1v")]([ExtResource("10_c6pm6"), ExtResource("11_5he1u"), ExtResource("12_5poiv"), ExtResource("13_2cjbq"), ExtResource("14_chjal")])
+end_portal = ExtResource("15_cjqg0")
+
+[node name="Theme" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"Music"
 
 [node name="Colors" type="Node3D" parent="."]
-script = ExtResource("8_getpj")
+script = ExtResource("16_vchkt")
 default_color = Color(0.3019608, 0.4862745, 0.69803923, 1)
 base_color = Color(0.3019608, 0.4862745, 0.69803923, 1)
 
 [node name="Grid" type="Node3D" parent="."]
-script = ExtResource("1_ig7tw")
+script = ExtResource("17_txyw0")
 grid_size = Vector2i(10, 6)
 tile_size = Vector2(1.3, 1.3)
 tile_height_variation = 0.25
@@ -161,7 +164,7 @@ transform = Transform3D(1, 0, 0, 0, 0.65307707, 0.75729156, 0, -0.75729156, 0.65
 
 [node name="Character" type="Node3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.009594381, 0, 0)
-script = ExtResource("3_1bvp3")
+script = ExtResource("18_vc5cj")
 
 [node name="SpriteContainer" type="Node3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19008301)
@@ -170,12 +173,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19008301)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9147905, 0.110119246)
 material_override = SubResource("ShaderMaterial_efxa6")
 shaded = true
-texture = ExtResource("2_0xm2m")
+texture = ExtResource("20_ty1g6")
 
 [node name="CharacterMovesLeftLabel" type="Label3D" parent="Character/SpriteContainer/Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30774, -0.110119246)
 text = "6"
-font = ExtResource("8_5vw27")
+font = ExtResource("22_bjg73")
 font_size = 160
 outline_size = 0
 
@@ -188,7 +191,7 @@ draw_pass_1 = SubResource("QuadMesh_yaehf")
 [node name="Shadow" type="Sprite3D" parent="Character"]
 transform = Transform3D(0.8000001, 0, 0, 0, -3.4969112e-08, 0.8000001, 0, -0.8000001, -3.4969112e-08, 0, 0.018935483, -0.18988776)
 modulate = Color(1, 1, 1, 0.6313726)
-texture = ExtResource("7_272bh")
+texture = ExtResource("24_o7ddy")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Character"]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0.9598488, 0.61517113)
@@ -276,7 +279,7 @@ offset_left = 23.0
 offset_right = 405.0
 offset_bottom = 117.0
 mouse_filter = 2
-script = ExtResource("18_82xsv")
+script = ExtResource("27_dnhof")
 
 [node name="ComboLabel" type="Label" parent="CanvasLayer/Control/ComboControl"]
 layout_mode = 1
@@ -294,16 +297,16 @@ theme_override_constants/h_separation = -10
 theme_override_constants/v_separation = -24
 columns = 10
 
-[node name="ComboUnitControl" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("19_getpj")]
+[node name="ComboUnitControl" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
 
-[node name="ComboUnitControl2" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("19_getpj")]
+[node name="ComboUnitControl2" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
 
-[node name="ComboUnitControl3" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("19_getpj")]
+[node name="ComboUnitControl3" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
 
-[node name="ComboUnitControl4" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("19_getpj")]
+[node name="ComboUnitControl4" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
 
 [node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
@@ -336,7 +339,7 @@ offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(128, 128)
-texture = ExtResource("9_kek77")
+texture = ExtResource("29_augu2")
 
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/TextureRect"]
 modulate = Color(0, 0, 0, 1)
@@ -355,7 +358,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.1, 1.1)
 pivot_offset = Vector2(128, 128)
-texture = ExtResource("9_kek77")
+texture = ExtResource("29_augu2")
 
 [node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl"]
 layout_mode = 1
@@ -393,8 +396,6 @@ offset_right = 32.5
 offset_bottom = 149.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_fonts/font = ExtResource("22_bjg73")
 theme_override_font_sizes/font_size = 64
 text = "RESTART ?"
-
-[node name="SceneTransitionControl" parent="CanvasLayer" instance=ExtResource("25_qsp4k")]

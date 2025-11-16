@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://dl8w77uxmq0if"]
+
+[ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/tiitle_control.gd" id="1_p6dhs"]
+[ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://button.gdshader" id="2_pyl7j"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="3_b3w7a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]
+shader = ExtResource("2_pyl7j")
+
+[sub_resource type="Theme" id="Theme_yql1r"]
+Button/font_sizes/font_size = 28
+Button/fonts/font = ExtResource("3_b3w7a")
+
+[node name="Title" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TiitleControl" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p6dhs")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/TiitleControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TiitleControl"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 463.0
+offset_right = -463.0
+offset_bottom = 319.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/TiitleControl/VBoxContainer"]
+material = SubResource("ShaderMaterial_4rr2b")
+layout_mode = 2
+theme = SubResource("Theme_yql1r")
+text = "PLAY"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/TiitleControl/VBoxContainer"]
+material = SubResource("ShaderMaterial_4rr2b")
+layout_mode = 2
+theme = SubResource("Theme_yql1r")
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/TiitleControl/VBoxContainer"]
+material = SubResource("ShaderMaterial_4rr2b")
+layout_mode = 2
+theme = SubResource("Theme_yql1r")
+text = "QUIT"

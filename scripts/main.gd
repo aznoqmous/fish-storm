@@ -45,10 +45,12 @@ var end_portal_instance: Fish
 @export var fish_level := 1.05;
 @export var upgrade_chance := 0.1;
 
+var upgrade_random: FixedRandom
 var current_level_index = 0
 var current_level: LevelResource
 
 func _ready() -> void:
+	upgrade_random = FixedRandom.new()
 	restart_button.pressed.connect(restart)
 	character.moved.connect(handle_movement)
 	load_level(levels[current_level_index])
@@ -197,19 +199,22 @@ func spawn_fish() -> Fish:
 func spawn_random_fish()-> Fish:
 	var fish = spawn_fish()
 	if fish:
-		if randf() < upgrade_chance:
+		if upgrade_random.pick():
 			fish.load_resource(upgrades.pick_random())
 		else:
 			fish.load_resource(fishes[min(floor(randf() * fish_level), fishes.size()-1)])
 	return fish
 
 func load_level(level: LevelResource):
+	upgrade_random.reset()
+	upgrade_random.rate = upgrade_chance
+	
 	current_level = level
 	level_label.text = str("Level ", current_level_index + 1)
 	
 	final_score_control.set_visible(false)
 
-	await scene_transition_control.open()
+	await SceneManager.scene_transition_control.open()
 	
 	# Level
 	grid.grid_size = level.grid_size
@@ -239,7 +244,7 @@ func load_level(level: LevelResource):
 	update_tiles_color()
 	update_moves_left()
 	
-	await scene_transition_control.close()
+	await SceneManager.scene_transition_control.close()
 
 func restart():
 	score = 0

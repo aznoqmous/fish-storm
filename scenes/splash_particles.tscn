@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bdf13uaow7h"]
 
-[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://sprites/particle.png" id="1_mhpbq"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="1_mhpbq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg77c"]
 transparency = 1

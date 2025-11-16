@@ -1,17 +1,109 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=24 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/tiitle_control.gd" id="1_p6dhs"]
-[ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://button.gdshader" id="2_pyl7j"]
+[ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
+[ext_resource type="Texture2D" uid="uid://cddn5ndm4nav8" path="res://assets/sprites/ooqo-title.png" id="3_4rr2b"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="3_b3w7a"]
+[ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="3_hiwto"]
+[ext_resource type="AudioStream" uid="uid://dlbr15o2xmvfg" path="res://assets/audio/GameOff_Mus_02 MainTitle 143bpm Loop.wav" id="4_pyl7j"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_w65of"]
+[ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="8_ygloa"]
+[ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://assets/sprites/voronoi.png" id="9_6civk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hiwto"]
+energy_multiplier = 10.0
+
+[sub_resource type="Sky" id="Sky_w65of"]
+sky_material = SubResource("ProceduralSkyMaterial_hiwto")
+
+[sub_resource type="Environment" id="Environment_hiwto"]
+sky = SubResource("Sky_w65of")
+ambient_light_source = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_81wt4"]
+render_priority = 0
+shader = ExtResource("8_ygloa")
+shader_parameter/water_color = Color(0.045294113, 0.07294116, 0.10470587, 1)
+shader_parameter/light_foam_color = Color(0.060392156, 0.097254895, 0.13960783, 1)
+shader_parameter/dark_foam_color = Color(0.030196087, 0.048627462, 0.06980394, 1)
+shader_parameter/voronoi_texture = ExtResource("9_6civk")
+shader_parameter/voronoi_size = 0.06
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kcc3o"]
+size = Vector2(100, 100)
+subdivide_width = 400
+subdivide_depth = 400
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiwto"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.13333334)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7af2g"]
+resource_local_to_scene = true
+shader = ExtResource("3_hiwto")
+shader_parameter/texture_albedo = ExtResource("3_4rr2b")
+shader_parameter/texture_flow_map = ExtResource("5_w65of")
+shader_parameter/color = Color(0.6123047, 0.66931915, 0.75, 1)
+shader_parameter/displacement_steps = 10
+shader_parameter/displacement_power = 0.4
+shader_parameter/displacement_size = 10.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]
 shader = ExtResource("2_pyl7j")
+shader_parameter/texture_flow_map = ExtResource("5_w65of")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 3
+shader_parameter/displacement_power = 300.0
+shader_parameter/displacement_size = 600.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hiwto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w65of"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ygloa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6civk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7af2g"]
 
 [sub_resource type="Theme" id="Theme_yql1r"]
-Button/font_sizes/font_size = 28
+Button/colors/font_color = Color(0.6117647, 0.67058825, 0.7490196, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 54
 Button/fonts/font = ExtResource("3_b3w7a")
+Button/styles/disabled = SubResource("StyleBoxEmpty_hiwto")
+Button/styles/focus = SubResource("StyleBoxEmpty_w65of")
+Button/styles/hover = SubResource("StyleBoxEmpty_ygloa")
+Button/styles/normal = SubResource("StyleBoxEmpty_6civk")
+Button/styles/pressed = SubResource("StyleBoxEmpty_7af2g")
 
 [node name="Title" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5806887, 0.8141257, 0, -0.8141257, 0.5806887, 0, 6.906287, 10.740732)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Camera3D"]
+environment = SubResource("Environment_hiwto")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
+transform = Transform3D(0.9321217, -0.12628701, 0.33941236, 0, 0.93722725, 0.34871927, -0.36214522, -0.3250488, 0.87360984, 0, 0, 0)
+
+[node name="Water" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_81wt4")
+mesh = SubResource("PlaneMesh_kcc3o")
+
+[node name="MainTitle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pyl7j")
+autoplay = true
+bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -31,6 +123,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hiwto")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TiitleControl/Panel"]
+material = SubResource("ShaderMaterial_7af2g")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -363.0
+offset_top = -197.0
+offset_right = 363.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4rr2b")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TiitleControl"]
 layout_mode = 1
@@ -38,8 +149,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 463.0
-offset_right = -463.0
+offset_left = 491.0
+offset_right = -491.0
 offset_bottom = 319.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -49,17 +160,20 @@ alignment = 1
 [node name="PlayButton" type="Button" parent="CanvasLayer/TiitleControl/VBoxContainer"]
 material = SubResource("ShaderMaterial_4rr2b")
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = SubResource("Theme_yql1r")
 text = "PLAY"
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/TiitleControl/VBoxContainer"]
 material = SubResource("ShaderMaterial_4rr2b")
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = SubResource("Theme_yql1r")
 text = "SETTINGS"
 
 [node name="QuitButton" type="Button" parent="CanvasLayer/TiitleControl/VBoxContainer"]
 material = SubResource("ShaderMaterial_4rr2b")
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = SubResource("Theme_yql1r")
 text = "QUIT"

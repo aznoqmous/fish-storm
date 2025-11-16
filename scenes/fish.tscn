@@ -1,12 +1,12 @@
 [gd_scene load_steps=17 format=3 uid="uid://bfwdsaqvhdqhg"]
 
-[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="1_8g0i4"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="1_8g0i4"]
 [ext_resource type="Script" uid="uid://bpxdfwkec8ehd" path="res://scripts/fish.gd" id="1_nub35"]
-[ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://sprites/shadow.png" id="2_nub35"]
+[ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://assets/sprites/shadow.png" id="2_nub35"]
 [ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="3_wpvan"]
 [ext_resource type="PackedScene" uid="uid://bdf13uaow7h" path="res://scenes/splash_particles.tscn" id="4_pgks6"]
-[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="5_21k1a"]
-[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://sprites/particle.png" id="7_21k1a"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_21k1a"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="7_21k1a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvcvt"]
 resource_local_to_scene = true

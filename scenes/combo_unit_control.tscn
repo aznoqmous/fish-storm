@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://brwaam4on8k8b"]
 
 [ext_resource type="Material" uid="uid://cj3h6h30di7sp" path="res://materials/canvas_wobbly_material.tres" id="1_ox02a"]
-[ext_resource type="Script" uid="uid://5urx2s6oequb" path="res://scripts/combo_unit_control.gd" id="1_pxciq"]
-[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="2_pxciq"]
+[ext_resource type="Script" path="res://scripts/combo_unit_control.gd" id="1_pxciq"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="2_pxciq"]
 
 [node name="ComboUnitControl" type="Control"]
 custom_minimum_size = Vector2(64, 64)

@@ -1,14 +1,14 @@
 [gd_scene load_steps=15 format=3 uid="uid://ioeg753fcpyw"]
 
-[ext_resource type="Shader" uid="uid://kk5eotwckwoj" path="res://scene_transition.gdshader" id="1_2gjj2"]
-[ext_resource type="Script" uid="uid://cxxlycrtk431o" path="res://scripts/scene_transition_control.gd" id="1_rs54f"]
-[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="2_rs54f"]
-[ext_resource type="Texture2D" uid="uid://dgejme745lw38" path="res://sprites/upgrades/big-fish.png" id="3_73exn"]
-[ext_resource type="Texture2D" uid="uid://dwlnn5k58fa00" path="res://sprites/upgrades/clover.png" id="4_h7gdl"]
-[ext_resource type="Texture2D" uid="uid://b2uqvd6mwnpox" path="res://sprites/upgrades/upgrade-magnet.png" id="5_h3c5i"]
-[ext_resource type="Texture2D" uid="uid://5iqctfc5awl6" path="res://sprites/upgrades/upgrade-cane.png" id="6_bmsr1"]
-[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="7_jco3r"]
-[ext_resource type="Texture2D" uid="uid://dep7pgsiwc7x3" path="res://sprites/rect.png" id="8_3i8tq"]
+[ext_resource type="Shader" uid="uid://kk5eotwckwoj" path="res://shaders/scene_transition.gdshader" id="1_2gjj2"]
+[ext_resource type="Script" path="res://scripts/scene_transition_control.gd" id="1_rs54f"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="2_rs54f"]
+[ext_resource type="Texture2D" uid="uid://dgejme745lw38" path="res://assets/sprites/upgrades/big-fish.png" id="3_73exn"]
+[ext_resource type="Texture2D" uid="uid://dwlnn5k58fa00" path="res://assets/sprites/upgrades/clover.png" id="4_h7gdl"]
+[ext_resource type="Texture2D" uid="uid://b2uqvd6mwnpox" path="res://assets/sprites/upgrades/upgrade-magnet.png" id="5_h3c5i"]
+[ext_resource type="Texture2D" uid="uid://5iqctfc5awl6" path="res://assets/sprites/upgrades/upgrade-cane.png" id="6_bmsr1"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="7_jco3r"]
+[ext_resource type="Texture2D" uid="uid://dep7pgsiwc7x3" path="res://assets/sprites/rect.png" id="8_3i8tq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq58d"]
 shader = ExtResource("1_2gjj2")

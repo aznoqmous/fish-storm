@@ -1,7 +1,6 @@
 class_name Tile extends Area3D
 
 @onready var main: Main = $/root/Main
-@onready var area_3d: Area3D = $Area3D
 @onready var sprite_3d: Sprite3D = $Sprite3D
 @onready var label_3d: Label3D = $Label3D
 @onready var algae_sprite: Sprite3D = $AlgaeSprite
@@ -50,7 +49,6 @@ func _process(delta):
 	algae_sprite.material_override.set("shader_parameter/color", current_color.lightened(0.4))
 	cube.material_override.set("albedo_color", current_color.darkened(0.6))
 	#if label_3d: label_3d.text = name
-
 func bump():
 	scale = Vector3(1.2, 1.0/1.2, 1.2);
 

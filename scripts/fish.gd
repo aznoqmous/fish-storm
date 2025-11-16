@@ -39,7 +39,8 @@ func _process(delta: float) -> void:
 		shadow_sprite_container.position.y = sin(animation * PI) * animation_height
 		shadow_sprite_container.position.z = lerp(animation_depth, 0.0, animation)
 		shadow_sprite_container.scale = lerp(Vector3.ZERO, Vector3.ONE, animation)
-
+	else:
+		shadow_sprite_container.position.y = 0.0
 func loot():
 	animation_player.play("looted")
 

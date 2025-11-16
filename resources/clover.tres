@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://d2acphkags8fd"]
 
 [ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_m4las"]
-[ext_resource type="Texture2D" uid="uid://dwlnn5k58fa00" path="res://sprites/upgrades/clover.png" id="2_m4las"]
+[ext_resource type="Texture2D" uid="uid://dwlnn5k58fa00" path="res://assets/sprites/upgrades/clover.png" id="2_m4las"]
 
 [resource]
 script = ExtResource("1_m4las")

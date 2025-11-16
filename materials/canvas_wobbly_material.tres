@@ -1,14 +1,14 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cj3h6h30di7sp"]
 
 [ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="1_t6yd7"]
-[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://sprites/upgrades/fish.png" id="2_5vve7"]
-[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="3_ehfqy"]
+[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="2_t6yd7"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="3_5vve7"]
 
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_t6yd7")
-shader_parameter/texture_albedo = ExtResource("2_5vve7")
-shader_parameter/texture_flow_map = ExtResource("3_ehfqy")
+shader_parameter/texture_albedo = ExtResource("2_t6yd7")
+shader_parameter/texture_flow_map = ExtResource("3_5vve7")
 shader_parameter/color = Color(0.8070984, 0.42578125, 1, 1)
 shader_parameter/displacement_steps = 4
 shader_parameter/displacement_power = 2.0

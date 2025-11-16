@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://cpwvylcnp8wi6"]
 
-[ext_resource type="Texture2D" uid="uid://3f4mefwv367p" path="res://sprites/tile.png" id="1_n3f48"]
+[ext_resource type="Texture2D" uid="uid://3f4mefwv367p" path="res://assets/sprites/tile.png" id="1_n3f48"]
 [ext_resource type="Script" uid="uid://cn06fnu4ouyxj" path="res://scripts/tile.gd" id="1_ywnoi"]
 [ext_resource type="Material" uid="uid://dn66vhkd36puj" path="res://materials/wobbly_material.tres" id="2_jy7pm"]
 [ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="4_gtpg2"]
-[ext_resource type="Texture2D" uid="uid://1j3pbr27ky8v" path="res://sprites/algae.png" id="5_a2bny"]
-[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://sprites/FlowMap.png" id="6_284l3"]
-[ext_resource type="PackedScene" uid="uid://bwdi0lr4cg1ss" path="res://models/tile.glb" id="7_a2bny"]
+[ext_resource type="Texture2D" uid="uid://1j3pbr27ky8v" path="res://assets/sprites/algae.png" id="5_a2bny"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="6_284l3"]
+[ext_resource type="PackedScene" uid="uid://bwdi0lr4cg1ss" path="res://assets/models/tile.glb" id="7_a2bny"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3iir"]
 resource_local_to_scene = true

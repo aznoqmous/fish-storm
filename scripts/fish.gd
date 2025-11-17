@@ -8,6 +8,7 @@ class_name Fish extends Node3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var loot_particles: GPUParticles3D = $LootParticles
+@onready var charges_mesh: MeshInstance3D = $ChargesMesh
 
 @export var colors: Array[Color]
 @export var upgrade_color: Color
@@ -19,6 +20,9 @@ var animation_height := 5.0
 var animation_depth := -10.0
 var resource: ObjectResource
 
+var charges = 0
+var max_charges = 0
+
 func _ready() -> void:
 	animation_depth = randf_range(-10, -6)
 	shadow_sprite_container.position.y = 0
@@ -28,10 +32,11 @@ func _ready() -> void:
 	splash_particles.emitting = true
 	
 	color = colors.pick_random()
-	sprite_3d.material_override.set("shader_parameter/color", color)
-	sprite_light.light_color = color
-	splash_particles.material_override.set("albedo_color", color)
-	loot_particles.material_override.set("albedo_color", color)
+	#sprite_light.light_color = color
+	#sprite_3d.material_override.set("shader_parameter/color", color)
+	#splash_particles.material_override.set("albedo_color", color)
+	#loot_particles.material_override.set("albedo_color", color)
+	set_color(color)
 	
 func _process(delta: float) -> void:
 	if animation < 1.0:
@@ -41,6 +46,7 @@ func _process(delta: float) -> void:
 		shadow_sprite_container.scale = lerp(Vector3.ZERO, Vector3.ONE, animation)
 	else:
 		shadow_sprite_container.position.y = 0.0
+		
 func loot():
 	animation_player.play("looted")
 
@@ -49,13 +55,29 @@ func set_color(value):
 	sprite_3d.material_override.set("shader_parameter/color", value)
 	splash_particles.material_override.set("albedo_color", value)
 	loot_particles.material_override.set("albedo_color", value)
+	charges_mesh.material_override.set("albedo_color", value)
 
 func load_resource(res: ObjectResource):
 	resource = res
-	sprite_3d.texture = res.texture
 	sprite_3d.material_override.set("shader_parameter/texture_albedo", res.texture)
+	sprite_3d.texture = res.texture
 	
 	if res.effect == ObjectResource.ObjectEffect.EndLevel:
 		set_color(end_portal_color)
 	elif res.effect != ObjectResource.ObjectEffect.None:
 		set_color(upgrade_color)
+		
+	if res.charge_effect:
+		max_charges = resource.max_charges
+		main.character.moved.connect(charge)
+				
+func charge():
+	charges += 1
+	match resource.charge_trigger:
+			ObjectResource.ChargeTrigger.OnMaxCharge:
+				if charges >= max_charges: charge_effect()
+				pass
+
+func charge_effect():
+#	TODO
+	pass

@@ -3,6 +3,7 @@ class_name ObjectResource extends Resource
 @export var texture: CompressedTexture2D
 @export var score := 1.0
 @export var combo : bool = false
+@export var walkable: bool = true
 
 @export_category("Effect")
 @export var effect: ObjectEffect

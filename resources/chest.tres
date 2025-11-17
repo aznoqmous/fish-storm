@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=8 format=3 uid="uid://duhkw1hqan1h7"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_dqesb"]
+[ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="2_7roof"]
+[ext_resource type="Texture2D" uid="uid://b83qe8gdut1n3" path="res://assets/sprites/upgrades/chest.png" id="3_iblc7"]
+[ext_resource type="Resource" uid="uid://sy0tuxwk5ayk" path="res://resources/shoe.tres" id="3_yg7ww"]
+[ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/cane.tres" id="4_201q4"]
+[ext_resource type="Resource" uid="uid://d2acphkags8fd" path="res://resources/clover.tres" id="5_rxxdk"]
+[ext_resource type="Resource" uid="uid://b14uynij41wa7" path="res://resources/portal.tres" id="6_jku8e"]
+
+[resource]
+script = ExtResource("1_dqesb")
+texture = ExtResource("3_iblc7")
+walkable = false
+effect = 1
+value = 0.5
+charge_trigger = 1
+charge_effect = 1
+charge_spawn_position = 1
+spawned_objects = Array[ExtResource("1_dqesb")]([ExtResource("2_7roof"), ExtResource("3_yg7ww"), ExtResource("4_201q4"), ExtResource("5_rxxdk"), ExtResource("6_jku8e")])
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

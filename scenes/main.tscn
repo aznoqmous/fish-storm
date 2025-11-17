@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=47 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -12,7 +12,6 @@
 [ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/cane.tres" id="10_c6pm6"]
 [ext_resource type="Resource" uid="uid://sy0tuxwk5ayk" path="res://resources/shoe.tres" id="11_5he1u"]
 [ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="12_5poiv"]
-[ext_resource type="Resource" uid="uid://b14uynij41wa7" path="res://resources/portal.tres" id="13_2cjbq"]
 [ext_resource type="Resource" uid="uid://d2acphkags8fd" path="res://resources/clover.tres" id="14_chjal"]
 [ext_resource type="Resource" uid="uid://cuerunb6u1f1g" path="res://resources/end_portal.tres" id="15_cjqg0"]
 [ext_resource type="AudioStream" uid="uid://bu5q0prpba67d" path="res://assets/audio/GameOff_Mus_01 Loop.wav" id="16_fv21b"]
@@ -143,7 +142,7 @@ _data = {
 script = ExtResource("1_fv21b")
 levels = Array[ExtResource("2_tel4y")]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky")])
 fishes = Array[ExtResource("7_kmb1v")]([ExtResource("8_fuf3a"), ExtResource("9_pibwh")])
-upgrades = Array[ExtResource("7_kmb1v")]([ExtResource("10_c6pm6"), ExtResource("11_5he1u"), ExtResource("12_5poiv"), ExtResource("13_2cjbq"), ExtResource("14_chjal")])
+upgrades = Array[ExtResource("7_kmb1v")]([ExtResource("14_chjal"), ExtResource("10_c6pm6"), ExtResource("11_5he1u"), ExtResource("12_5poiv")])
 end_portal = ExtResource("15_cjqg0")
 
 [node name="Camera3D" type="Camera3D" parent="."]

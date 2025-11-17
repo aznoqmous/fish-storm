@@ -88,7 +88,7 @@ func update_tiles_color():
 	var max_distance = min(combo * move_per_combo, max_combo_move_distance) + max_move_distance + 0.1 + temporary_mov_distance
 	for tile in grid.tiles.values():
 		var tile_pos = Vector2(tile.global_position.x, tile.global_position.z)
-		tile.is_available = tile != character.target_tile and character_pos.distance_to(tile_pos) / grid.tile_size.x <= max_distance
+		tile.is_available = (not (tile.object and not tile.object.resource.walkable)) and tile != character.target_tile and character_pos.distance_to(tile_pos) / grid.tile_size.x <= max_distance
 		tile.update_color()
 		
 func update_moves_left():
@@ -172,6 +172,16 @@ func spend_credits():
 		credits -= 1.0
 		await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 		
+func spawn_object_at_position(resource: ObjectResource, pos:Vector3):
+	var tile = grid.tiles[grid.world_to_grid_position(pos)]
+	if not tile: return;
+	var new_fish := FISH.instantiate() as Fish
+	new_fish.global_position = tile.global_position
+	add_child(new_fish)
+	tile.object = new_fish
+	new_fish.load_resource(resource)
+	return new_fish
+	
 func spawn_fish() -> Fish:
 	var tiles = grid.tiles.values()
 	for tile in tiles: tile.fish_weight = 0.0

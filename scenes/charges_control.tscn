@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cc5lbkhk10ino"]
+[gd_scene load_steps=5 format=3 uid="uid://cc5lbkhk10ino"]
 
 [ext_resource type="Script" uid="uid://c02oyx2oku7tp" path="res://scripts/charges_control.gd" id="1_4hisx"]
+[ext_resource type="PackedScene" uid="uid://c2tmpxol1oeno" path="res://scenes/charge_control.tscn" id="2_fa3vu"]
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="2_gy4w6"]
 [ext_resource type="Script" uid="uid://c0qmct83h2gb6" path="res://scripts/tile_scale_container.gd" id="2_rqivg"]
 
@@ -19,20 +20,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ChargeControl" type="Container" parent="ChargesContainer"]
+[node name="ChargeControl" parent="ChargesContainer" instance=ExtResource("2_fa3vu")]
 layout_mode = 0
-offset_right = 107.5
-offset_bottom = 44.0
-script = ExtResource("2_rqivg")
-tile_scale = 0.3
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ChargesContainer/ChargeControl"]
-layout_mode = 2
-texture = ExtResource("2_gy4w6")
-patch_margin_left = 50
-patch_margin_top = 52
-patch_margin_right = 49
-patch_margin_bottom = 50
 
 [node name="ChargeControl2" type="Container" parent="ChargesContainer"]
 layout_mode = 0

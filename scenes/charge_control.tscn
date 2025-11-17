@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2tmpxol1oeno"]
+
+[ext_resource type="Script" uid="uid://cm6gv7eyr543m" path="res://scripts/charge_control.gd" id="1_jh3ge"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="2_sgiej"]
+
+[node name="ChargeControl" type="Container"]
+offset_right = 107.5
+offset_bottom = 44.0
+script = ExtResource("1_jh3ge")
+disabled_color = Color(0.203125, 0.203125, 0.203125, 1)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_sgiej")
+patch_margin_left = 50
+patch_margin_top = 52
+patch_margin_right = 49
+patch_margin_bottom = 50

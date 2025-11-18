@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://fgs77dbhgmfo"]
+
+[ext_resource type="Script" uid="uid://b7m41i2ftkapf" path="res://scripts/character_select_control.gd" id="1_7vd0q"]
+[ext_resource type="Texture2D" uid="uid://bab5aa4p74xda" path="res://assets/sprites/ui/nine-patch-border.png" id="1_wito6"]
+[ext_resource type="Texture2D" uid="uid://cifkscdayb3qe" path="res://assets/sprites/characters/default.png" id="2_7vd0q"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="3_88pla"]
+[ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="3_qpiw4"]
+[ext_resource type="Texture2D" uid="uid://bsco3j71102md" path="res://assets/sprites/ui/lock.png" id="4_88pla"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_mq72j"]
+[ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="6_pgudw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nbisn"]
+resource_local_to_scene = true
+shader = ExtResource("3_qpiw4")
+shader_parameter/texture_albedo = ExtResource("1_wito6")
+shader_parameter/texture_flow_map = ExtResource("5_mq72j")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xcmdd"]
+resource_local_to_scene = true
+shader = ExtResource("3_qpiw4")
+shader_parameter/texture_albedo = ExtResource("6_pgudw")
+shader_parameter/texture_flow_map = ExtResource("5_mq72j")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_3pc2v"]
+font = ExtResource("3_88pla")
+font_size = 32
+
+[node name="CharacterSelectControl" type="Control"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 174.0
+pivot_offset = Vector2(61, 59)
+mouse_default_cursor_shape = 2
+script = ExtResource("1_7vd0q")
+enabled_color = Color(1, 1, 1, 1)
+disabled_color = Color(0.63671875, 0.63671875, 0.63671875, 1)
+lock_texture = ExtResource("4_88pla")
+
+[node name="BorderTextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_nbisn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wito6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CharacterTextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_xcmdd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7vd0q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -49.0
+offset_right = 70.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ooqo"
+label_settings = SubResource("LabelSettings_3pc2v")
+horizontal_alignment = 1

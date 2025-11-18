@@ -2,9 +2,10 @@ class_name Character extends Node3D
 
 @onready var main: Main = $/root/Main
 @onready var sprite_container: Node3D = $SpriteContainer
-@onready var sprite_3d: Sprite3D = $SpriteContainer/Sprite3D
 @onready var shadow: Sprite3D = $Shadow
-@onready var character_moves_left_label: Label3D = $SpriteContainer/Sprite3D/CharacterMovesLeftLabel
+@onready var body_sprite: Sprite3D = $SpriteContainer/BodySprite
+@onready var head_sprite: Sprite3D = $SpriteContainer/HeadSprite
+@onready var character_moves_left_label: Label3D = $SpriteContainer/CharacterMovesLeftLabel
 
 var last_jump: float
 var jump_life: float
@@ -13,6 +14,7 @@ var jump_life: float
 var target_position: Vector3
 var start_jump_position: Vector3
 var target_tile: Tile
+var flip_sprites := false
 
 var is_jumping: float:
 	get: return jump_life <  1.0
@@ -40,7 +42,11 @@ func move_to(tile: Tile):
 	target_position = tile.global_position
 	last_jump = Time.get_ticks_msec() / 1000.0
 	start_jump_position = global_position
-	sprite_3d.scale = Vector3(1.0 / 1.2, 1.2, 1.0)
+	sprite_container.scale = Vector3(1.0 / 1.2, 1.2, 1.0)
+	var signn = sign(tile.global_position.x - global_position.x)
+	if signn != 0.0:
+		flip_sprites = signn < 0
+
 	
 func set_tile(tile: Tile):
 	target_tile = tile
@@ -48,23 +54,27 @@ func set_tile(tile: Tile):
 	global_position = target_tile.global_position
 	
 func _process(delta: float) -> void:
-	#global_position = lerp(global_position, target_position, delta * 5.0)
 	if target_tile and is_jumping and (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration > 1.0:
 		global_position = target_tile.global_position
 		moved.emit()
 		
-		
+	head_sprite.rotation.y = lerp(head_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
+	body_sprite.rotation.y = lerp(body_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
+
 	jump_life = (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration
 	
 	if is_jumping:
-		#global_position.y = sin(jump_life * TAU / 2.0) * jump_height + lerp(start_jump_position.y, target_position.y, jump_life)
 		global_position = lerp(start_jump_position, target_position, jump_life)
 		sprite_container.position.y = sin(jump_life * TAU / 2.0) * jump_height
 		shadow.scale = Vector3.ONE * cos(jump_life * TAU / 2.0) * 0.8
 	else:
 		global_position = target_position
 		
-	sprite_3d.scale = lerp(sprite_3d.scale, Vector3.ONE, delta * 5.0)
+	sprite_container.scale = lerp(sprite_container.scale, Vector3.ONE, delta * 5.0)
 	character_moves_left_label.scale = lerp(character_moves_left_label.scale, Vector3.ONE, delta * 5.0)
+	body_sprite.material_override.set("shader_parameter/color", main.colors.current_color.darkened(0.5).lightened(min(main.combo / 10.0 / 5.0, 0.5)))
+
+func load_resource(res: CharacterResource):
+	head_sprite.material_override.set("shader_parameter/texture_albedo", res.head_sprite)
 	
 signal moved

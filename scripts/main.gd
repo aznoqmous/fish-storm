@@ -11,21 +11,20 @@ class_name Main extends Node3D
 @onready var colors: Colors = $Colors
 @onready var scene_transition_control: SceneTransitionControl = $CanvasLayer/SceneTransitionControl
 @onready var restart_button: Button = $CanvasLayer/Control/FinalScoreControl/RestartButton
-@onready var character_moves_left_label: Label3D = $Character/SpriteContainer/Sprite3D/CharacterMovesLeftLabel
 @onready var score_label: Label = $CanvasLayer/Control/Control/ScoreLabel
 @onready var level_label: Label = $CanvasLayer/Control/LevelLabel
+@onready var character_moves_left_label: Label3D = $Character/SpriteContainer/CharacterMovesLeftLabel
 
 const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
 
 @export var levels: Array[LevelResource]
 
-var credits = 10.0
 var score := 0
+var credits = 10.0
 var combo := 0
-var is_combo : bool : 
-	get: return combo > 1
-var last_color: Color
+
+var max_combo := 10.0
 var moves_left := 10
 var max_moves_left := 10
 var max_move_distance := 1.0
@@ -34,6 +33,10 @@ var move_per_combo := 0.2
 var magnet_power := 0.0
 var temporary_mov_distance := 0.0
 var credits_gain = 1.0
+
+var is_combo : bool : 
+	get: return combo > 1
+var last_color: Color
 
 @export_category("Fishes")
 @export var fish_before_end_portal := 5
@@ -54,6 +57,18 @@ func _ready() -> void:
 	restart_button.pressed.connect(restart)
 	character.moved.connect(handle_movement)
 	load_level(levels[current_level_index])
+	load_character(Game.selected_character)
+	
+func load_character(res: CharacterResource):
+	max_combo += res.max_combo
+	max_moves_left += res.max_moves_left
+	max_move_distance += res.max_move_distance
+	max_combo_move_distance += res.max_combo_move_distance
+	move_per_combo += res.move_per_combo
+	magnet_power += res.magnet_power
+	temporary_mov_distance += res.temporary_mov_distance
+	credits_gain *= res.credits_gain
+	character.load_resource(res)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
@@ -72,7 +87,7 @@ func gain_score(value):
 	score_label.text = str(score)
 
 func gain_combo(value):
-	combo = max(combo + value, 0)
+	combo = clamp(0, combo + value, max_combo)
 	if combo > 1:
 		var new_combo := COMBO.instantiate() as Combo
 		add_child(new_combo)

@@ -48,7 +48,7 @@ func _process(delta):
 	sprite_3d.material_override.set("shader_parameter/color", current_color)
 	algae_sprite.material_override.set("shader_parameter/color", current_color.lightened(0.4))
 	cube.material_override.set("albedo_color", current_color.darkened(0.6))
-	#if label_3d: label_3d.text = name
+
 func bump():
 	scale = Vector3(1.2, 1.0/1.2, 1.2);
 

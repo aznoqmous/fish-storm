@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://ioeg753fcpyw"]
 
 [ext_resource type="Shader" uid="uid://kk5eotwckwoj" path="res://shaders/scene_transition.gdshader" id="1_2gjj2"]
-[ext_resource type="Script" path="res://scripts/scene_transition_control.gd" id="1_rs54f"]
+[ext_resource type="Script" uid="uid://cxxlycrtk431o" path="res://scripts/uis/scene_transition_control.gd" id="1_rs54f"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="2_rs54f"]
 [ext_resource type="Texture2D" uid="uid://dgejme745lw38" path="res://assets/sprites/upgrades/big-fish.png" id="3_73exn"]
 [ext_resource type="Texture2D" uid="uid://dwlnn5k58fa00" path="res://assets/sprites/upgrades/clover.png" id="4_h7gdl"]
@@ -17,7 +17,7 @@ shader_parameter/texture_size = Vector2(156, 136)
 shader_parameter/screen_size = Vector2(1160, 650)
 shader_parameter/alpha = 1.0
 shader_parameter/texture_flow_map = ExtResource("2_rs54f")
-shader_parameter/fsize = 1.345
+shader_parameter/fsize = 2.245
 
 [sub_resource type="Animation" id="Animation_h7gdl"]
 length = 0.001

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://b3e8by7tdbx8h"]
+
+[ext_resource type="Texture2D" uid="uid://bjko1aq357isv" path="res://assets/sprites/characters/yv.png" id="1_xh8nt"]
+[ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_fuyfx"]
+
+[resource]
+script = ExtResource("2_fuyfx")
+character_name = "YV"
+head_sprite = ExtResource("1_xh8nt")
+description = "Active : More fishes
+Passive : More fishes"
+credits_gain = 1.2
+active_effect = 3
+value = 3.0
+metadata/_custom_type_script = "uid://bxsukocx6neog"

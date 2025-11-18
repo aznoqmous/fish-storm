@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=50 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="17_txyw0"]
 [ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="18_vc5cj"]
 [ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="19_nvyfr"]
+[ext_resource type="Texture2D" uid="uid://boyic6scpewkt" path="res://assets/sprites/characters/body.png" id="20_fv21b"]
+[ext_resource type="Texture2D" uid="uid://d3unknu7ywa6w" path="res://assets/sprites/characters/evil.png" id="20_tel4y"]
 [ext_resource type="Texture2D" uid="uid://b4a2eobvwve67" path="res://assets/sprites/peer.png" id="20_ty1g6"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="21_j2jfr"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="22_bjg73"]
@@ -26,16 +28,23 @@
 [ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://assets/sprites/shadow.png" id="24_o7ddy"]
 [ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="25_0loja"]
 [ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://assets/sprites/voronoi.png" id="26_ids8r"]
-[ext_resource type="Script" path="res://scripts/combo_control.gd" id="27_dnhof"]
+[ext_resource type="Script" uid="uid://drt20frltyy3q" path="res://scripts/uis/combo_control.gd" id="27_dnhof"]
 [ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/combo_unit_control.tscn" id="28_1v6qk"]
 [ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://assets/sprites/star.png" id="29_augu2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
 render_priority = 0
 shader = ExtResource("19_nvyfr")
-shader_parameter/texture_albedo = ExtResource("20_ty1g6")
+shader_parameter/texture_albedo = ExtResource("20_tel4y")
 shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
 shader_parameter/color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qkpxi"]
+render_priority = 0
+shader = ExtResource("19_nvyfr")
+shader_parameter/texture_albedo = ExtResource("20_fv21b")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(0.8046875, 0.8046875, 0.8046875, 1)
 
 [sub_resource type="Curve" id="Curve_ycdy4"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -171,21 +180,29 @@ script = ExtResource("18_vc5cj")
 [node name="SpriteContainer" type="Node3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19008301)
 
-[node name="Sprite3D" type="Sprite3D" parent="Character/SpriteContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9147905, 0.110119246)
-material_override = SubResource("ShaderMaterial_efxa6")
-shaded = true
-texture = ExtResource("20_ty1g6")
-
-[node name="CharacterMovesLeftLabel" type="Label3D" parent="Character/SpriteContainer/Sprite3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30774, -0.110119246)
+[node name="CharacterMovesLeftLabel" type="Label3D" parent="Character/SpriteContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2683098, 0.03303577)
 text = "6"
 font = ExtResource("22_bjg73")
 font_size = 160
 outline_size = 0
 
+[node name="HeadSprite" type="Sprite3D" parent="Character/SpriteContainer"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.3494116, 0.314)
+sorting_offset = 100.0
+material_override = SubResource("ShaderMaterial_efxa6")
+shaded = true
+texture = ExtResource("20_ty1g6")
+
+[node name="BodySprite" type="Sprite3D" parent="Character/SpriteContainer"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.61356497, 0.110119246)
+sorting_offset = 100.0
+material_override = SubResource("ShaderMaterial_qkpxi")
+shaded = true
+texture = ExtResource("20_ty1g6")
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Character/SpriteContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8284638, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8284638, -0.0030645728)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_vivmo")
 draw_pass_1 = SubResource("QuadMesh_yaehf")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://cgyvpdxxyqfg5"]
+
+[ext_resource type="Texture2D" uid="uid://d3unknu7ywa6w" path="res://assets/sprites/characters/evil.png" id="1_rw115"]
+[ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_3o5qn"]
+
+[resource]
+script = ExtResource("2_3o5qn")
+character_name = "Paha"
+head_sprite = ExtResource("1_rw115")
+description = "Active : More fishes
+Passive : More fishes"
+credits_gain = 1.2
+active_effect = 3
+value = 3.0
+metadata/_custom_type_script = "uid://bxsukocx6neog"

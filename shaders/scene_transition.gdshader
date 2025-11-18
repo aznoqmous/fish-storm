@@ -27,9 +27,8 @@ uniform float fsize = 2.0;
 void fragment() {
 	vec2 size = texture_size / ( 1.0 / fsize) ;
 	
-	vec3 color = hsv_to_rgb(vec3(TIME / 10.0, 0.5, 0.7));
 	float ratio = screen_size.x / size.x;
-	vec2 pos = (UV - vec2(TIME / 50.0)) * ratio;
+	vec2 pos = (UV * 8.0 - vec2(TIME / 10.0)) * ratio * (screen_size / texture_size) / 10.0;
 	int index = clamp(int(pos.x + floor(pos.y) * 2.0) % 4, 0, 4);
 	vec2 puv = fract(pos);
 	
@@ -39,7 +38,9 @@ void fragment() {
 	
 	vec4 sampled = texture(textures[index], puv * (vec2(ratio, ratio * size.y / size.x)) / fsize + dpos);
 	
-	COLOR = mix(vec4(color * 0.05, 1.0), sampled * vec4(color * 0.4 *  (abs(sin(TIME * TAU / 4.0)) / 2.0 + 1.0), 1.0), sampled.a) * vec4(1.0, 1.0, 1.0, alpha);
+	vec3 bg_color = hsv_to_rgb(vec3((TIME) / 10.0, 0.5, 0.7));
+	vec3 color = hsv_to_rgb(vec3((TIME + float(index) * 0.666) / 10.0, 0.5, 0.7));
+	COLOR = mix(vec4(bg_color * 0.05, 1.0), sampled * vec4(color * 0.4 *  (abs(sin((TIME + float(index) * 0.5) * TAU / 4.0)) / 2.0 + 1.0), 1.0), sampled.a) * vec4(1.0, 1.0, 1.0, alpha);
 	
 }
 

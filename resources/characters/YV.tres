@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://cljw1d0fw8t6b"]
+
+[ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="1_c4e0c"]
+[ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_kftgp"]
+
+[resource]
+script = ExtResource("2_kftgp")
+character_name = "Ikk"
+head_sprite = ExtResource("1_c4e0c")
+description = "Active : More fishes
+Passive : More fishes"
+credits_gain = 1.2
+active_effect = 3
+value = 3.0
+metadata/_custom_type_script = "uid://bxsukocx6neog"

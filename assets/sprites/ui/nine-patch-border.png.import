@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cddn5ndm4nav8"
-path="res://.godot/imported/ooqo-title.png-9c13bd4db007c47c830f0bc89cd9a5ff.ctex"
+uid="uid://bab5aa4p74xda"
+path="res://.godot/imported/nine-patch-border.png-d9185db6a5a622c88e3eff61cf427337.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ooqo-title.png"
-dest_files=["res://.godot/imported/ooqo-title.png-9c13bd4db007c47c830f0bc89cd9a5ff.ctex"]
+source_file="res://assets/sprites/ui/nine-patch-border.png"
+dest_files=["res://.godot/imported/nine-patch-border.png-d9185db6a5a622c88e3eff61cf427337.ctex"]
 
 [params]
 

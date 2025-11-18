@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode cull_disabled;
 uniform sampler2D texture_albedo;
 uniform sampler2D texture_flow_map;
 uniform vec3 color: source_color = vec3(1.0);
@@ -16,7 +17,7 @@ void fragment() {
 	vec2 pos = UV + displacement.xy * 0.02 * displacement_power;
 	vec4 tex = texture(texture_albedo, pos);
     ALBEDO = tex.rgb * color;
-    ALPHA = tex.a;
+    ALPHA = pow(tex.a, 3);
 }
 
 //void light() {

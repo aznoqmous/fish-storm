@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://b0v358lg7qpbk"]
+
+[ext_resource type="Texture2D" uid="uid://cifkscdayb3qe" path="res://assets/sprites/characters/default.png" id="1_8j8q6"]
+[ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="1_hrhmk"]
+
+[resource]
+script = ExtResource("1_hrhmk")
+character_name = "Ooqo"
+head_sprite = ExtResource("1_8j8q6")
+description = "Active : More fishes
+Passive : More fishes"
+credits_gain = 1.5
+active_effect = 3
+value = 3.0
+metadata/_custom_type_script = "uid://bxsukocx6neog"

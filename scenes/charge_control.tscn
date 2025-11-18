@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2tmpxol1oeno"]
 
-[ext_resource type="Script" uid="uid://cm6gv7eyr543m" path="res://scripts/charge_control.gd" id="1_jh3ge"]
+[ext_resource type="Script" uid="uid://cm6gv7eyr543m" path="res://scripts/uis/charge_control.gd" id="1_jh3ge"]
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="2_sgiej"]
 
 [node name="ChargeControl" type="Container"]

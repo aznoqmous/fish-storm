@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=54 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -31,6 +31,10 @@
 [ext_resource type="Script" uid="uid://drt20frltyy3q" path="res://scripts/uis/combo_control.gd" id="27_dnhof"]
 [ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/combo_unit_control.tscn" id="28_1v6qk"]
 [ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://assets/sprites/star.png" id="29_augu2"]
+[ext_resource type="Texture2D" uid="uid://bab5aa4p74xda" path="res://assets/sprites/ui/nine-patch-border.png" id="32_5q0nq"]
+[ext_resource type="Script" uid="uid://evjj08c3krjn" path="res://scripts/active_control.gd" id="32_j8jky"]
+[ext_resource type="Texture2D" uid="uid://b2uqvd6mwnpox" path="res://assets/sprites/upgrades/upgrade-magnet.png" id="33_dgi5k"]
+[ext_resource type="PackedScene" uid="uid://cc5lbkhk10ino" path="res://scenes/charges_control.tscn" id="34_dgi5k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
 render_priority = 0
@@ -418,3 +422,66 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("22_bjg73")
 theme_override_font_sizes/font_size = 64
 text = "RESTART ?"
+
+[node name="ActiveControl" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -110.0
+offset_right = 36.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("32_j8jky")
+active_color = Color(0.59552, 1, 0.44921875, 1)
+disabled_color = Color(0.20392157, 0.20392157, 0.20392157, 1)
+
+[node name="Border" type="TextureRect" parent="CanvasLayer/Control/ActiveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_5q0nq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActiveEffectSprite" type="TextureRect" parent="CanvasLayer/Control/ActiveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_dgi5k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ChargesControl" parent="CanvasLayer/Control/ActiveControl" instance=ExtResource("34_dgi5k")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = 42.0
+offset_right = 33.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+gap = 5

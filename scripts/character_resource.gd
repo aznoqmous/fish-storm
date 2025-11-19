@@ -2,6 +2,7 @@ class_name CharacterResource extends Resource
 
 @export var character_name: String
 @export var head_sprite: CompressedTexture2D
+@export var active_effect_sprite: CompressedTexture2D
 @export_multiline var description: String
  
 @export_category("Passive Effect")

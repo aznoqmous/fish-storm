@@ -215,7 +215,7 @@ texture = ExtResource("2_nub35")
 [node name="SpriteContainer" type="Node3D" parent="ShadowSpriteContainer"]
 
 [node name="Sprite3D" type="Sprite3D" parent="ShadowSpriteContainer/SpriteContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6836207, 0.1)
+transform = Transform3D(1, 0, 0, 0, 0.8418312, 0.53974086, 0, -0.53974086, 0.8418312, 0, 0.6836207, 0.03881053)
 material_override = SubResource("ShaderMaterial_bvcvt")
 modulate = Color(1, 0.9647059, 0.7254902, 1)
 texture = ExtResource("1_8g0i4")

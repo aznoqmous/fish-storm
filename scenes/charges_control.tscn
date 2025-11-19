@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cc5lbkhk10ino"]
+[gd_scene load_steps=3 format=3 uid="uid://cc5lbkhk10ino"]
 
 [ext_resource type="Script" uid="uid://c02oyx2oku7tp" path="res://scripts/uis/charges_control.gd" id="1_4hisx"]
 [ext_resource type="PackedScene" uid="uid://c2tmpxol1oeno" path="res://scenes/charge_control.tscn" id="2_fa3vu"]
-[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="2_gy4w6"]
-[ext_resource type="Script" uid="uid://c0qmct83h2gb6" path="res://scripts/tile_scale_container.gd" id="2_rqivg"]
 
 [node name="ChargesControl" type="Control"]
 layout_mode = 3
@@ -22,51 +20,14 @@ grow_vertical = 2
 
 [node name="ChargeControl" parent="ChargesContainer" instance=ExtResource("2_fa3vu")]
 layout_mode = 0
+offset_right = 148.66667
 
-[node name="ChargeControl2" type="Container" parent="ChargesContainer"]
+[node name="ChargeControl2" parent="ChargesContainer" instance=ExtResource("2_fa3vu")]
 layout_mode = 0
-offset_left = 123.5
-offset_right = 231.0
-offset_bottom = 44.0
-script = ExtResource("2_rqivg")
-tile_scale = 0.3
+offset_left = 164.66667
+offset_right = 313.33334
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ChargesContainer/ChargeControl2"]
-layout_mode = 2
-texture = ExtResource("2_gy4w6")
-patch_margin_left = 50
-patch_margin_top = 52
-patch_margin_right = 49
-patch_margin_bottom = 50
-
-[node name="ChargeControl3" type="Container" parent="ChargesContainer"]
+[node name="ChargeControl3" parent="ChargesContainer" instance=ExtResource("2_fa3vu")]
 layout_mode = 0
-offset_left = 247.0
-offset_right = 354.5
-offset_bottom = 44.0
-script = ExtResource("2_rqivg")
-tile_scale = 0.3
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ChargesContainer/ChargeControl3"]
-layout_mode = 2
-texture = ExtResource("2_gy4w6")
-patch_margin_left = 50
-patch_margin_top = 52
-patch_margin_right = 49
-patch_margin_bottom = 50
-
-[node name="ChargeControl4" type="Container" parent="ChargesContainer"]
-layout_mode = 0
-offset_left = 370.5
+offset_left = 329.33334
 offset_right = 478.0
-offset_bottom = 44.0
-script = ExtResource("2_rqivg")
-tile_scale = 0.3
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ChargesContainer/ChargeControl4"]
-layout_mode = 2
-texture = ExtResource("2_gy4w6")
-patch_margin_left = 50
-patch_margin_top = 52
-patch_margin_right = 49
-patch_margin_bottom = 50

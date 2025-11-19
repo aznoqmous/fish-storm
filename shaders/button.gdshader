@@ -2,9 +2,9 @@ shader_type canvas_item;
 
 uniform sampler2D texture_flow_map;
 uniform vec3 color: source_color = vec3(1.0);
-uniform int displacement_steps = 4;
-uniform float displacement_power = 2.0;
-uniform float displacement_size = 5.0;
+uniform int displacement_steps = 3;
+uniform float displacement_power = 300.0;
+uniform float displacement_size = 600.0;
 
 void vertex() {
 	// Called for every vertex the material is visible on.

@@ -1,14 +1,13 @@
 @tool
 class_name ChargesControl extends Control
 const CHARGE_CONTROL = preload("res://scenes/charge_control.tscn")
-
 @onready var charges_container: Control = $ChargesContainer
 @export var gap:= 16:
 	set(value):
 		gap = value
 		update()
 		
-var max_charges = 0
+@export var max_charges = 0
 var charges = 0
 var color: Color
 
@@ -20,8 +19,10 @@ func _ready() -> void:
 		update()
 	)
 	charges_container.resized.connect(update)
-
+	build()
+	
 func build():
+	if not charges_container: return;
 	for child in charges_container.get_children(): child.queue_free()
 	for i in max_charges:
 		var charge_control:= CHARGE_CONTROL.instantiate() as ChargeControl
@@ -30,6 +31,7 @@ func build():
 		charge_control.set_enabled(false)
 
 func update():
+	if not charges_container: return;
 	var children = charges_container.get_children()
 	var _size = (charges_container.size.x - gap * (children.size() - 1.0)) / children.size()
 	for i in children.size():

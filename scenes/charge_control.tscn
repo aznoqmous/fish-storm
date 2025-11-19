@@ -8,6 +8,7 @@ offset_right = 107.5
 offset_bottom = 44.0
 script = ExtResource("1_jh3ge")
 disabled_color = Color(0.203125, 0.203125, 0.203125, 1)
+tile_scale = 0.1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2

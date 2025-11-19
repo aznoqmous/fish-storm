@@ -1,15 +1,13 @@
-[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://cljw1d0fw8t6b"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://b3e8by7tdbx8h"]
 
-[ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="1_c4e0c"]
-[ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_kftgp"]
+[ext_resource type="Texture2D" uid="uid://bjko1aq357isv" path="res://assets/sprites/characters/yv.png" id="1_xh8nt"]
+[ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_fuyfx"]
 
 [resource]
-script = ExtResource("2_kftgp")
-character_name = "Ikk"
-head_sprite = ExtResource("1_c4e0c")
-description = "Active : More fishes
-Passive : More fishes"
-credits_gain = 1.2
-active_effect = 3
-value = 3.0
+script = ExtResource("2_fuyfx")
+character_name = "YV"
+head_sprite = ExtResource("1_xh8nt")
+description = "Power : Spawn an upgrade"
+credits_gain = 1.0
+active_effect = 2
 metadata/_custom_type_script = "uid://bxsukocx6neog"

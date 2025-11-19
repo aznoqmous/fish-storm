@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=44 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/uis/title_control.gd" id="1_p6dhs"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
@@ -17,10 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://dep7pgsiwc7x3" path="res://assets/sprites/rect.png" id="11_fgbvm"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="13_blk4q"]
 [ext_resource type="Resource" uid="uid://b0v358lg7qpbk" path="res://resources/characters/default.tres" id="14_8magm"]
-[ext_resource type="Resource" uid="uid://cljw1d0fw8t6b" path="res://resources/characters/YV.tres" id="15_pmcd8"]
+[ext_resource type="Resource" uid="uid://cljw1d0fw8t6b" path="res://resources/characters/ikk.tres" id="15_pmcd8"]
 [ext_resource type="PackedScene" uid="uid://fgs77dbhgmfo" path="res://scenes/character_select_control.tscn" id="16_6rcc6"]
-[ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/oye.tres" id="16_e75f2"]
-[ext_resource type="Resource" uid="uid://dqlwd5tymo60x" path="res://resources/characters/ikk.tres" id="17_wtvjo"]
+[ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/yv.tres" id="16_e75f2"]
+[ext_resource type="Resource" uid="uid://dqlwd5tymo60x" path="res://resources/characters/oye.tres" id="17_wtvjo"]
 [ext_resource type="Resource" uid="uid://cgyvpdxxyqfg5" path="res://resources/characters/paha.tres" id="18_t8o15"]
 [ext_resource type="Resource" uid="uid://dtswsmddjfa73" path="res://resources/characters/nohz.tres" id="19_e75f2"]
 
@@ -139,6 +139,22 @@ Button/styles/focus = SubResource("StyleBoxEmpty_w65of")
 Button/styles/hover = SubResource("StyleBoxEmpty_ygloa")
 Button/styles/normal = SubResource("StyleBoxEmpty_6civk")
 Button/styles/pressed = SubResource("StyleBoxEmpty_7af2g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e75f2"]
+shader = ExtResource("2_pyl7j")
+shader_parameter/texture_flow_map = ExtResource("5_w65of")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 8
+shader_parameter/displacement_power = 200.0
+shader_parameter/displacement_size = 100.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_wtvjo"]
+font = ExtResource("3_b3w7a")
+font_size = 42
+
+[sub_resource type="LabelSettings" id="LabelSettings_e75f2"]
+font = ExtResource("3_b3w7a")
+font_size = 32
 
 [node name="Title" type="Node3D"]
 
@@ -262,7 +278,53 @@ mouse_default_cursor_shape = 2
 theme = SubResource("Theme_yql1r")
 text = "QUIT"
 
-[node name="CharactersContainer" type="GridContainer" parent="CanvasLayer/TitleControl"]
+[node name="CharacterSelect" type="Control" parent="CanvasLayer/TitleControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/TitleControl/CharacterSelect"]
+material = SubResource("ShaderMaterial_e75f2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.5
+offset_top = -27.0
+offset_right = 157.5
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chose a character"
+label_settings = SubResource("LabelSettings_wtvjo")
+horizontal_alignment = 1
+
+[node name="CharacterDescription" type="Label" parent="CanvasLayer/TitleControl/CharacterSelect"]
+material = SubResource("ShaderMaterial_e75f2")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 197.5
+offset_right = 144.0
+offset_bottom = 266.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Active : More fishes
+Passive : More fishes"
+label_settings = SubResource("LabelSettings_e75f2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharactersContainer" type="GridContainer" parent="CanvasLayer/TitleControl/CharacterSelect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -270,27 +332,27 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -394.0
-offset_top = 43.0
+offset_top = 59.5
 offset_right = 394.0
-offset_bottom = 303.0
+offset_bottom = 319.5
 grow_horizontal = 2
 grow_vertical = 2
 columns = 6
 
-[node name="CharacterSelectControl" parent="CanvasLayer/TitleControl/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2
 
-[node name="CharacterSelectControl2" parent="CanvasLayer/TitleControl/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl2" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2
 
-[node name="CharacterSelectControl3" parent="CanvasLayer/TitleControl/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl3" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2
 
-[node name="CharacterSelectControl4" parent="CanvasLayer/TitleControl/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl4" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2
 
-[node name="CharacterSelectControl5" parent="CanvasLayer/TitleControl/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl5" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2
 
-[node name="CharacterSelectControl6" parent="CanvasLayer/TitleControl/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl6" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2

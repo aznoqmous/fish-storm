@@ -7,9 +7,8 @@
 script = ExtResource("2_xyafw")
 character_name = "Nohz"
 head_sprite = ExtResource("1_yd8ku")
-description = "Active : More fishes
-Passive : More fishes"
-credits_gain = 1.2
+description = "???"
+credits_gain = 1.0
 active_effect = 3
 value = 3.0
 metadata/_custom_type_script = "uid://bxsukocx6neog"

@@ -19,7 +19,6 @@ const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
 
 @export var levels: Array[LevelResource]
-
 var score := 0
 var credits = 10.0
 var combo := 0
@@ -52,10 +51,18 @@ var upgrade_random: FixedRandom
 var current_level_index = 0
 var current_level: LevelResource
 
+@export_category("Actions")
+@onready var active_control: ActiveControl = $CanvasLayer/Control/ActiveControl
+
+
 func _ready() -> void:
 	upgrade_random = FixedRandom.new()
 	restart_button.pressed.connect(restart)
 	character.moved.connect(handle_movement)
+	active_control.gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton and event.is_pressed() and event.button_index == 1:
+			trigger_active_effect()
+	)
 	load_level(levels[current_level_index])
 	load_character(Game.selected_character)
 	
@@ -69,6 +76,10 @@ func load_character(res: CharacterResource):
 	temporary_mov_distance += res.temporary_mov_distance
 	credits_gain *= res.credits_gain
 	character.load_resource(res)
+	
+	active_control.charges_control.max_charges = res.active_cooldown
+	active_control.charges_control.build()
+	active_control.active_effect_sprite.texture = res.active_effect_sprite
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
@@ -88,6 +99,7 @@ func gain_score(value):
 
 func gain_combo(value):
 	combo = clamp(0, combo + value, max_combo)
+	combo_control.set_combo(combo)
 	if combo > 1:
 		var new_combo := COMBO.instantiate() as Combo
 		add_child(new_combo)
@@ -169,12 +181,13 @@ func handle_loot(fish: Fish):
 	last_color = fish.color if fish else colors.default_color
 	
 	if not fish: return
+	active_control.charges_control.gain_charge(1)
+	active_control.set_active(active_control.charges_control.charges >= active_control.charges_control.max_charges)
 	fish.loot()
 	gain_score(fish.resource.value)
 	if fish.resource.combo:
 		gain_combo(1)
 		combo_control.add_fish(fish)
-		combo_control.set_combo(combo)
 	if fish.resource.description:
 		var new_combo := COMBO.instantiate() as Combo
 		add_child(new_combo)
@@ -216,9 +229,9 @@ func spawn_fish() -> Fish:
 	var tile : Tile = empty_tiles[0]
 	
 	var new_fish := FISH.instantiate() as Fish
-	new_fish.global_position = tile.global_position
-	tile.object = new_fish
 	add_child(new_fish)
+	tile.object = new_fish
+	new_fish.global_position = tile.global_position
 	return new_fish
 	
 func spawn_random_fish()-> Fish:
@@ -276,3 +289,35 @@ func restart():
 	score_label.text = str(score)
 	current_level_index = 0
 	load_level(levels[current_level_index])
+	
+func trigger_active_effect():
+	var ch := Game.selected_character
+	match ch.active_effect:
+		CharacterResource.ActiveEffect.AddCombo:
+			gain_combo(ch.value)
+		CharacterResource.ActiveEffect.SpawnUpgrade:
+			var fish = spawn_fish()
+			if fish: fish.load_resource(upgrades.pick_random())
+		CharacterResource.ActiveEffect.SpawnFishes:
+			for i in range(0, ch.value):
+				var fish = spawn_fish()
+				if fish: fish.load_resource(fishes[min(floor(randf() * fish_level), fishes.size()-1)])
+		CharacterResource.ActiveEffect.TemporaryMovementIncrease:
+			temporary_mov_distance += ch.value
+			reset_combo()
+			update_tiles_color()
+		CharacterResource.ActiveEffect.LootFishesForMaxMoves:
+			for i in range(0, ch.value):
+				var tile = grid.get_fish_tiles().pick_random()
+				if tile and tile.object:
+					handle_loot(tile.object)
+					moves_left -= 1
+					character_moves_left_label.scale = Vector3.ONE * 2.0
+					if moves_left <= 0:
+						final_score_control.set_visible(true)
+						final_score_label.text = str(score)
+	update_moves_left()
+	
+	active_control.charges_control.charges = 0
+	active_control.charges_control.build()
+	active_control.set_active(false)

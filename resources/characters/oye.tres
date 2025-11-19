@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://b3e8by7tdbx8h"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=4 format=3 uid="uid://dqlwd5tymo60x"]
 
-[ext_resource type="Texture2D" uid="uid://bjko1aq357isv" path="res://assets/sprites/characters/yv.png" id="1_xh8nt"]
+[ext_resource type="Texture2D" uid="uid://mle8rjelmqhx" path="res://assets/sprites/upgrades/portal.png" id="1_ys065"]
+[ext_resource type="Texture2D" uid="uid://bv266s2uk1bmf" path="res://assets/sprites/characters/eye.png" id="2_bh8km"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_fuyfx"]
 
 [resource]
 script = ExtResource("2_fuyfx")
-character_name = "YV"
-head_sprite = ExtResource("1_xh8nt")
-description = "Active : More fishes
-Passive : More fishes"
-credits_gain = 1.2
-active_effect = 3
-value = 3.0
+character_name = "Oye"
+head_sprite = ExtResource("2_bh8km")
+active_effect_sprite = ExtResource("1_ys065")
+description = "Power : Teleport"
+credits_gain = 1.0
+active_effect = 4
+value = 100.0
+active_cooldown = 5
 metadata/_custom_type_script = "uid://bxsukocx6neog"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://fgs77dbhgmfo"]
+[gd_scene load_steps=23 format=3 uid="uid://fgs77dbhgmfo"]
 
 [ext_resource type="Script" uid="uid://b7m41i2ftkapf" path="res://scripts/character_select_control.gd" id="1_7vd0q"]
 [ext_resource type="Texture2D" uid="uid://bab5aa4p74xda" path="res://assets/sprites/ui/nine-patch-border.png" id="1_wito6"]
@@ -9,6 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_mq72j"]
 [ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="6_pgudw"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="8_mq72j"]
+[ext_resource type="AudioStream" uid="uid://4o2l10cw8l2w" path="res://assets/audio/sfx/Button_Click_001.wav" id="10_uewkq"]
+[ext_resource type="AudioStream" uid="uid://betpib7wwdels" path="res://assets/audio/sfx/Button_Click_002.wav" id="11_5jrkl"]
+[ext_resource type="AudioStream" uid="uid://dfbley2cop6xf" path="res://assets/audio/sfx/Button_Click_003.wav" id="12_r3qcu"]
+[ext_resource type="AudioStream" uid="uid://bbom8rbe6iqri" path="res://assets/audio/sfx/Button_Click_004.wav" id="13_u2a1r"]
+[ext_resource type="AudioStream" uid="uid://dy0wolgv52csv" path="res://assets/audio/sfx/Button_Hover A_001.wav" id="14_ejdt7"]
+[ext_resource type="AudioStream" uid="uid://dekpaf6n3ljyu" path="res://assets/audio/sfx/Button_Hover A_002.wav" id="15_5vhtj"]
+[ext_resource type="AudioStream" uid="uid://e04kqxjffqa6" path="res://assets/audio/sfx/Button_Hover A_003.wav" id="16_uwvwe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nbisn"]
 resource_local_to_scene = true
@@ -41,6 +48,19 @@ shader_parameter/displacement_size = 600.0
 [sub_resource type="LabelSettings" id="LabelSettings_3pc2v"]
 font = ExtResource("3_88pla")
 font_size = 32
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d4byy"]
+streams_count = 4
+stream_0/stream = ExtResource("10_uewkq")
+stream_1/stream = ExtResource("11_5jrkl")
+stream_2/stream = ExtResource("12_r3qcu")
+stream_3/stream = ExtResource("13_u2a1r")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_x1kre"]
+streams_count = 3
+stream_0/stream = ExtResource("14_ejdt7")
+stream_1/stream = ExtResource("15_5vhtj")
+stream_2/stream = ExtResource("16_uwvwe")
 
 [node name="CharacterSelectControl" type="Control"]
 custom_minimum_size = Vector2(128, 128)
@@ -100,3 +120,11 @@ grow_vertical = 0
 text = "Ooqo"
 label_settings = SubResource("LabelSettings_3pc2v")
 horizontal_alignment = 1
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_d4byy")
+bus = &"SFX"
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_x1kre")
+bus = &"SFX"

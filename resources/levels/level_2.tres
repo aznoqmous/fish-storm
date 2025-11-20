@@ -6,5 +6,5 @@
 script = ExtResource("1_ia1ul")
 grid_size = Vector2(10, 6)
 base_color = Color(0.47215074, 0.3019608, 0.69803923, 1)
-fish_before_end_portal = 15
-starting_credits = 12
+fish_before_end_portal = 20
+starting_credits = 15

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=56 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -17,58 +17,29 @@
 [ext_resource type="AudioStream" uid="uid://bu5q0prpba67d" path="res://assets/audio/GameOff_Mus_01 Loop.wav" id="16_fv21b"]
 [ext_resource type="Script" path="res://scripts/colors.gd" id="16_vchkt"]
 [ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="17_txyw0"]
-[ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="18_vc5cj"]
-[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="19_nvyfr"]
-[ext_resource type="Texture2D" uid="uid://boyic6scpewkt" path="res://assets/sprites/characters/body.png" id="20_fv21b"]
-[ext_resource type="Texture2D" uid="uid://d3unknu7ywa6w" path="res://assets/sprites/characters/evil.png" id="20_tel4y"]
-[ext_resource type="Texture2D" uid="uid://b4a2eobvwve67" path="res://assets/sprites/peer.png" id="20_ty1g6"]
+[ext_resource type="PackedScene" uid="uid://ckp64p0ofal5m" path="res://scenes/character.tscn" id="18_2f3dj"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="21_j2jfr"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="22_bjg73"]
-[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="23_bu4jf"]
-[ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://assets/sprites/shadow.png" id="24_o7ddy"]
 [ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="25_0loja"]
 [ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://assets/sprites/voronoi.png" id="26_ids8r"]
+[ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="26_tel4y"]
 [ext_resource type="Script" uid="uid://drt20frltyy3q" path="res://scripts/uis/combo_control.gd" id="27_dnhof"]
 [ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/combo_unit_control.tscn" id="28_1v6qk"]
 [ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://assets/sprites/star.png" id="29_augu2"]
+[ext_resource type="Texture2D" uid="uid://dtftqwpvc5vtl" path="res://assets/sprites/ui/actions/umbrella.png" id="29_c6pm6"]
+[ext_resource type="Texture2D" uid="uid://wh6vcej6t1ho" path="res://assets/sprites/ui/cross.png" id="30_5he1u"]
+[ext_resource type="AudioStream" uid="uid://ckaw4ns3fpixo" path="res://assets/audio/sfx/Jump_Launch_001.wav" id="32_5he1u"]
 [ext_resource type="Texture2D" uid="uid://bab5aa4p74xda" path="res://assets/sprites/ui/nine-patch-border.png" id="32_5q0nq"]
 [ext_resource type="Script" uid="uid://evjj08c3krjn" path="res://scripts/active_control.gd" id="32_j8jky"]
-[ext_resource type="Texture2D" uid="uid://b2uqvd6mwnpox" path="res://assets/sprites/upgrades/upgrade-magnet.png" id="33_dgi5k"]
+[ext_resource type="AudioStream" uid="uid://bmam22sqpv13i" path="res://assets/audio/sfx/Jump_Launch_002.wav" id="33_5poiv"]
+[ext_resource type="AudioStream" uid="uid://pa5edkc3rcgy" path="res://assets/audio/sfx/Jump_Launch_003.wav" id="34_2cjbq"]
 [ext_resource type="PackedScene" uid="uid://cc5lbkhk10ino" path="res://scenes/charges_control.tscn" id="34_dgi5k"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
-render_priority = 0
-shader = ExtResource("19_nvyfr")
-shader_parameter/texture_albedo = ExtResource("20_tel4y")
-shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
-shader_parameter/color = Color(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qkpxi"]
-render_priority = 0
-shader = ExtResource("19_nvyfr")
-shader_parameter/texture_albedo = ExtResource("20_fv21b")
-shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
-shader_parameter/color = Color(0.8046875, 0.8046875, 0.8046875, 1)
-
-[sub_resource type="Curve" id="Curve_ycdy4"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_w48qg"]
-curve = SubResource("Curve_ycdy4")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vivmo"]
-gravity = Vector3(0, 0, 0)
-scale_min = 0.19999999
-scale_max = 0.19999999
-scale_curve = SubResource("CurveTexture_w48qg")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
-transparency = 1
-albedo_texture = ExtResource("23_bu4jf")
-
-[sub_resource type="QuadMesh" id="QuadMesh_yaehf"]
-material = SubResource("StandardMaterial3D_2cqfq")
+[ext_resource type="AudioStream" uid="uid://ccb220vm6uv7p" path="res://assets/audio/sfx/Jump_Launch_004.wav" id="35_chjal"]
+[ext_resource type="AudioStream" uid="uid://happy2ftf3ws" path="res://assets/audio/sfx/Jump_Launch_005.wav" id="36_cjqg0"]
+[ext_resource type="AudioStream" uid="uid://b3to8t2s2uff8" path="res://assets/audio/sfx/Jump_Launch_006.wav" id="37_vchkt"]
+[ext_resource type="AudioStream" uid="uid://bfdrtxke47c8" path="res://assets/audio/sfx/Jump_Launch_007.wav" id="38_txyw0"]
+[ext_resource type="AudioStream" uid="uid://dakll7rw0rlmw" path="res://assets/audio/sfx/Jump_Launch_008.wav" id="39_vc5cj"]
+[ext_resource type="AudioStream" uid="uid://dt2b216q0p0lq" path="res://assets/audio/sfx/Jump_Launch_009.wav" id="40_nvyfr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
@@ -151,6 +122,48 @@ _data = {
 &"score_idle": SubResource("Animation_kek77")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q0nq"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("32_5q0nq")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 0.5
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dgi5k"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("29_c6pm6")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 0.5
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5poiv"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("30_5he1u")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(0.20392157, 0.20392157, 0.20392157, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 0.5
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ty1g6"]
+streams_count = 9
+stream_0/stream = ExtResource("32_5he1u")
+stream_1/stream = ExtResource("33_5poiv")
+stream_2/stream = ExtResource("34_2cjbq")
+stream_3/stream = ExtResource("35_chjal")
+stream_4/stream = ExtResource("36_cjqg0")
+stream_5/stream = ExtResource("37_vchkt")
+stream_6/stream = ExtResource("38_txyw0")
+stream_7/stream = ExtResource("39_vc5cj")
+stream_8/stream = ExtResource("40_nvyfr")
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_fv21b")
 levels = Array[ExtResource("2_tel4y")]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky")])
@@ -177,50 +190,8 @@ grid_size = Vector2i(10, 6)
 tile_size = Vector2(1.3, 1.3)
 tile_height_variation = 0.25
 
-[node name="Character" type="Node3D" parent="."]
+[node name="Character" parent="." instance=ExtResource("18_2f3dj")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.009594381, 0, 0)
-script = ExtResource("18_vc5cj")
-
-[node name="SpriteContainer" type="Node3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19008301)
-
-[node name="CharacterMovesLeftLabel" type="Label3D" parent="Character/SpriteContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2683098, 0.03303577)
-text = "6"
-font = ExtResource("22_bjg73")
-font_size = 160
-outline_size = 0
-
-[node name="HeadSprite" type="Sprite3D" parent="Character/SpriteContainer"]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.3494116, 0.314)
-sorting_offset = 100.0
-material_override = SubResource("ShaderMaterial_efxa6")
-shaded = true
-texture = ExtResource("20_ty1g6")
-
-[node name="BodySprite" type="Sprite3D" parent="Character/SpriteContainer"]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.61356497, 0.110119246)
-sorting_offset = 100.0
-material_override = SubResource("ShaderMaterial_qkpxi")
-shaded = true
-texture = ExtResource("20_ty1g6")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Character/SpriteContainer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8284638, -0.0030645728)
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_vivmo")
-draw_pass_1 = SubResource("QuadMesh_yaehf")
-
-[node name="Shadow" type="Sprite3D" parent="Character"]
-transform = Transform3D(0.8000001, 0, 0, 0, -3.4969112e-08, 0.8000001, 0, -0.8000001, -3.4969112e-08, 0, 0.018935483, -0.18988776)
-modulate = Color(1, 1, 1, 0.6313726)
-texture = ExtResource("24_o7ddy")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Character"]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0.9598488, 0.61517113)
-visible = false
-light_energy = 0.5
-omni_range = 7.3351545
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.9321217, -0.12628701, 0.33941236, 0, 0.93722725, 0.34871927, -0.36214522, -0.3250488, 0.87360984, 0, 0, 0)
@@ -314,11 +285,11 @@ label_settings = SubResource("LabelSettings_kek77")
 [node name="UnitContainer" type="GridContainer" parent="CanvasLayer/Control/ComboControl"]
 layout_mode = 0
 offset_top = 27.0
-offset_right = 410.0
+offset_right = 313.0
 offset_bottom = 235.0
 theme_override_constants/h_separation = -10
 theme_override_constants/v_separation = -24
-columns = 10
+columns = 5
 
 [node name="ComboUnitControl" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
@@ -330,6 +301,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ComboUnitControl4" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
+layout_mode = 2
+
+[node name="ComboUnitControl5" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
 
 [node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
@@ -442,6 +416,7 @@ active_color = Color(0.59552, 1, 0.44921875, 1)
 disabled_color = Color(0.20392157, 0.20392157, 0.20392157, 1)
 
 [node name="Border" type="TextureRect" parent="CanvasLayer/Control/ActiveControl"]
+material = SubResource("ShaderMaterial_5q0nq")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -457,17 +432,60 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="ActiveEffectSprite" type="TextureRect" parent="CanvasLayer/Control/ActiveControl"]
+material = SubResource("ShaderMaterial_dgi5k")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = -7.0
-offset_bottom = -7.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("33_dgi5k")
+texture = ExtResource("29_c6pm6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CrossSprite" type="Control" parent="CanvasLayer/Control/ActiveControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CrossSprite1" type="TextureRect" parent="CanvasLayer/Control/ActiveControl/CrossSprite"]
+material = SubResource("ShaderMaterial_5poiv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_5he1u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CrossSprite2" type="TextureRect" parent="CanvasLayer/Control/ActiveControl/CrossSprite"]
+material = SubResource("ShaderMaterial_5poiv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5987216
+pivot_offset = Vector2(54, 54)
+texture = ExtResource("30_5he1u")
 expand_mode = 1
 stretch_mode = 5
 
@@ -485,3 +503,7 @@ offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 gap = 5
+
+[node name="TriggerEffectAudio" type="AudioStreamPlayer" parent="CanvasLayer/Control/ActiveControl"]
+stream = SubResource("AudioStreamRandomizer_ty1g6")
+bus = &"SFX"

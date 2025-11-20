@@ -87,4 +87,8 @@ func get_tile(pos: Vector2):
 	return tiles[pos] if tiles.has(pos) else null
 	
 func get_fish_tiles():
-	return tiles.values().filter(func(a): return a.object)
+	return tiles.values().filter(func(a: Tile): return a.object and not a.object.is_upgrade and not a.object.is_portal)
+
+func get_empty_tiles():
+	return tiles.values().filter(func(a: Tile): return not a.object and a != main.character.target_tile)
+	

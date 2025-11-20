@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6qdr5f1wpb3j"
+path="res://.godot/imported/Upgrade_Loot ST.wav-32e696f1e5b2b6df4faef78ea4e89a52.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Upgrade_Loot ST.wav"
+dest_files=["res://.godot/imported/Upgrade_Loot ST.wav-32e696f1e5b2b6df4faef78ea4e89a52.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

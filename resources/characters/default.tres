@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cifkscdayb3qe" path="res://assets/sprites/characters/default.png" id="1_8j8q6"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="1_hrhmk"]
-[ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="1_ucav4"]
+[ext_resource type="Texture2D" uid="uid://dtftqwpvc5vtl" path="res://assets/sprites/ui/actions/umbrella.png" id="1_ucav4"]
 
 [resource]
 script = ExtResource("1_hrhmk")
@@ -11,7 +11,7 @@ head_sprite = ExtResource("1_8j8q6")
 active_effect_sprite = ExtResource("1_ucav4")
 description = "More fishes
 Power : More fishes"
-credits_gain = 1.2
 active_effect = 3
 value = 3.0
+active_cooldown = 5
 metadata/_custom_type_script = "uid://bxsukocx6neog"

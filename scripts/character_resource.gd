@@ -10,10 +10,10 @@ class_name CharacterResource extends Resource
 @export var max_moves_left := 0
 @export var max_move_distance := 0.0
 @export var max_combo_move_distance := 0.0
-@export var move_per_combo := 0.0
+@export var move_per_combo := 1.0
 @export var magnet_power := 0.0
 @export var temporary_mov_distance := 0.0
-@export var credits_gain := 0.0
+@export var credits_gain := 1.0
 
 @export_category("Active Effect")
 @export var active_effect: ActiveEffect

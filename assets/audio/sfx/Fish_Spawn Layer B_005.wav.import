@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbvndj4oxmjsy"
+path="res://.godot/imported/Fish_Spawn Layer B_005.wav-d44c9f25d7022e3beb0bf11d6f728cd3.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Fish_Spawn Layer B_005.wav"
+dest_files=["res://.godot/imported/Fish_Spawn Layer B_005.wav-d44c9f25d7022e3beb0bf11d6f728cd3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

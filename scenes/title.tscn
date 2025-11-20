@@ -1,19 +1,14 @@
-[gd_scene load_steps=44 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=27 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/uis/title_control.gd" id="1_p6dhs"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
 [ext_resource type="Texture2D" uid="uid://cxcq0prg5ar5m" path="res://assets/sprites/ui/ooqo-title.png" id="3_4rr2b"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="3_b3w7a"]
+[ext_resource type="CompressedTexture2DArray" uid="uid://cwvt3fxyqsfxt" path="res://assets/sprites/tilesarray.png" id="4_blk4q"]
 [ext_resource type="Shader" uid="uid://kk5eotwckwoj" path="res://shaders/scene_transition.gdshader" id="4_kcc3o"]
 [ext_resource type="AudioStream" uid="uid://dlbr15o2xmvfg" path="res://assets/audio/GameOff_Mus_02 MainTitle 143bpm Loop.wav" id="4_pyl7j"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_w65of"]
-[ext_resource type="Texture2D" uid="uid://dgejme745lw38" path="res://assets/sprites/upgrades/big-fish.png" id="6_6rcc6"]
-[ext_resource type="Texture2D" uid="uid://dwlnn5k58fa00" path="res://assets/sprites/upgrades/clover.png" id="7_ah8jo"]
 [ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="7_hiwto"]
-[ext_resource type="Texture2D" uid="uid://b2uqvd6mwnpox" path="res://assets/sprites/upgrades/upgrade-magnet.png" id="8_blk4q"]
-[ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="8_ygloa"]
-[ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://assets/sprites/voronoi.png" id="9_6civk"]
-[ext_resource type="Texture2D" uid="uid://5iqctfc5awl6" path="res://assets/sprites/upgrades/upgrade-cane.png" id="9_8magm"]
 [ext_resource type="Texture2D" uid="uid://dep7pgsiwc7x3" path="res://assets/sprites/rect.png" id="11_fgbvm"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="13_blk4q"]
 [ext_resource type="Resource" uid="uid://b0v358lg7qpbk" path="res://resources/characters/default.tres" id="14_8magm"]
@@ -22,35 +17,11 @@
 [ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/yv.tres" id="16_e75f2"]
 [ext_resource type="Resource" uid="uid://dqlwd5tymo60x" path="res://resources/characters/oye.tres" id="17_wtvjo"]
 [ext_resource type="Resource" uid="uid://cgyvpdxxyqfg5" path="res://resources/characters/paha.tres" id="18_t8o15"]
-[ext_resource type="Resource" uid="uid://dtswsmddjfa73" path="res://resources/characters/nohz.tres" id="19_e75f2"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hiwto"]
-energy_multiplier = 10.0
-
-[sub_resource type="Sky" id="Sky_w65of"]
-sky_material = SubResource("ProceduralSkyMaterial_hiwto")
-
-[sub_resource type="Environment" id="Environment_hiwto"]
-sky = SubResource("Sky_w65of")
-ambient_light_source = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_81wt4"]
-render_priority = 0
-shader = ExtResource("8_ygloa")
-shader_parameter/water_color = Color(0.045294113, 0.07294116, 0.10470587, 1)
-shader_parameter/light_foam_color = Color(0.060392156, 0.097254895, 0.13960783, 1)
-shader_parameter/dark_foam_color = Color(0.030196087, 0.048627462, 0.06980394, 1)
-shader_parameter/voronoi_texture = ExtResource("9_6civk")
-shader_parameter/voronoi_size = 0.06
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_kcc3o"]
-size = Vector2(100, 100)
-subdivide_width = 400
-subdivide_depth = 400
+[ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/button.tscn" id="21_wtvjo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vjr5h"]
 shader = ExtResource("4_kcc3o")
-shader_parameter/textures = Array[Texture2D]([ExtResource("6_6rcc6"), ExtResource("7_ah8jo"), ExtResource("8_blk4q"), ExtResource("9_8magm"), ExtResource("7_hiwto")])
+shader_parameter/textures = ExtResource("4_blk4q")
 shader_parameter/texture_size = Vector2(156, 136)
 shader_parameter/screen_size = Vector2(1160, 650)
 shader_parameter/alpha = 1.0
@@ -111,35 +82,6 @@ shader_parameter/displacement_steps = 10
 shader_parameter/displacement_power = 1.4
 shader_parameter/displacement_size = 10.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]
-shader = ExtResource("2_pyl7j")
-shader_parameter/texture_flow_map = ExtResource("5_w65of")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/displacement_steps = 3
-shader_parameter/displacement_power = 300.0
-shader_parameter/displacement_size = 600.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hiwto"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w65of"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ygloa"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6civk"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7af2g"]
-
-[sub_resource type="Theme" id="Theme_yql1r"]
-Button/colors/font_color = Color(0.40234375, 0.40234375, 0.40234375, 1)
-Button/colors/font_hover_color = Color(1, 1, 1, 1)
-Button/font_sizes/font_size = 54
-Button/fonts/font = ExtResource("3_b3w7a")
-Button/styles/disabled = SubResource("StyleBoxEmpty_hiwto")
-Button/styles/focus = SubResource("StyleBoxEmpty_w65of")
-Button/styles/hover = SubResource("StyleBoxEmpty_ygloa")
-Button/styles/normal = SubResource("StyleBoxEmpty_6civk")
-Button/styles/pressed = SubResource("StyleBoxEmpty_7af2g")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e75f2"]
 shader = ExtResource("2_pyl7j")
 shader_parameter/texture_flow_map = ExtResource("5_w65of")
@@ -158,21 +100,9 @@ font_size = 32
 
 [node name="Title" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5806887, 0.8141257, 0, -0.8141257, 0.5806887, 0, 6.906287, 10.740732)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Camera3D"]
-environment = SubResource("Environment_hiwto")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Camera3D"]
-transform = Transform3D(0.9321217, -0.12628701, 0.33941236, 0, 0.93722725, 0.34871927, -0.36214522, -0.3250488, 0.87360984, 0, 0, 0)
-
-[node name="Water" type="MeshInstance3D" parent="."]
-material_override = SubResource("ShaderMaterial_81wt4")
-mesh = SubResource("PlaneMesh_kcc3o")
-
 [node name="MainTitle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pyl7j")
+volume_db = -6.0
 autoplay = true
 bus = &"Music"
 
@@ -195,8 +125,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p6dhs")
-character_resources = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("19_e75f2"), ExtResource("16_e75f2"), ExtResource("17_wtvjo"), ExtResource("15_pmcd8")])
-unlocked_characters = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm")])
+character_resources = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("16_e75f2"), ExtResource("17_wtvjo"), ExtResource("15_pmcd8")])
+unlocked_characters = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("15_pmcd8"), ExtResource("17_wtvjo"), ExtResource("16_e75f2")])
 
 [node name="Panel" type="Panel" parent="CanvasLayer/TitleControl"]
 layout_mode = 1
@@ -257,25 +187,15 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/TitleControl/ButtonsContainer"]
-material = SubResource("ShaderMaterial_4rr2b")
+[node name="PlayButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("21_wtvjo")]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-theme = SubResource("Theme_yql1r")
-text = "PLAY"
 
-[node name="SettingsButton" type="Button" parent="CanvasLayer/TitleControl/ButtonsContainer"]
-material = SubResource("ShaderMaterial_4rr2b")
+[node name="SettingsButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("21_wtvjo")]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-theme = SubResource("Theme_yql1r")
 text = "SETTINGS"
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/TitleControl/ButtonsContainer"]
-material = SubResource("ShaderMaterial_4rr2b")
+[node name="QuitButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("21_wtvjo")]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-theme = SubResource("Theme_yql1r")
 text = "QUIT"
 
 [node name="CharacterSelect" type="Control" parent="CanvasLayer/TitleControl"]
@@ -331,13 +251,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -394.0
+offset_left = -328.0
 offset_top = 59.5
-offset_right = 394.0
+offset_right = 328.0
 offset_bottom = 319.5
 grow_horizontal = 2
 grow_vertical = 2
-columns = 6
+columns = 5
 
 [node name="CharacterSelectControl" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2

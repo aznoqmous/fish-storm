@@ -6,6 +6,8 @@ class_name Character extends Node3D
 @onready var body_sprite: Sprite3D = $SpriteContainer/BodySprite
 @onready var head_sprite: Sprite3D = $SpriteContainer/HeadSprite
 @onready var character_moves_left_label: Label3D = $SpriteContainer/CharacterMovesLeftLabel
+@onready var jump_launch_audio: AudioStreamPlayer = $JumpLaunchAudio
+@onready var jump_land_audio: AudioStreamPlayer = $JumpLandAudio
 
 var last_jump: float
 var jump_life: float
@@ -36,8 +38,9 @@ func _input(event: InputEvent) -> void:
 			move_to(new_target)
 
 func move_to(tile: Tile):
+	if is_jumping: return;
 	if main.moves_left <= 0: return
-	
+	jump_launch_audio.play()
 	target_tile = tile
 	target_position = tile.global_position
 	last_jump = Time.get_ticks_msec() / 1000.0
@@ -57,6 +60,7 @@ func _process(delta: float) -> void:
 	if target_tile and is_jumping and (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration > 1.0:
 		global_position = target_tile.global_position
 		moved.emit()
+		jump_land_audio.play()
 		
 	head_sprite.rotation.y = lerp(head_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
 	body_sprite.rotation.y = lerp(body_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)

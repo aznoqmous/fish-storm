@@ -9,18 +9,27 @@ class_name Fish extends Node3D
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var loot_particles: GPUParticles3D = $LootParticles
 @onready var charges_mesh: MeshInstance3D = $ChargesMesh
+@onready var charges_control: ChargesControl = $ChargesSubViewport/ChargesControl
+
+@onready var spawn_audio: AudioStreamPlayer = $SpawnAudio
+@onready var land_audio: AudioStreamPlayer = $LandAudio
+@onready var loot_audio: AudioStreamPlayer = $LootAudio
+@onready var upgrade_loot_audio: AudioStreamPlayer = $UpgradeLootAudio
+@onready var portal_loot_audio: AudioStreamPlayer = $PortalLootAudio
 
 @export var colors: Array[Color]
 @export var upgrade_color: Color
 @export var end_portal_color: Color
 
-@onready var charges_control: ChargesControl = $ChargesSubViewport/ChargesControl
 
 var color: Color
 var animation := 0.0
 var animation_height := 5.0
 var animation_depth := -10.0
 var resource: ObjectResource
+
+var is_upgrade := false
+var is_portal := false
 
 var charges = 0
 var max_charges = 0
@@ -39,6 +48,7 @@ func _ready() -> void:
 	#splash_particles.material_override.set("albedo_color", color)
 	#loot_particles.material_override.set("albedo_color", color)
 	set_color(color)
+	spawn_audio.play()
 	
 func _process(delta: float) -> void:
 	if animation < 1.0:
@@ -47,10 +57,17 @@ func _process(delta: float) -> void:
 		shadow_sprite_container.position.z = lerp(animation_depth, 0.0, animation)
 		shadow_sprite_container.scale = lerp(Vector3.ZERO, Vector3.ONE, animation)
 	else:
+		if shadow_sprite_container.position.y != 0:
+			land_audio.play()
 		shadow_sprite_container.position.y = 0.0
 		
 func loot():
 	animation_player.play("looted")
+	if is_portal: portal_loot_audio.play()
+	elif is_upgrade: upgrade_loot_audio.play()
+	else: 
+		loot_audio.pitch_scale = 1.0 + float(main.combo / 10.0)
+		loot_audio.play()
 
 func set_color(value):
 	color = value

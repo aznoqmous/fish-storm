@@ -7,12 +7,16 @@ class_name CharacterSelectControl extends Control
 @export var disabled_color: Color
 @export var lock_texture: CompressedTexture2D
 
+@onready var button_click: AudioStreamPlayer = $ButtonClick
+@onready var button_hover: AudioStreamPlayer = $ButtonHover
+
 var resource : CharacterResource
 var hovered := false
 var is_enabled := false
 func _ready():
 	mouse_entered.connect(func():
 		hovered = true
+		if is_enabled: button_hover.play()
 	)
 	mouse_exited.connect(func():
 		hovered = false
@@ -23,6 +27,7 @@ func _process(delta):
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and hovered and is_enabled and event.is_pressed():
+		button_click.play()
 		Game.selected_character = resource
 		SceneManager.load_game()
 

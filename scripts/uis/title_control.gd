@@ -1,5 +1,6 @@
 class_name TitleControl extends Control
 
+@export var texture_map: Texture2DArray
 @onready var play_button: Button = $ButtonsContainer/PlayButton
 @onready var settings_button: Button = $ButtonsContainer/SettingsButton
 @onready var quit_button: Button = $ButtonsContainer/QuitButton

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c567523x03yc2"
+path="res://.godot/imported/Portal_Land ST_002.wav-6b82920e8d12120ffbaf5cc8d74b2046.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Portal_Land ST_002.wav"
+dest_files=["res://.godot/imported/Portal_Land ST_002.wav-6b82920e8d12120ffbaf5cc8d74b2046.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

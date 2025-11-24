@@ -1,7 +1,7 @@
 [gd_scene load_steps=56 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
-[ext_resource type="Script" path="res://scripts/level_resource.gd" id="2_tel4y"]
+[ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
 [ext_resource type="Resource" uid="uid://bbpocc62orq55" path="res://resources/levels/level_0.tres" id="3_qkpxi"]
 [ext_resource type="Resource" uid="uid://72umxngdtnt3" path="res://resources/levels/level_1.tres" id="4_5q0nq"]
 [ext_resource type="Resource" uid="uid://bflmrepi3u4v2" path="res://resources/levels/level_2.tres" id="5_dgi5k"]
@@ -15,7 +15,7 @@
 [ext_resource type="Resource" uid="uid://d2acphkags8fd" path="res://resources/clover.tres" id="14_chjal"]
 [ext_resource type="Resource" uid="uid://cuerunb6u1f1g" path="res://resources/end_portal.tres" id="15_cjqg0"]
 [ext_resource type="AudioStream" uid="uid://bu5q0prpba67d" path="res://assets/audio/GameOff_Mus_01 Loop.wav" id="16_fv21b"]
-[ext_resource type="Script" path="res://scripts/colors.gd" id="16_vchkt"]
+[ext_resource type="Script" uid="uid://b87jek5xw2ya2" path="res://scripts/colors.gd" id="16_vchkt"]
 [ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="17_txyw0"]
 [ext_resource type="PackedScene" uid="uid://ckp64p0ofal5m" path="res://scenes/character.tscn" id="18_2f3dj"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="21_j2jfr"]
@@ -404,9 +404,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -36.0
-offset_top = -110.0
-offset_right = 36.0
+offset_left = -47.0
+offset_top = -132.0
+offset_right = 47.0
 offset_bottom = -38.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -478,9 +478,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -18.0
-offset_top = -18.0
+offset_top = 4.0
 offset_right = 18.0
-offset_bottom = 18.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 rotation = -1.5987216
@@ -497,9 +497,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -33.0
-offset_top = 42.0
+offset_top = 50.0
 offset_right = 33.0
-offset_bottom = 56.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 gap = 5

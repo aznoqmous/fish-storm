@@ -12,6 +12,6 @@ active_effect_sprite = ExtResource("1_ucav4")
 description = "More fishes
 Power : More fishes"
 active_effect = 3
-value = 3.0
-active_cooldown = 5
+value = 2.0
+active_cooldown = 4
 metadata/_custom_type_script = "uid://bxsukocx6neog"

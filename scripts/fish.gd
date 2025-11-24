@@ -8,8 +8,6 @@ class_name Fish extends Node3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var loot_particles: GPUParticles3D = $LootParticles
-@onready var charges_mesh: MeshInstance3D = $ChargesMesh
-@onready var charges_control: ChargesControl = $ChargesSubViewport/ChargesControl
 
 @onready var spawn_audio: AudioStreamPlayer = $SpawnAudio
 @onready var land_audio: AudioStreamPlayer = $LandAudio
@@ -21,15 +19,14 @@ class_name Fish extends Node3D
 @export var upgrade_color: Color
 @export var end_portal_color: Color
 
-
 var color: Color
 var animation := 0.0
 var animation_height := 5.0
 var animation_depth := -10.0
-var resource: ObjectResource
+@export var resource: ObjectResource
 
-var is_upgrade := false
-var is_portal := false
+@export var is_upgrade := false
+@export var is_portal := false
 
 var charges = 0
 var max_charges = 0
@@ -60,24 +57,33 @@ func _process(delta: float) -> void:
 		if shadow_sprite_container.position.y != 0:
 			land_audio.play()
 		shadow_sprite_container.position.y = 0.0
-		
+	
+	if not is_portal: animation_player.speed_scale = main.combo / 20.0 + 1.0
+	sprite_3d.scale = lerp(sprite_3d.scale, Vector3.ONE, delta * 5.0)
+	
 func loot():
-	animation_player.play("looted")
 	if is_portal: portal_loot_audio.play()
 	elif is_upgrade: upgrade_loot_audio.play()
 	else: 
 		loot_audio.pitch_scale = 1.0 + float(main.combo / 10.0)
 		loot_audio.play()
+		
+	animation_player.play("looted")
+	if not is_portal and not is_upgrade:
+		get_tree().create_tween().tween_property(self, "global_position", main.end_portal_instance.global_position, animation_player.current_animation_length / 2.0)
+		await get_tree().create_timer(animation_player.current_animation_length / 2.0).timeout
+		main.end_portal_instance.bump()
+	if is_upgrade:
+		get_tree().create_tween().tween_property(sprite_container, "global_position", sprite_container.global_position + Vector3.UP * 3.0, animation_player.current_animation_length / 2.0)
 
+func bump(value:=1.5):
+	sprite_3d.scale = Vector3.ONE * value
+	
 func set_color(value):
 	color = value
 	sprite_3d.material_override.set("shader_parameter/color", value)
 	splash_particles.material_override.set("albedo_color", value)
 	loot_particles.material_override.set("albedo_color", value)
-	charges_mesh.material_override.set("albedo_color", value)
-	
-	charges_control.color = color
-	charges_control.build()
 	
 func load_resource(res: ObjectResource):
 	resource = res
@@ -92,14 +98,9 @@ func load_resource(res: ObjectResource):
 	if res.charge_effect:
 		max_charges = resource.max_charges
 		main.character.moved.connect(charge)
-	
-	charges_control.max_charges = max_charges
-	charges_control.color = color
-	charges_control.build()
 
 func charge():
 	charges += 1
-	charges_control.gain_charge(1)
 	match resource.charge_trigger:
 			ObjectResource.ChargeTrigger.OnMaxCharge:
 				if charges >= max_charges: charge_effect()
@@ -115,3 +116,9 @@ func charge_effect():
 						main.spawn_object_at_position(resource.spawned_objects.pick_random(), global_position)
 	if resource.destroy_on_spawn:
 		queue_free()
+
+func is_available():
+	#not (tile.object and tile.object is Fish and not tile.object.resource.walkable) 
+	if is_portal and not main.current_fish_count >= main.fish_before_end_portal: return false
+	if resource and not resource.walkable: return false
+	return true

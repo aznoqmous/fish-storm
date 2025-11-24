@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bfwdsaqvhdqhg"]
+[gd_scene load_steps=37 format=3 uid="uid://bfwdsaqvhdqhg"]
 
 [ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="1_8g0i4"]
 [ext_resource type="Script" uid="uid://bpxdfwkec8ehd" path="res://scripts/fish.gd" id="1_nub35"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bdf13uaow7h" path="res://scenes/splash_particles.tscn" id="4_pgks6"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_21k1a"]
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="7_21k1a"]
-[ext_resource type="PackedScene" uid="uid://cc5lbkhk10ino" path="res://scenes/charges_control.tscn" id="8_bvcvt"]
 [ext_resource type="AudioStream" uid="uid://bx6kmxvnth2l8" path="res://assets/audio/sfx/Fish_Spawn Layer B_001.wav" id="9_axbn3"]
 [ext_resource type="AudioStream" uid="uid://chhk4uv0438nd" path="res://assets/audio/sfx/Fish_Spawn Layer B_002.wav" id="10_yixxi"]
 [ext_resource type="AudioStream" uid="uid://t5rb4m4h0hdc" path="res://assets/audio/sfx/Fish_Spawn Layer B_003.wav" id="11_wjndy"]
@@ -31,6 +30,7 @@ shader = ExtResource("3_wpvan")
 shader_parameter/texture_albedo = ExtResource("1_8g0i4")
 shader_parameter/texture_flow_map = ExtResource("5_21k1a")
 shader_parameter/color = Color(1, 0.6171875, 0.9042969, 1)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="Animation" id="Animation_pgks6"]
 length = 0.001
@@ -49,34 +49,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ShadowSpriteContainer/SpriteContainer:position")
+tracks/1/path = NodePath("LootParticles:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ShadowSpriteContainer/Shadow:scale")
+tracks/2/path = NodePath("ShadowSpriteContainer/Shadow:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.8, 0.8, 0.8)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("LootParticles:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -99,40 +87,40 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(0.9, 1.1, 1), Vector3(1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowSpriteContainer/Shadow:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_wpvan"]
 resource_name = "looted"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ShadowSpriteContainer/SpriteContainer:position")
+tracks/0/path = NodePath("ShadowSpriteContainer/SpriteContainer:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 10, 0)]
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(0, 0, 0)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ShadowSpriteContainer/SpriteContainer:scale")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -140,29 +128,29 @@ tracks/2/keys = {
 "method": &"queue_free"
 }]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ShadowSpriteContainer/Shadow:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.8, 0.8, 0.8), Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("LootParticles:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LootParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ShadowSpriteContainer/Shadow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pgks6"]
@@ -172,7 +160,7 @@ _data = {
 &"looted": SubResource("Animation_wpvan")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjndy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yixxi"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
@@ -197,20 +185,6 @@ initial_velocity_min = 2.0
 initial_velocity_max = 6.0
 scale_min = 0.39999998
 scale_curve = SubResource("CurveTexture_2c5cg")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_bvcvt"]
-viewport_path = NodePath("ChargesSubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x24sl"]
-resource_local_to_scene = true
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.4627451, 0.28627452, 0.50980395, 1)
-albedo_texture = SubResource("ViewportTexture_bvcvt")
-
-[sub_resource type="QuadMesh" id="QuadMesh_bvcvt"]
-resource_local_to_scene = true
-size = Vector2(512, 64)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tjd68"]
 streams_count = 5
@@ -244,7 +218,7 @@ stream_0/stream = ExtResource("23_wjndy")
 
 [node name="Fish" type="Node3D"]
 script = ExtResource("1_nub35")
-colors = Array[Color]([Color(0.835968, 0.51171875, 1, 1), Color(0.50980395, 0.5519302, 1, 1), Color(0.6171875, 0.892334, 1, 1)])
+colors = Array[Color]([Color(0.7607843, 0.4627451, 0.9098039, 1), Color(0.50980395, 0.5519302, 1, 1), Color(0.6171875, 0.892334, 1, 1)])
 upgrade_color = Color(0.6170343, 1, 0.50980395, 1)
 end_portal_color = Color(1, 1, 1, 1)
 
@@ -253,6 +227,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.12390545)
 
 [node name="Shadow" type="Sprite3D" parent="ShadowSpriteContainer"]
 transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, 0.8, 0, -0.8, -3.4969112e-08, 0, 0.2, 0.146)
+visible = false
 modulate = Color(1, 1, 1, 0.6313726)
 texture = ExtResource("2_nub35")
 
@@ -280,24 +255,9 @@ autoplay = "idle"
 lifetime = 0.5
 
 [node name="LootParticles" parent="." instance=ExtResource("4_pgks6")]
-material_override = SubResource("StandardMaterial3D_wjndy")
+material_override = SubResource("StandardMaterial3D_yixxi")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_wpvan")
-
-[node name="ChargesSubViewport" type="SubViewport" parent="."]
-disable_3d = true
-transparent_bg = true
-size = Vector2i(512, 64)
-render_target_update_mode = 4
-
-[node name="ChargesControl" parent="ChargesSubViewport" instance=ExtResource("8_bvcvt")]
-offset_right = 512.0
-offset_bottom = 64.0
-
-[node name="ChargesMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.002, 0, 0, 0, 0.002, 0, 0, 0, 0.002, 0, 0.060217798, 0.2157712)
-material_override = SubResource("StandardMaterial3D_x24sl")
-mesh = SubResource("QuadMesh_bvcvt")
 
 [node name="SpawnAudio" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_tjd68")

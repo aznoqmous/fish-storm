@@ -17,10 +17,14 @@ var target_position: Vector3
 var start_jump_position: Vector3
 var target_tile: Tile
 var flip_sprites := false
+var last_position: Vector3
 
 var is_jumping: float:
 	get: return jump_life <  1.0
-	
+
+var upgrades_list : Dictionary[ObjectResource, int]
+
+
 func _input(event: InputEvent) -> void:
 	if is_jumping: return;
 	if event is InputEventKey:
@@ -32,12 +36,13 @@ func _input(event: InputEvent) -> void:
 		
 		var current_position = main.grid.world_to_grid_position(target_position)
 		var new_target = main.grid.get_tile(current_position + movement)
-
-		if not new_target: return;
+		
+		if not new_target or not new_target.is_available: return;
 		if target_tile != new_target:
 			move_to(new_target)
 
 func move_to(tile: Tile):
+	last_position = global_position
 	if is_jumping: return;
 	if main.moves_left <= 0: return
 	jump_launch_audio.play()
@@ -64,8 +69,8 @@ func _process(delta: float) -> void:
 		
 	head_sprite.rotation.y = lerp(head_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
 	body_sprite.rotation.y = lerp(body_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
-
 	jump_life = (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration
+
 	
 	if is_jumping:
 		global_position = lerp(start_jump_position, target_position, jump_life)
@@ -80,5 +85,9 @@ func _process(delta: float) -> void:
 
 func load_resource(res: CharacterResource):
 	head_sprite.material_override.set("shader_parameter/texture_albedo", res.head_sprite)
-	
+
+func add_upgrade(upgrade: ObjectResource):
+	if not upgrades_list.has(upgrade): upgrades_list[upgrade] = 0
+	upgrades_list[upgrade] += 1
+
 signal moved

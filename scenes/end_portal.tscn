@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://4b56lr8uoqj2"]
+
+[ext_resource type="PackedScene" uid="uid://bfwdsaqvhdqhg" path="res://scenes/fish.tscn" id="1_jq5yh"]
+[ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="2_byhhq"]
+[ext_resource type="Script" uid="uid://c5b03abgp6ed2" path="res://scripts/portal.gd" id="2_noqqd"]
+[ext_resource type="Resource" uid="uid://cuerunb6u1f1g" path="res://resources/end_portal.tres" id="2_o30k5"]
+[ext_resource type="Texture2D" uid="uid://mle8rjelmqhx" path="res://assets/sprites/upgrades/portal.png" id="3_jq5yh"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="4_noqqd"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="5_5ke07"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="8_noqqd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_byhhq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_byhhq")
+shader_parameter/texture_albedo = ExtResource("3_jq5yh")
+shader_parameter/texture_flow_map = ExtResource("4_noqqd")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5751l"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
+albedo_texture = ExtResource("5_5ke07")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="EndPortal" instance=ExtResource("1_jq5yh")]
+script = ExtResource("2_noqqd")
+disabled_color = Color(1, 1, 1, 0.39215687)
+colors = Array[Color]([Color(1, 1, 1, 1)])
+resource = ExtResource("2_o30k5")
+is_portal = true
+
+[node name="Sprite3D" parent="ShadowSpriteContainer/SpriteContainer" index="0"]
+material_override = SubResource("ShaderMaterial_byhhq")
+
+[node name="CountLabel" type="Label3D" parent="ShadowSpriteContainer/SpriteContainer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.95405746, 0.29962367, 0, -0.29962367, 0.95405746, 0, 1.3871715, 0.49816826)
+text = "12"
+font = ExtResource("8_noqqd")
+font_size = 158
+outline_size = 0
+
+[node name="LootParticles" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_5751l")

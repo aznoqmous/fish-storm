@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="LevelResource" load_steps=2 format=3 uid="uid://bflmrepi3u4v2"]
+[gd_resource type="Resource" script_class="LevelResource" load_steps=3 format=3 uid="uid://bflmrepi3u4v2"]
 
-[ext_resource type="Script" path="res://scripts/level_resource.gd" id="1_ia1ul"]
+[ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="1_ia1ul"]
+[ext_resource type="PackedScene" uid="uid://dpusbgwuv8u26" path="res://scenes/levels/level_20.tscn" id="1_or7n4"]
 
 [resource]
 script = ExtResource("1_ia1ul")
 grid_size = Vector2(10, 6)
 base_color = Color(0.47215074, 0.3019608, 0.69803923, 1)
-fish_before_end_portal = 20
-starting_credits = 15
+fish_before_end_portal = 12
+starting_credits = 7
+levels = Array[PackedScene]([ExtResource("1_or7n4")])

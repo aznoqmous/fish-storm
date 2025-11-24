@@ -6,3 +6,4 @@ class_name LevelResource extends Resource
 @export var fish_before_end_portal:= 10
 @export var starting_credits := 5
 @export var ground_ratio := 0.8
+@export var levels: Array[PackedScene]

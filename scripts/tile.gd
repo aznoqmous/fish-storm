@@ -55,7 +55,7 @@ func bump():
 func get_color() -> Color:
 	if not is_available: return main.colors.current_color.darkened(0.8)
 	if is_hovered: return hover_color
-	return available_color if main.combo < 1 else main.last_color
+	return available_color if main.combo < 1 else main.colors.current_color
 	
 func update_color():
 	target_color = get_color()

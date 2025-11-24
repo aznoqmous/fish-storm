@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_spkdh")
 texture = ExtResource("2_spkdh")
+score = 5.0
 combo = true
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

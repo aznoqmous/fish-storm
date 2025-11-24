@@ -3,6 +3,7 @@ render_mode cull_disabled;
 uniform sampler2D texture_albedo;
 uniform sampler2D texture_flow_map;
 uniform vec3 color: source_color = vec3(1.0);
+uniform float alpha = 1.0;
 const int displacement_steps = 10;
 const float displacement_power = 1.5;
 const float displacement_size = 5.0;
@@ -17,7 +18,7 @@ void fragment() {
 	vec2 pos = UV + displacement.xy * 0.02 * displacement_power;
 	vec4 tex = texture(texture_albedo, pos);
     ALBEDO = tex.rgb * color;
-    ALPHA = pow(tex.a, 3);
+    ALPHA = pow(tex.a * alpha, 3);
 }
 
 //void light() {

@@ -65,13 +65,15 @@ func _ready() -> void:
 			trigger_active_effect()
 	)
 	
+	moves_left = max_moves_left
 	load_level(levels[current_level_index])
 	load_character(Game.selected_character)
+	reset_active_charges()
 
 	
 func load_character(res: CharacterResource):
 	max_combo += res.max_combo
-	max_moves_left += res.max_moves_left
+	#max_moves_left += res.max_moves_left
 	max_move_distance += res.max_move_distance
 	max_combo_move_distance += res.max_combo_move_distance
 	move_per_combo *= res.move_per_combo
@@ -93,6 +95,7 @@ func _input(event: InputEvent) -> void:
 func next_level():
 	current_level_index += 1
 	load_level(levels[current_level_index % levels.size()])
+	reset_upgrades()
 	load_character(Game.selected_character)
 	
 func _process(delta: float) -> void:
@@ -115,7 +118,7 @@ func gain_combo(value):
 func reset_combo():
 	combo = 0
 	combo_control.clear()
-	reset_active_charges()
+	#reset_active_charges()
 	
 func reset_active_charges():
 	active_control.charges_control.charges = 0
@@ -127,7 +130,7 @@ func update_tiles_color():
 	var max_distance = min(combo * move_per_combo, max_combo_move_distance) + max_move_distance + 0.1 + temporary_mov_distance
 	for tile in grid.tiles.values():
 		var tile_pos = Vector2(tile.global_position.x, tile.global_position.z)
-		tile.is_available = (not (tile.object and not tile.object.resource.walkable)) and tile != character.target_tile and character_pos.distance_to(tile_pos) / grid.tile_size.x <= max_distance
+		tile.is_available = (not tile.object or tile.object.is_available()) and tile != character.target_tile and character_pos.distance_to(tile_pos) / grid.tile_size.x <= max_distance
 		tile.update_color()
 		
 func update_moves_left():
@@ -153,28 +156,32 @@ func handle_movement():
 		if moves_left <= 0:
 			final_score_control.set_visible(true)
 			final_score_label.text = str(score)
+			
 	update_moves_left()
 	update_tiles_color()
 	
-	if not end_portal_instance:
-		credits += credits_gain;
-		if credits > 1.0:
-			spend_credits()
-		else:
-			if grid.get_fish_tiles().size() <= 0:
-				spawn_fish()
-				credits += 5.0
+	
+	if not current_fish_count >= fish_before_end_portal:
+		gain_credits()
 				
-
+func gain_credits():
+	credits += credits_gain;
+	if credits > 1.0:
+		spend_credits()
+	else:
+		if grid.get_fish_tiles().size() <= 0:
+			spawn_fish()
+			credits += 5.0
 func handle_loot(fish: Fish):
 	current_fish_count += 1
-	if not end_portal_instance and current_fish_count >= fish_before_end_portal:
-		var portal = spawn_fish()
-		if portal:
-			portal.load_resource(end_portal)
-			portal.is_portal = true
-			end_portal_instance = portal
-			
+	#if not end_portal_instance and current_fish_count >= fish_before_end_portal:
+		#var portal = spawn_fish()
+		#if portal:
+			#portal.load_resource(end_portal)
+			#portal.is_portal = true
+			#end_portal_instance = portal
+	if fish.resource.effect:
+		character.add_upgrade(fish.resource)
 	match fish.resource.effect:
 		ObjectResource.ObjectEffect.IncreaseMovement:
 			max_move_distance += fish.resource.value
@@ -193,7 +200,7 @@ func handle_loot(fish: Fish):
 	
 	if not fish: return
 	
-	if not end_portal_instance:
+	if not end_portal_instance.is_active:
 		active_control.charges_control.gain_charge(1)
 		active_control.update()
 	
@@ -209,6 +216,17 @@ func handle_loot(fish: Fish):
 		add_child(new_combo)
 		new_combo.set_description(fish.resource.description)
 		new_combo.global_position = character.global_position
+		
+		if fish.is_portal:
+			if grid.get_fish_tiles().size() <= 0 and moves_left >= max_moves_left:
+				new_combo.set_description("WOOOOOOW !")
+				gain_score(50)
+			elif grid.get_fish_tiles().size() <= 0:
+				new_combo.set_description("Perfect !")
+				gain_score(10)
+			elif moves_left >= max_moves_left:
+				new_combo.set_description("Flawless !")
+				gain_score(10)
 		
 func spend_credits_spaced():
 	while credits >= 1.0:
@@ -302,10 +320,18 @@ func spawn_random_fish()-> Fish:
 			fish.load_resource(fishes[min(floor(randf() * fish_level), fishes.size()-1)])
 	return fish
 
+func reset_upgrades():
+	# Upgrades
+	max_combo = 10.0
+	max_move_distance = 1.0
+	max_combo_move_distance = 2.0
+	move_per_combo = 0.2
+	magnet_power = 0.0
+	temporary_mov_distance = 0.0
+	credits_gain = 0.6
+	upgrade_chance = 0.1
+
 func load_level(level: LevelResource):
-	active_control.charges_control.charges = 0
-	active_control.update()
-	active_control.charges_control.build()
 	
 	upgrade_random.reset()
 	upgrade_random.rate = upgrade_chance
@@ -318,28 +344,19 @@ func load_level(level: LevelResource):
 	await SceneManager.scene_transition_control.open()
 	
 	# Level
-	grid.grid_size = level.grid_size
+	#grid.grid_size = level.grid_size
+	grid.load_level(current_level.levels.pick_random())
+	
 	colors.base_color = level.base_color
 	max_moves_left = level.max_moves_left
 	fish_before_end_portal = level.fish_before_end_portal
 	credits = level.starting_credits
-	
-	# Upgrades
-	max_combo = 10.0
-	max_move_distance = 1.0
-	max_combo_move_distance = 2.0
-	move_per_combo = 0.2
-	magnet_power = 0.0
-	temporary_mov_distance = 0.0
-	credits_gain = 0.6
-	upgrade_chance = 0.1
 		
 	current_fish_count = 0
 	reset_combo()
 	last_color = colors.default_color
-	moves_left = max_moves_left
 	
-	var tile = grid.tiles.values().pick_random()
+	var tile = grid.get_empty_tiles().pick_random()
 	camera_3d.global_position.x = character.global_position.x
 	character.set_tile(tile)
 	update_tiles_color()
@@ -356,7 +373,12 @@ func restart():
 	score = 0
 	score_label.text = str(score)
 	current_level_index = 0
+	moves_left = max_moves_left
+	update_moves_left()
+	reset_upgrades()
 	load_level(levels[current_level_index])
+	load_character(Game.selected_character)
+	reset_active_charges()
 	
 func trigger_active_effect():
 	if not active_control.is_charged: return
@@ -384,17 +406,19 @@ func trigger_active_effect():
 				await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 		CharacterResource.ActiveEffect.TemporaryMovementIncrease:
 			temporary_mov_distance += ch.value
-			reset_combo()
+			combo = floor(combo/2.0)
+			combo_control.set_combo(combo)
+			#reset_combo()
 			update_tiles_color()
 		CharacterResource.ActiveEffect.LootFishesForMaxMoves:
 			for i in range(0, ch.value):
-				moves_left -= 1
-				character_moves_left_label.scale = Vector3.ONE * 2.0
-				update_moves_left()
-				if moves_left <= 0:
-					final_score_control.set_visible(true)
-					final_score_label.text = str(score)
-					return;
+				#moves_left -= 1
+				#character_moves_left_label.scale = Vector3.ONE * 2.0
+				#update_moves_left()
+				#if moves_left <= 0:
+					#final_score_control.set_visible(true)
+					#final_score_label.text = str(score)
+					#return;
 				var tiles = grid.get_fish_tiles()
 				if not tiles.size(): break;
 				tiles.shuffle()
@@ -409,4 +433,7 @@ func trigger_active_effect():
 			update_tiles_color()
 
 	reset_active_charges()
+	gain_credits()
 	
+func get_time():
+	return Time.get_ticks_msec() / 1000.0

@@ -44,7 +44,6 @@ void fragment() {
 	vec3 bg_color = hsv_to_rgb(vec3((TIME) / 60.0, 0.5, 0.7));
 	vec3 color = hsv_to_rgb(vec3((TIME + float(index) / float(sprites) * 2.5) / 10.0, 0.5, 0.7));
 	COLOR = mix(vec4(bg_color * 0.0, 1.0), sampled * vec4(color * 0.2 *  (abs(sin((TIME + float(index) * 0.5) * TAU / 4.0)) / 2.0 + 1.0), 1.0), sampled.a) * vec4(1.0, 1.0, 1.0, alpha);
-	
 }
 
 //void light() {

@@ -19,4 +19,4 @@ func update():
 	active_effect_sprite.material.set("shader_parameter/displacement_power", 2.0 if is_charged else 0.5)
 
 func _process(_delta):
-	cross_sprite.set_visible(main.end_portal_instance and not is_charged)
+	cross_sprite.set_visible(main.end_portal_instance.is_active and not is_charged)

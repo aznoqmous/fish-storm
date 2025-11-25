@@ -9,5 +9,4 @@
 script = ExtResource("1_x4xt6")
 grid_size = Vector2(5, 5)
 base_color = Color(0.3019608, 0.4862745, 0.69803923, 1)
-starting_credits = 6
 levels = Array[PackedScene]([ExtResource("1_ocxh0"), ExtResource("2_m1x4x"), ExtResource("3_m1x4x")])

@@ -33,6 +33,8 @@ shader_parameter/displacement_size = 600.0
 [sub_resource type="Theme" id="Theme_yql1r"]
 Button/colors/font_color = Color(0.40234375, 0.40234375, 0.40234375, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+Button/constants/icon_max_width = 70
 Button/font_sizes/font_size = 54
 Button/fonts/font = ExtResource("3_1bdt2")
 Button/styles/disabled = SubResource("StyleBoxEmpty_hiwto")
@@ -68,6 +70,3 @@ bus = &"SFX"
 [node name="ButtonHover" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_64bf4")
 bus = &"SFX"
-
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="pressed" from="." to="." method="_on_pressed"]

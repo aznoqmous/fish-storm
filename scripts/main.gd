@@ -21,6 +21,7 @@ const COMBO = preload("res://scenes/combo.tscn")
 
 @export var levels: Array[LevelResource]
 var score := 0
+var score_display := 0.0
 var credits = 10.0
 var combo := 0
 
@@ -105,10 +106,12 @@ func next_level():
 func _process(delta: float) -> void:
 	var pos = (get_viewport().get_mouse_position() / Vector2(get_viewport().size)) - Vector2.ONE / 2.0
 	camera_3d.global_position.x = lerp(camera_3d.global_position.x, character.global_position.x + pos.x * 8.0, delta * 2.0)
-
+	score_display = lerp(score_display, float(score), delta * 5.0)
+	score_label.text = str(int(ceil(score_display)))
+	
 func gain_score(value):
 	score += value * (combo + 1.0)
-	score_label.text = str(score)
+	#score_label.text = str(score)
 	on_score.emit()
 
 func gain_combo(value):
@@ -159,6 +162,7 @@ func handle_movement():
 		colors.base_color = colors.default_color
 		moves_left -= 1
 		character_moves_left_label.scale = Vector3.ONE * 2.0
+		character.damage_particles_3d.emitting = true
 		if moves_left <= 0:
 			final_score_control.set_visible(true)
 			final_score_label.text = str(score)
@@ -422,7 +426,6 @@ func trigger_active_effect():
 			temporary_mov_distance += ch.value
 			combo = floor(combo/2.0)
 			combo_control.set_combo(combo)
-			#reset_combo()
 			update_tiles_color()
 		CharacterResource.ActiveEffect.LootFishesForMaxMoves:
 			for i in range(0, ch.value):
@@ -445,6 +448,8 @@ func trigger_active_effect():
 					await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 				else: break
 			update_tiles_color()
+			gain_credits()
+			
 		CharacterResource.ActiveEffect.ReturnToLastPosition:
 			var pos = grid.world_to_grid_position(character.last_position)
 			var tile = grid.get_tile(pos)
@@ -452,7 +457,6 @@ func trigger_active_effect():
 			character.move_to(tile)
 
 	reset_active_charges()
-	gain_credits()
 	
 func get_time():
 	return Time.get_ticks_msec() / 1000.0

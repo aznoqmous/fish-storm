@@ -8,6 +8,7 @@ class_name TitleControl extends Control
 @onready var character_select: Control = $CanvasLayer/TitleControl/CharacterSelect
 @onready var characters_container: GridContainer = $CanvasLayer/TitleControl/CharacterSelect/CharactersContainer
 @onready var character_description: Label = $CanvasLayer/TitleControl/CharacterSelect/CharacterDescription
+@onready var return_button: Button = $CanvasLayer/TitleControl/CharacterSelect/ReturnButton
 
 @export var character_resources: Array[CharacterResource]
 const CHARACTER_SELECT_CONTROL = preload("res://scenes/character_select_control.tscn")
@@ -20,6 +21,7 @@ func _ready() -> void:
 	play_button.pressed.connect(func():
 		select_character()
 	)
+	return_button.pressed.connect(func(): return_to_title())
 	SceneManager.scene_transition_control.close()
 	update_characters()
 	character_description.text = ""
@@ -45,3 +47,7 @@ func update_characters():
 func select_character():
 	character_select.set_visible(true)
 	buttons_container.set_visible(false)
+	
+func return_to_title():
+	character_select.set_visible(false)
+	buttons_container.set_visible(true)

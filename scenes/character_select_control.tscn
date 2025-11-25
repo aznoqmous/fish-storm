@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://fgs77dbhgmfo"]
+[gd_scene load_steps=25 format=3 uid="uid://fgs77dbhgmfo"]
 
 [ext_resource type="Script" uid="uid://b7m41i2ftkapf" path="res://scripts/character_select_control.gd" id="1_7vd0q"]
 [ext_resource type="Texture2D" uid="uid://bab5aa4p74xda" path="res://assets/sprites/ui/nine-patch-border.png" id="1_wito6"]
@@ -16,11 +16,22 @@
 [ext_resource type="AudioStream" uid="uid://dy0wolgv52csv" path="res://assets/audio/sfx/Button_Hover A_001.wav" id="14_ejdt7"]
 [ext_resource type="AudioStream" uid="uid://dekpaf6n3ljyu" path="res://assets/audio/sfx/Button_Hover A_002.wav" id="15_5vhtj"]
 [ext_resource type="AudioStream" uid="uid://e04kqxjffqa6" path="res://assets/audio/sfx/Button_Hover A_003.wav" id="16_uwvwe"]
+[ext_resource type="Texture2D" uid="uid://ghymgceqlwkg" path="res://assets/sprites/upgrades/star.png" id="17_5jrkl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nbisn"]
 resource_local_to_scene = true
 shader = ExtResource("3_qpiw4")
 shader_parameter/texture_albedo = ExtResource("1_wito6")
+shader_parameter/texture_flow_map = ExtResource("5_mq72j")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3qcu"]
+resource_local_to_scene = true
+shader = ExtResource("3_qpiw4")
+shader_parameter/texture_albedo = ExtResource("17_5jrkl")
 shader_parameter/texture_flow_map = ExtResource("5_mq72j")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/displacement_steps = 4
@@ -86,6 +97,22 @@ offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_wito6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StartTexture" type="TextureRect" parent="BorderTextureRect"]
+visible = false
+material = SubResource("ShaderMaterial_r3qcu")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+texture = ExtResource("17_5jrkl")
 expand_mode = 1
 stretch_mode = 5
 

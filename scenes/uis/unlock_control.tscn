@@ -1,0 +1,140 @@
+[gd_scene load_steps=16 format=3 uid="uid://coi6pa3wr02p4"]
+
+[ext_resource type="Script" uid="uid://4k1d7qxeohcc" path="res://scripts/uis/unlock_control.gd" id="1_iwyur"]
+[ext_resource type="Script" uid="uid://c0qmct83h2gb6" path="res://scripts/tile_scale_container.gd" id="2_dge0j"]
+[ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="3_xtl8v"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="4_bx8h7"]
+[ext_resource type="Texture2D" uid="uid://ctile7rukjpjc" path="res://assets/sprites/ui/nine-patch.png" id="5_n7y8s"]
+[ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="6_dnjpk"]
+[ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="7_ywws0"]
+[ext_resource type="Texture2D" uid="uid://bab5aa4p74xda" path="res://assets/sprites/ui/nine-patch-border.png" id="8_xd84r"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="9_oimgt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvyfr"]
+shader = ExtResource("3_xtl8v")
+shader_parameter/texture_flow_map = ExtResource("4_bx8h7")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 300.0
+shader_parameter/displacement_size = 600.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwyur"]
+resource_local_to_scene = true
+shader = ExtResource("6_dnjpk")
+shader_parameter/texture_albedo = ExtResource("7_ywws0")
+shader_parameter/texture_flow_map = ExtResource("4_bx8h7")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 8
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dge0j"]
+resource_local_to_scene = true
+shader = ExtResource("6_dnjpk")
+shader_parameter/texture_albedo = ExtResource("8_xd84r")
+shader_parameter/texture_flow_map = ExtResource("4_bx8h7")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjg73"]
+shader = ExtResource("3_xtl8v")
+shader_parameter/texture_flow_map = ExtResource("4_bx8h7")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 3
+shader_parameter/displacement_power = 300.0
+shader_parameter/displacement_size = 600.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bu4jf"]
+font = ExtResource("9_oimgt")
+font_size = 32
+font_color = Color(0.671875, 0.671875, 0.671875, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7ddy"]
+font = ExtResource("9_oimgt")
+font_size = 84
+
+[node name="UnlockControl" type="Control"]
+custom_minimum_size = Vector2(376.835, 149.865)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_iwyur")
+
+[node name="TileScaleContainer" type="Container" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -19.0
+offset_right = 17.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_dge0j")
+tile_scale = 0.48
+metadata/_custom_type_script = "uid://c0qmct83h2gb6"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TileScaleContainer"]
+modulate = Color(0.21484375, 0.21484375, 0.21484375, 1)
+material = SubResource("ShaderMaterial_nvyfr")
+layout_mode = 2
+texture = ExtResource("5_n7y8s")
+patch_margin_left = 88
+patch_margin_top = 106
+patch_margin_right = 86
+patch_margin_bottom = 96
+
+[node name="CharacterSpriteContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 141.0
+offset_bottom = 157.0
+
+[node name="CharacterTexture" type="TextureRect" parent="CharacterSpriteContainer"]
+material = SubResource("ShaderMaterial_iwyur")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_xd84r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BorderTexture" type="TextureRect" parent="CharacterSpriteContainer"]
+material = SubResource("ShaderMaterial_dge0j")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_ywws0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+material = SubResource("ShaderMaterial_bjg73")
+layout_mode = 0
+offset_left = 142.0
+offset_top = 29.0
+offset_right = 362.0
+offset_bottom = 81.0
+text = "New character !"
+label_settings = SubResource("LabelSettings_bu4jf")
+
+[node name="CharacterNameLabel" type="Label" parent="."]
+material = SubResource("ShaderMaterial_bjg73")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 141.0
+offset_top = -108.0
+offset_right = 333.0
+offset_bottom = -23.0
+grow_vertical = 0
+text = "Ikk"
+label_settings = SubResource("LabelSettings_o7ddy")

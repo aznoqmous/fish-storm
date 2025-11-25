@@ -15,6 +15,7 @@ shader = ExtResource("4_gtpg2")
 shader_parameter/texture_albedo = ExtResource("5_a2bny")
 shader_parameter/texture_flow_map = ExtResource("6_284l3")
 shader_parameter/color = Color(0.671875, 0.671875, 0.671875, 1)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywnoi"]
 resource_local_to_scene = true

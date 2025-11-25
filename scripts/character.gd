@@ -8,6 +8,7 @@ class_name Character extends Node3D
 @onready var character_moves_left_label: Label3D = $SpriteContainer/CharacterMovesLeftLabel
 @onready var jump_launch_audio: AudioStreamPlayer = $JumpLaunchAudio
 @onready var jump_land_audio: AudioStreamPlayer = $JumpLandAudio
+@onready var damage_particles_3d: GPUParticles3D = $SpriteContainer/DamageParticles3D
 
 var last_jump: float
 var jump_life: float
@@ -23,7 +24,6 @@ var is_jumping: float:
 	get: return jump_life <  1.0
 
 var upgrades_list : Dictionary[ObjectResource, int]
-
 
 func _input(event: InputEvent) -> void:
 	if is_jumping: return;
@@ -42,9 +42,9 @@ func _input(event: InputEvent) -> void:
 			move_to(new_target)
 
 func move_to(tile: Tile):
-	last_position = global_position
 	if is_jumping: return;
 	if main.moves_left <= 0: return
+	last_position = global_position
 	jump_launch_audio.play()
 	target_tile = tile
 	target_position = tile.global_position
@@ -54,22 +54,22 @@ func move_to(tile: Tile):
 	var signn = sign(tile.global_position.x - global_position.x)
 	if signn != 0.0:
 		flip_sprites = signn < 0
-
 	
 func set_tile(tile: Tile):
 	target_tile = tile
 	target_position = tile.global_position
 	global_position = target_tile.global_position
+	jump_life = 1.0
 	
 func _process(delta: float) -> void:
-	if target_tile and is_jumping and (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration > 1.0:
+	if target_tile and is_jumping and (main.get_time() - last_jump) / jump_duration > 1.0:
 		global_position = target_tile.global_position
 		moved.emit()
 		jump_land_audio.play()
 		
 	head_sprite.rotation.y = lerp(head_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
 	body_sprite.rotation.y = lerp(body_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
-	jump_life = (Time.get_ticks_msec() / 1000.0 - last_jump) / jump_duration
+	jump_life = (main.get_time() - last_jump) / jump_duration
 
 	
 	if is_jumping:

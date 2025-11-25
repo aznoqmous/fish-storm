@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ckp64p0ofal5m"]
+[gd_scene load_steps=38 format=3 uid="uid://ckp64p0ofal5m"]
 
 [ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="1_0dpix"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="2_2hyy3"]
@@ -34,6 +34,7 @@ shader = ExtResource("3_irmqu")
 shader_parameter/texture_albedo = ExtResource("4_7eonc")
 shader_parameter/texture_flow_map = ExtResource("5_50cep")
 shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qkpxi"]
 render_priority = 0
@@ -41,6 +42,7 @@ shader = ExtResource("3_irmqu")
 shader_parameter/texture_albedo = ExtResource("7_lagn4")
 shader_parameter/texture_flow_map = ExtResource("5_50cep")
 shader_parameter/color = Color(0.8046875, 0.8046875, 0.8046875, 1)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="Curve" id="Curve_ycdy4"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -57,10 +59,20 @@ scale_curve = SubResource("CurveTexture_w48qg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
 transparency = 1
+shading_mode = 0
 albedo_texture = ExtResource("8_x8k1v")
 
 [sub_resource type="QuadMesh" id="QuadMesh_yaehf"]
 material = SubResource("StandardMaterial3D_2cqfq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2y1m1"]
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.39999998
+scale_max = 0.39999998
+scale_curve = SubResource("CurveTexture_w48qg")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2y1m1"]
 streams_count = 9
@@ -114,10 +126,19 @@ material_override = SubResource("ShaderMaterial_qkpxi")
 shaded = true
 texture = ExtResource("6_8yvht")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="SpriteContainer"]
+[node name="TrailParticles3D" type="GPUParticles3D" parent="SpriteContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8284638, -0.0030645728)
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_vivmo")
+draw_pass_1 = SubResource("QuadMesh_yaehf")
+
+[node name="DamageParticles3D" type="GPUParticles3D" parent="SpriteContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8284638, -0.0030645728)
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_2y1m1")
 draw_pass_1 = SubResource("QuadMesh_yaehf")
 
 [node name="Shadow" type="Sprite3D" parent="."]

@@ -13,4 +13,6 @@ description = "Power : Collect 2 farest fishes"
 active_effect = 5
 value = 2.0
 active_cooldown = 2
+unlock_description = "Reach level 4"
+unlock_value = 4
 metadata/_custom_type_script = "uid://bxsukocx6neog"

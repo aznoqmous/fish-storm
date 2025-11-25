@@ -36,11 +36,14 @@ colors = Array[Color]([Color(1, 1, 1, 1)])
 resource = ExtResource("2_o30k5")
 is_portal = true
 
+[node name="Shadow" parent="ShadowSpriteContainer" index="0"]
+sorting_offset = -10.0
+
 [node name="Sprite3D" parent="ShadowSpriteContainer/SpriteContainer" index="0"]
 material_override = SubResource("ShaderMaterial_byhhq")
 
 [node name="CountLabel" type="Label3D" parent="ShadowSpriteContainer/SpriteContainer" index="2"]
-transform = Transform3D(1, 0, 0, 0, 0.95405746, 0.29962367, 0, -0.29962367, 0.95405746, 0, 1.3871715, 0.49816826)
+transform = Transform3D(1, 0, 0, 0, 0.8480481, -0.52991927, 0, 0.52991927, 0.8480481, 0, 1.3871715, 0.49816826)
 text = "12"
 font = ExtResource("8_noqqd")
 font_size = 158

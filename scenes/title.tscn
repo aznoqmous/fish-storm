@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=29 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/uis/title_control.gd" id="1_p6dhs"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
@@ -9,14 +9,16 @@
 [ext_resource type="AudioStream" uid="uid://dlbr15o2xmvfg" path="res://assets/audio/GameOff_Mus_02 MainTitle 143bpm Loop.wav" id="4_pyl7j"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_w65of"]
 [ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="7_hiwto"]
+[ext_resource type="Resource" uid="uid://dtswsmddjfa73" path="res://resources/characters/nohz.tres" id="11_8magm"]
 [ext_resource type="Texture2D" uid="uid://dep7pgsiwc7x3" path="res://assets/sprites/rect.png" id="11_fgbvm"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="13_blk4q"]
 [ext_resource type="Resource" uid="uid://b0v358lg7qpbk" path="res://resources/characters/default.tres" id="14_8magm"]
 [ext_resource type="Resource" uid="uid://cljw1d0fw8t6b" path="res://resources/characters/ikk.tres" id="15_pmcd8"]
 [ext_resource type="PackedScene" uid="uid://fgs77dbhgmfo" path="res://scenes/character_select_control.tscn" id="16_6rcc6"]
-[ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/yv.tres" id="16_e75f2"]
+[ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/YV.tres" id="16_e75f2"]
 [ext_resource type="Resource" uid="uid://dqlwd5tymo60x" path="res://resources/characters/oye.tres" id="17_wtvjo"]
 [ext_resource type="Resource" uid="uid://cgyvpdxxyqfg5" path="res://resources/characters/paha.tres" id="18_t8o15"]
+[ext_resource type="Texture2D" uid="uid://dt3i0nx6owjfj" path="res://assets/sprites/ui/actions/back.png" id="20_fgbvm"]
 [ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/button.tscn" id="21_wtvjo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vjr5h"]
@@ -25,8 +27,8 @@ shader_parameter/textures = ExtResource("4_blk4q")
 shader_parameter/texture_size = Vector2(156, 136)
 shader_parameter/screen_size = Vector2(1160, 650)
 shader_parameter/alpha = 1.0
-shader_parameter/texture_flow_map = ExtResource("5_w65of")
 shader_parameter/fsize = 2.245
+shader_parameter/texture_flow_map = ExtResource("5_w65of")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiwto"]
 content_margin_left = 0.0
@@ -98,7 +100,15 @@ font_size = 42
 font = ExtResource("3_b3w7a")
 font_size = 32
 
-[node name="Title" type="Node3D"]
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p6dhs")
+character_resources = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("17_wtvjo"), ExtResource("11_8magm"), ExtResource("16_e75f2"), ExtResource("15_pmcd8")])
 
 [node name="MainTitle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pyl7j")
@@ -124,9 +134,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_p6dhs")
-character_resources = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("16_e75f2"), ExtResource("17_wtvjo"), ExtResource("15_pmcd8")])
-unlocked_characters = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("15_pmcd8"), ExtResource("17_wtvjo"), ExtResource("16_e75f2")])
 
 [node name="Panel" type="Panel" parent="CanvasLayer/TitleControl"]
 layout_mode = 1
@@ -199,6 +206,7 @@ layout_mode = 2
 text = "QUIT"
 
 [node name="CharacterSelect" type="Control" parent="CanvasLayer/TitleControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -233,9 +241,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -144.0
-offset_top = 197.5
+offset_top = 212.0
 offset_right = 144.0
-offset_bottom = 266.5
+offset_bottom = 281.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Active : More fishes
@@ -251,13 +259,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -328.0
-offset_top = 59.5
-offset_right = 328.0
-offset_bottom = 319.5
+offset_left = -394.0
+offset_top = 74.0
+offset_right = 394.0
+offset_bottom = 334.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 5
+columns = 6
 
 [node name="CharacterSelectControl" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2
@@ -276,3 +284,14 @@ layout_mode = 2
 
 [node name="CharacterSelectControl6" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
 layout_mode = 2
+
+[node name="ReturnButton" parent="CanvasLayer/TitleControl/CharacterSelect" instance=ExtResource("21_wtvjo")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -71.125404
+offset_right = 246.0
+grow_vertical = 0
+text = "RETURN"
+icon = ExtResource("20_fgbvm")

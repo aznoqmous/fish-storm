@@ -41,6 +41,8 @@
 [ext_resource type="AudioStream" uid="uid://dakll7rw0rlmw" path="res://assets/audio/sfx/Jump_Launch_008.wav" id="39_vc5cj"]
 [ext_resource type="Script" uid="uid://bvudd4e0t6jb5" path="res://scripts/final_score_control.gd" id="40_chjal"]
 [ext_resource type="AudioStream" uid="uid://dt2b216q0p0lq" path="res://assets/audio/sfx/Jump_Launch_009.wav" id="40_nvyfr"]
+[ext_resource type="Script" uid="uid://b6dir60bs2k8u" path="res://scripts/uis/unlock_control_container.gd" id="41_2cjbq"]
+[ext_resource type="PackedScene" uid="uid://coi6pa3wr02p4" path="res://scenes/uis/unlock_control.tscn" id="42_chjal"]
 [ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="43_cjqg0"]
 [ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="44_vchkt"]
 
@@ -556,3 +558,127 @@ text = "CHARACTERS"
 [node name="MainMenu" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "MAIN MENU"
+
+[node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl"]
+modulate = Color(0.8515625, 0.8336174, 0.71517944, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+texture = ExtResource("29_augu2")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/TextureRect"]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.999985
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(128, 128)
+texture = ExtResource("29_augu2")
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.5
+offset_top = -72.5
+offset_right = 103.5
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "125"
+label_settings = SubResource("LabelSettings_4c57u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/FinalScoreControl"]
+libraries = {
+&"": SubResource("AnimationLibrary_efxa6")
+}
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = 124.0
+offset_right = 32.5
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("22_bjg73")
+theme_override_font_sizes/font_size = 64
+text = "RESTART ?"
+
+[node name="UnlockControlContainer" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -398.0
+offset_top = -18.0
+offset_right = -19.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("41_2cjbq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/UnlockControlContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="UnlockControl" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+layout_mode = 2
+
+[node name="UnlockControl2" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+layout_mode = 2
+
+[node name="UnlockControl3" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+layout_mode = 2

@@ -12,3 +12,4 @@ func _process(delta: float) -> void:
 	sprite_3d.material_override.set("shader_parameter/alpha", color.a)
 	count_label.text = str(main.fish_before_end_portal - main.current_fish_count)
 	count_label.set_visible(not is_active)
+	sprite_3d.rotate_z(delta * TAU * (0.5 if is_active else 0.1))

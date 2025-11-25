@@ -22,6 +22,10 @@ func _ready():
 func load_title():
 	load_scene_progress(title_scene)
 
+func load_character_select():
+	var title := await load_scene_progress(title_scene) as TitleControl
+	title.select_character()
+
 func load_game():
 	load_scene_progress(game_scene)
 
@@ -42,10 +46,12 @@ func load_scene_progress(path):
 	await scene_transition_control.open()
 	
 	var s = await _thread_load(path)
-	set_scene(s.instantiate())
+	var s_instance = s.instantiate()
+	set_scene(s_instance)
 	
-	await scene_transition_control.close()
-	
+	scene_transition_control.close()
+	return s_instance
+
 func _thread_load(path):
 	ResourceLoader.load_threaded_request(path)
 	var tree = get_tree()

@@ -14,6 +14,7 @@ class_name Main extends Node3D
 @onready var score_label: Label = $CanvasLayer/Control/Control/ScoreLabel
 @onready var level_label: Label = $CanvasLayer/Control/LevelLabel
 @onready var character_moves_left_label: Label3D = $Character/SpriteContainer/CharacterMovesLeftLabel
+@onready var unlock_control_container: UnlockControlContainer = $CanvasLayer/Control/UnlockControlContainer
 
 const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
@@ -53,6 +54,8 @@ var current_level: LevelResource
 
 @export_category("Actions")
 @onready var active_control: ActiveControl = $CanvasLayer/Control/ActiveControl
+var is_free_move := false
+
 
 
 func _ready() -> void:
@@ -69,6 +72,7 @@ func _ready() -> void:
 	load_level(levels[current_level_index])
 	load_character(Game.selected_character)
 	reset_active_charges()
+	bind_character_unlocks()
 
 	
 func load_character(res: CharacterResource):
@@ -105,6 +109,7 @@ func _process(delta: float) -> void:
 func gain_score(value):
 	score += value * (combo + 1.0)
 	score_label.text = str(score)
+	on_score.emit()
 
 func gain_combo(value):
 	combo = clamp(0, combo + value, max_combo)
@@ -114,6 +119,7 @@ func gain_combo(value):
 		add_child(new_combo)
 		new_combo.set_combo(combo)
 		new_combo.global_position = character.global_position
+	on_combo.emit()
 		
 func reset_combo():
 	combo = 0
@@ -148,7 +154,7 @@ func handle_movement():
 		handle_loot(fish)
 		character.target_tile.object = null
 		colors.base_color = fish.color if combo > 1 and fish else colors.default_color
-	else:
+	elif not is_free_move:
 		reset_combo()
 		colors.base_color = colors.default_color
 		moves_left -= 1
@@ -163,7 +169,9 @@ func handle_movement():
 	
 	if not current_fish_count >= fish_before_end_portal:
 		gain_credits()
-				
+		
+	is_free_move = false
+	
 func gain_credits():
 	credits += credits_gain;
 	if credits > 1.0:
@@ -172,6 +180,7 @@ func gain_credits():
 		if grid.get_fish_tiles().size() <= 0:
 			spawn_fish()
 			credits += 5.0
+			
 func handle_loot(fish: Fish):
 	current_fish_count += 1
 	#if not end_portal_instance and current_fish_count >= fish_before_end_portal:
@@ -221,12 +230,15 @@ func handle_loot(fish: Fish):
 			if grid.get_fish_tiles().size() <= 0 and moves_left >= max_moves_left:
 				new_combo.set_description("WOOOOOOW !")
 				gain_score(50)
+				on_wooow.emit()
 			elif grid.get_fish_tiles().size() <= 0:
 				new_combo.set_description("Perfect !")
 				gain_score(10)
+				on_perfect.emit()
 			elif moves_left >= max_moves_left:
 				new_combo.set_description("Flawless !")
 				gain_score(10)
+				on_flawless.emit()
 		
 func spend_credits_spaced():
 	while credits >= 1.0:
@@ -368,6 +380,7 @@ func load_level(level: LevelResource):
 	await spend_credits()
 	#await spend_credits_spaced()
 	
+	on_enter_level.emit()
 
 func restart():
 	score = 0
@@ -381,7 +394,8 @@ func restart():
 	reset_active_charges()
 	
 func trigger_active_effect():
-	if not active_control.is_charged: return
+	if character.is_jumping: return;
+	if not active_control.is_charged: return;
 	active_control.trigger_effect_audio.play()
 	update_moves_left()
 	
@@ -431,9 +445,63 @@ func trigger_active_effect():
 					await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 				else: break
 			update_tiles_color()
+		CharacterResource.ActiveEffect.ReturnToLastPosition:
+			var pos = grid.world_to_grid_position(character.last_position)
+			var tile = grid.get_tile(pos)
+			is_free_move = true
+			character.move_to(tile)
 
 	reset_active_charges()
 	gain_credits()
 	
 func get_time():
 	return Time.get_ticks_msec() / 1000.0
+
+signal on_enter_level()
+signal on_combo()
+signal on_score()
+signal on_flawless()
+signal on_perfect()
+signal on_wooow()
+
+func bind_character_unlocks():
+	var characters = Game.get_locked_characters()
+	for c in characters:
+		match c.unlock_type:
+			CharacterResource.UnlockType.Level: 
+				on_enter_level.connect(func():
+					if not current_level_index >= c.unlock_min_level: return;
+					if current_level_index >= c.unlock_value: unlock_character(c)
+				)
+			CharacterResource.UnlockType.Combo:
+				on_combo.connect(func():
+					if not current_level_index >= c.unlock_min_level: return;
+					if combo >= c.unlock_value: unlock_character(c)
+				)
+			CharacterResource.UnlockType.Score:
+				on_combo.connect(func():
+					if not current_level_index >= c.unlock_min_level: return;
+					if score >= c.unlock_value: unlock_character(c)
+				)
+			CharacterResource.UnlockType.Flawless: 
+				on_flawless.connect(func():
+					if not current_level_index >= c.unlock_min_level: return;
+					unlock_character(c)
+				)
+			CharacterResource.UnlockType.Perfect: 
+				on_perfect.connect(func():
+					if not current_level_index >= c.unlock_min_level: return;
+					unlock_character(c)
+				)
+			CharacterResource.UnlockType.Wooow: 
+				on_wooow.connect(func():
+					if not current_level_index >= c.unlock_min_level: return;
+					unlock_character(c)
+				)
+			#CharacterResource.UnlockType.FishCount: pass
+			#CharacterResource.UnlockType.TotalFishCount: pass
+			
+func unlock_character(cr: CharacterResource):
+	if Game.unlocked_characters.has(cr): return;
+	unlock_control_container.display_unlock(cr)
+	Game.unlock_character(cr)

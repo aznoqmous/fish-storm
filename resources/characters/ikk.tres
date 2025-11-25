@@ -16,4 +16,6 @@ max_combo = 999.0
 move_per_combo = 0.7
 active_effect = 1
 value = 3.0
+unlock_description = "Wooow a level (perfect + flawless)"
+unlock_type = 5
 metadata/_custom_type_script = "uid://bxsukocx6neog"

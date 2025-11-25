@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=58 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -40,6 +40,8 @@
 [ext_resource type="AudioStream" uid="uid://bfdrtxke47c8" path="res://assets/audio/sfx/Jump_Launch_007.wav" id="38_txyw0"]
 [ext_resource type="AudioStream" uid="uid://dakll7rw0rlmw" path="res://assets/audio/sfx/Jump_Launch_008.wav" id="39_vc5cj"]
 [ext_resource type="AudioStream" uid="uid://dt2b216q0p0lq" path="res://assets/audio/sfx/Jump_Launch_009.wav" id="40_nvyfr"]
+[ext_resource type="Script" uid="uid://b6dir60bs2k8u" path="res://scripts/uis/unlock_control_container.gd" id="41_2cjbq"]
+[ext_resource type="PackedScene" uid="uid://coi6pa3wr02p4" path="res://scenes/uis/unlock_control.tscn" id="42_chjal"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
@@ -78,6 +80,48 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("22_bjg73")
 font_size = 64
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q0nq"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("32_5q0nq")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 0.5
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dgi5k"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("29_c6pm6")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 0.5
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5poiv"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("30_5he1u")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(0.20392157, 0.20392157, 0.20392157, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 0.5
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ty1g6"]
+streams_count = 9
+stream_0/stream = ExtResource("32_5he1u")
+stream_1/stream = ExtResource("33_5poiv")
+stream_2/stream = ExtResource("34_2cjbq")
+stream_3/stream = ExtResource("35_chjal")
+stream_4/stream = ExtResource("36_cjqg0")
+stream_5/stream = ExtResource("37_vchkt")
+stream_6/stream = ExtResource("38_txyw0")
+stream_7/stream = ExtResource("39_vc5cj")
+stream_8/stream = ExtResource("40_nvyfr")
 
 [sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
 font = ExtResource("22_bjg73")
@@ -121,48 +165,6 @@ _data = {
 &"RESET": SubResource("Animation_4c57u"),
 &"score_idle": SubResource("Animation_kek77")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q0nq"]
-resource_local_to_scene = true
-shader = ExtResource("26_tel4y")
-shader_parameter/texture_albedo = ExtResource("32_5q0nq")
-shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/displacement_steps = 4
-shader_parameter/displacement_power = 0.5
-shader_parameter/displacement_size = 16.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dgi5k"]
-resource_local_to_scene = true
-shader = ExtResource("26_tel4y")
-shader_parameter/texture_albedo = ExtResource("29_c6pm6")
-shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
-shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/displacement_steps = 4
-shader_parameter/displacement_power = 0.5
-shader_parameter/displacement_size = 16.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5poiv"]
-resource_local_to_scene = true
-shader = ExtResource("26_tel4y")
-shader_parameter/texture_albedo = ExtResource("30_5he1u")
-shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
-shader_parameter/color = Color(0.20392157, 0.20392157, 0.20392157, 1)
-shader_parameter/displacement_steps = 4
-shader_parameter/displacement_power = 0.5
-shader_parameter/displacement_size = 16.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ty1g6"]
-streams_count = 9
-stream_0/stream = ExtResource("32_5he1u")
-stream_1/stream = ExtResource("33_5poiv")
-stream_2/stream = ExtResource("34_2cjbq")
-stream_3/stream = ExtResource("35_chjal")
-stream_4/stream = ExtResource("36_cjqg0")
-stream_5/stream = ExtResource("37_vchkt")
-stream_6/stream = ExtResource("38_txyw0")
-stream_7/stream = ExtResource("39_vc5cj")
-stream_8/stream = ExtResource("40_nvyfr")
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_fv21b")
@@ -306,97 +308,6 @@ layout_mode = 2
 [node name="ComboUnitControl5" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
 
-[node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl"]
-modulate = Color(0.8515625, 0.8336174, 0.71517944, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(128, 128)
-texture = ExtResource("29_augu2")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/TextureRect"]
-modulate = Color(0, 0, 0, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -127.999985
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.1, 1.1)
-pivot_offset = Vector2(128, 128)
-texture = ExtResource("29_augu2")
-
-[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -72.5
-offset_right = 103.5
-offset_bottom = 72.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "125"
-label_settings = SubResource("LabelSettings_4c57u")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/FinalScoreControl"]
-libraries = {
-&"": SubResource("AnimationLibrary_efxa6")
-}
-
-[node name="RestartButton" type="Button" parent="CanvasLayer/Control/FinalScoreControl"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.5
-offset_top = 124.0
-offset_right = 32.5
-offset_bottom = 149.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("22_bjg73")
-theme_override_font_sizes/font_size = 64
-text = "RESTART ?"
-
 [node name="ActiveControl" type="Control" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 7
@@ -507,3 +418,127 @@ gap = 5
 [node name="TriggerEffectAudio" type="AudioStreamPlayer" parent="CanvasLayer/Control/ActiveControl"]
 stream = SubResource("AudioStreamRandomizer_ty1g6")
 bus = &"SFX"
+
+[node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl"]
+modulate = Color(0.8515625, 0.8336174, 0.71517944, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+texture = ExtResource("29_augu2")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/TextureRect"]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.999985
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(128, 128)
+texture = ExtResource("29_augu2")
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.5
+offset_top = -72.5
+offset_right = 103.5
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "125"
+label_settings = SubResource("LabelSettings_4c57u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/FinalScoreControl"]
+libraries = {
+&"": SubResource("AnimationLibrary_efxa6")
+}
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = 124.0
+offset_right = 32.5
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("22_bjg73")
+theme_override_font_sizes/font_size = 64
+text = "RESTART ?"
+
+[node name="UnlockControlContainer" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -398.0
+offset_top = -18.0
+offset_right = -19.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("41_2cjbq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/UnlockControlContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="UnlockControl" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+layout_mode = 2
+
+[node name="UnlockControl2" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+layout_mode = 2
+
+[node name="UnlockControl3" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+layout_mode = 2

@@ -42,9 +42,9 @@ func _input(event: InputEvent) -> void:
 			move_to(new_target)
 
 func move_to(tile: Tile):
-	last_position = global_position
 	if is_jumping: return;
 	if main.moves_left <= 0: return
+	last_position = global_position
 	jump_launch_audio.play()
 	target_tile = tile
 	target_position = tile.global_position
@@ -54,7 +54,6 @@ func move_to(tile: Tile):
 	var signn = sign(tile.global_position.x - global_position.x)
 	if signn != 0.0:
 		flip_sprites = signn < 0
-
 	
 func set_tile(tile: Tile):
 	target_tile = tile

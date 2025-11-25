@@ -1,12 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpwvylcnp8wi6"]
+[gd_scene load_steps=15 format=3 uid="uid://cpwvylcnp8wi6"]
 
 [ext_resource type="Texture2D" uid="uid://3f4mefwv367p" path="res://assets/sprites/tile.png" id="1_n3f48"]
 [ext_resource type="Script" uid="uid://cn06fnu4ouyxj" path="res://scripts/tile.gd" id="1_ywnoi"]
 [ext_resource type="Material" uid="uid://dn66vhkd36puj" path="res://materials/wobbly_material.tres" id="2_jy7pm"]
 [ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="4_gtpg2"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="5_284l3"]
 [ext_resource type="Texture2D" uid="uid://1j3pbr27ky8v" path="res://assets/sprites/algae.png" id="5_a2bny"]
+[ext_resource type="Texture2D" uid="uid://dt3i0nx6owjfj" path="res://assets/sprites/ui/actions/back.png" id="5_j3iir"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="6_284l3"]
 [ext_resource type="PackedScene" uid="uid://bwdi0lr4cg1ss" path="res://assets/models/tile.glb" id="7_a2bny"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8k5k"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_gtpg2")
+shader_parameter/texture_albedo = ExtResource("5_j3iir")
+shader_parameter/texture_flow_map = ExtResource("6_284l3")
+shader_parameter/color = Color(0.36618042, 0.45739353, 0.5546875, 1)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3iir"]
 resource_local_to_scene = true
@@ -37,6 +48,12 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 material_override = ExtResource("2_jy7pm")
 shaded = true
 texture = ExtResource("1_n3f48")
+
+[node name="LastPositionSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_j8k5k")
+shaded = true
+texture = ExtResource("5_284l3")
 
 [node name="AlgaeSprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.7939598, 0.42708594)

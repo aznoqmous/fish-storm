@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cqn1yb5r4pbyv"]
+
+[node name="FmodBankLoader" type="FmodBankLoader"]
+bank_paths = ["res:///Master.strings.bank", "res:///Master.bank"]

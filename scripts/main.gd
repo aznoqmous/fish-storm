@@ -14,6 +14,8 @@ class_name Main extends Node3D
 @onready var unlock_control_container: UnlockControlContainer = $CanvasLayer/Control/UnlockControlContainer
 @onready var final_score_control: FinalScoreControl = $CanvasLayer/Control/FinalScoreControl
 
+@onready var fmod_main_theme: FmodEventEmitter2D = $FmodMainTheme
+
 const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
 
@@ -40,7 +42,7 @@ var last_color: Color
 @export_category("Fishes")
 @export var fish_before_end_portal := 5
 var current_fish_count := 0
-var end_portal_instance: Fish
+var end_portal_instance: Portal
 @export var fishes: Array[ObjectResource]
 @export var upgrades: Array[ObjectResource]
 @export var end_portal: ObjectResource
@@ -68,6 +70,7 @@ func _ready() -> void:
 	
 	moves_left = max_moves_left
 	load_level(levels[current_level_index])
+	reset_upgrades()
 	load_character(Game.selected_character)
 	reset_active_charges()
 	bind_character_unlocks()
@@ -91,6 +94,8 @@ func load_character(res: CharacterResource):
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
 		next_level()
+	if event.is_action_pressed("ui_down"):
+		Game.clear()
 	if event.is_action_pressed("Power"):
 		trigger_active_effect()
 		
@@ -120,10 +125,14 @@ func gain_combo(value):
 		new_combo.set_combo(combo)
 		new_combo.global_position = character.global_position
 	on_combo.emit()
+	fmod_main_theme.set_parameter("ComboIntensity", min(combo, 10.0) / 10.0 * 7.0)
+	print(fmod_main_theme.get_parameter("ComboIntensity"))
 		
 func reset_combo():
 	combo = 0
 	combo_control.clear()
+	fmod_main_theme.set_parameter("ComboIntensity", 0.0)
+
 	#reset_active_charges()
 	
 func reset_active_charges():
@@ -138,7 +147,10 @@ func update_tiles_color():
 		var tile_pos = Vector2(tile.global_position.x, tile.global_position.z)
 		tile.is_available = (not tile.object or tile.object.is_available()) and tile != character.target_tile and character_pos.distance_to(tile_pos) / grid.tile_size.x <= max_distance
 		tile.update_color()
-		
+		tile.is_last_position = false
+	if Game.selected_character.active_effect == CharacterResource.ActiveEffect.ReturnToLastPosition:
+		var tile = grid.get_tile(grid.world_to_grid_position(character.last_position))
+		if tile: tile.is_last_position = true
 func update_moves_left():
 	character_moves_left_label.text = str(moves_left)
 	
@@ -175,6 +187,8 @@ func handle_movement():
 	
 		
 func gain_credits():
+	var fish_count = grid.get_fish_tiles().size()
+	if fish_count <= 2: credits += 1
 	credits += credits_gain;
 	if credits > 1.0:
 		spend_credits()
@@ -184,6 +198,7 @@ func gain_credits():
 			credits += 5.0
 			
 func handle_loot(fish: Fish):
+	if not fish.resource: return;
 	current_fish_count += 1
 	#if not end_portal_instance and current_fish_count >= fish_before_end_portal:
 		#var portal = spawn_fish()
@@ -231,15 +246,15 @@ func handle_loot(fish: Fish):
 		if fish.is_portal:
 			if grid.get_fish_tiles().size() <= 0 and moves_left >= max_moves_left:
 				new_combo.set_description("WOOOOOOW !")
-				gain_score(50)
+				gain_score(5)
 				on_wooow.emit()
 			elif grid.get_fish_tiles().size() <= 0:
 				new_combo.set_description("Perfect !")
-				gain_score(10)
+				gain_score(3)
 				on_perfect.emit()
 			elif moves_left >= max_moves_left:
 				new_combo.set_description("Flawless !")
-				gain_score(10)
+				gain_score(3)
 				on_flawless.emit()
 		
 func spend_credits_spaced():
@@ -358,7 +373,6 @@ func load_level(level: LevelResource):
 	await SceneManager.scene_transition_control.open()
 	
 	# Level
-	#grid.grid_size = level.grid_size
 	grid.load_level(current_level.levels.pick_random())
 	
 	colors.base_color = level.base_color
@@ -370,7 +384,10 @@ func load_level(level: LevelResource):
 	reset_combo()
 	last_color = colors.default_color
 	
-	var tile = grid.get_empty_tiles().pick_random()
+	var empty_tiles = grid.get_empty_tiles().filter(func(t):
+		return grid.get_tile_neighbours(t).size() > 2
+	)
+	var tile = empty_tiles.pick_random()
 	camera_3d.global_position.x = character.global_position.x
 	character.set_tile(tile)
 	update_tiles_color()
@@ -443,10 +460,12 @@ func trigger_active_effect():
 					handle_loot(tile.object)
 					tile.object = null
 					update_tiles_color()
+					if not end_portal_instance.is_active:
+						gain_credits()
 					await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 				else: break
+				
 			update_tiles_color()
-			gain_credits()
 			
 		CharacterResource.ActiveEffect.ReturnToLastPosition:
 			var pos = grid.world_to_grid_position(character.last_position)

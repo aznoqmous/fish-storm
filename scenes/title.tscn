@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=28 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/uis/title_control.gd" id="1_p6dhs"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="3_b3w7a"]
 [ext_resource type="CompressedTexture2DArray" uid="uid://cwvt3fxyqsfxt" path="res://assets/sprites/tilesarray.png" id="4_blk4q"]
 [ext_resource type="Shader" uid="uid://kk5eotwckwoj" path="res://shaders/scene_transition.gdshader" id="4_kcc3o"]
-[ext_resource type="AudioStream" uid="uid://dlbr15o2xmvfg" path="res://assets/audio/GameOff_Mus_02 MainTitle 143bpm Loop.wav" id="4_pyl7j"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_w65of"]
 [ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="7_hiwto"]
 [ext_resource type="Resource" uid="uid://dtswsmddjfa73" path="res://resources/characters/nohz.tres" id="11_8magm"]
@@ -110,11 +109,10 @@ grow_vertical = 2
 script = ExtResource("1_p6dhs")
 character_resources = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("17_wtvjo"), ExtResource("11_8magm"), ExtResource("16_e75f2"), ExtResource("15_pmcd8")])
 
-[node name="MainTitle" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_pyl7j")
-volume_db = -6.0
+[node name="MainTitle2" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Music/Mus_MainTitle"
+event_guid = "{0ed5c7b5-d166-4ab2-b735-f0dfd12bef3c}"
 autoplay = true
-bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -196,6 +194,10 @@ alignment = 1
 
 [node name="PlayButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
 layout_mode = 2
+
+[node name="LeaderboardButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
+layout_mode = 2
+text = "LEADERBOARD"
 
 [node name="SettingsButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
 layout_mode = 2

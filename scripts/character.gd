@@ -6,8 +6,8 @@ class_name Character extends Node3D
 @onready var body_sprite: Sprite3D = $SpriteContainer/BodySprite
 @onready var head_sprite: Sprite3D = $SpriteContainer/HeadSprite
 @onready var character_moves_left_label: Label3D = $SpriteContainer/CharacterMovesLeftLabel
-@onready var jump_launch_audio: AudioStreamPlayer = $JumpLaunchAudio
-@onready var jump_land_audio: AudioStreamPlayer = $JumpLandAudio
+@onready var jump_launch_audio: FmodEventEmitter2D = $JumpLaunchAudio
+@onready var jump_land_audio: FmodEventEmitter2D = $JumpLandAudio
 @onready var damage_particles_3d: GPUParticles3D = $SpriteContainer/DamageParticles3D
 
 var last_jump: float

@@ -9,11 +9,11 @@ class_name Fish extends Node3D
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var loot_particles: GPUParticles3D = $LootParticles
 
-@onready var spawn_audio: AudioStreamPlayer = $SpawnAudio
-@onready var land_audio: AudioStreamPlayer = $LandAudio
-@onready var loot_audio: AudioStreamPlayer = $LootAudio
-@onready var upgrade_loot_audio: AudioStreamPlayer = $UpgradeLootAudio
-@onready var portal_loot_audio: AudioStreamPlayer = $PortalLootAudio
+@onready var spawn_audio: FmodEventEmitter2D = $SpawnAudio
+@onready var loot_audio: FmodEventEmitter2D = $LootAudio
+@onready var land_audio: FmodEventEmitter2D = $LandAudio
+@onready var portal_loot_audio: FmodEventEmitter2D = $PortalLootAudio
+@onready var upgrade_loot_audio: FmodEventEmitter2D = $UpgradeLootAudio
 
 @export var colors: Array[Color]
 @export var upgrade_color: Color
@@ -65,7 +65,7 @@ func loot():
 	if is_portal: portal_loot_audio.play()
 	elif is_upgrade: upgrade_loot_audio.play()
 	else: 
-		loot_audio.pitch_scale = 1.0 + float(main.combo / 10.0)
+		#loot_audio.pitch_scale = 1.0 + float(main.combo / 10.0)
 		loot_audio.play()
 		
 	animation_player.play("looted")

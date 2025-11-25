@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bfwdsaqvhdqhg"]
+[gd_scene load_steps=17 format=3 uid="uid://bfwdsaqvhdqhg"]
 
 [ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="1_8g0i4"]
 [ext_resource type="Script" uid="uid://bpxdfwkec8ehd" path="res://scripts/fish.gd" id="1_nub35"]
@@ -7,21 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bdf13uaow7h" path="res://scenes/splash_particles.tscn" id="4_pgks6"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_21k1a"]
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="7_21k1a"]
-[ext_resource type="AudioStream" uid="uid://bx6kmxvnth2l8" path="res://assets/audio/sfx/Fish_Spawn Layer B_001.wav" id="9_axbn3"]
-[ext_resource type="AudioStream" uid="uid://chhk4uv0438nd" path="res://assets/audio/sfx/Fish_Spawn Layer B_002.wav" id="10_yixxi"]
-[ext_resource type="AudioStream" uid="uid://t5rb4m4h0hdc" path="res://assets/audio/sfx/Fish_Spawn Layer B_003.wav" id="11_wjndy"]
-[ext_resource type="AudioStream" uid="uid://b8y45qdvnyp6e" path="res://assets/audio/sfx/Fish_Spawn Layer B_004.wav" id="12_4lajf"]
-[ext_resource type="AudioStream" uid="uid://dbvndj4oxmjsy" path="res://assets/audio/sfx/Fish_Spawn Layer B_005.wav" id="13_k5b65"]
-[ext_resource type="AudioStream" uid="uid://ccag6a8uf371e" path="res://assets/audio/sfx/Fish_Spawn Layer A_001.wav" id="14_3ekal"]
-[ext_resource type="AudioStream" uid="uid://7x4wp05t8lt8" path="res://assets/audio/sfx/Fish_Spawn Layer A_002.wav" id="15_og10o"]
-[ext_resource type="AudioStream" uid="uid://biy2ibmab6vs1" path="res://assets/audio/sfx/Fish_Spawn Layer A_003.wav" id="16_1h2xk"]
-[ext_resource type="AudioStream" uid="uid://uhsndphg6la2" path="res://assets/audio/sfx/Fish_Loot_001.wav" id="17_yul4c"]
-[ext_resource type="AudioStream" uid="uid://dhtpafw4oxy7c" path="res://assets/audio/sfx/Fish_Loot_002.wav" id="18_epktj"]
-[ext_resource type="AudioStream" uid="uid://d15rd6bxxmhkc" path="res://assets/audio/sfx/Fish_Loot_003.wav" id="19_enxas"]
-[ext_resource type="AudioStream" uid="uid://dwdr7ntl80tj1" path="res://assets/audio/sfx/Fish_Loot_004.wav" id="20_7ocb7"]
-[ext_resource type="AudioStream" uid="uid://b4rmjgqt12vab" path="res://assets/audio/sfx/Fish_Loot_005.wav" id="21_5gnq5"]
-[ext_resource type="AudioStream" uid="uid://bqt0sjo15e46f" path="res://assets/audio/sfx/Portal_Loot ST.wav" id="22_yixxi"]
-[ext_resource type="AudioStream" uid="uid://6qdr5f1wpb3j" path="res://assets/audio/sfx/Upgrade_Loot ST.wav" id="23_wjndy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bvcvt"]
 resource_local_to_scene = true
@@ -160,7 +145,7 @@ _data = {
 &"looted": SubResource("Animation_wpvan")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yixxi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21k1a"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
@@ -185,36 +170,6 @@ initial_velocity_min = 2.0
 initial_velocity_max = 6.0
 scale_min = 0.39999998
 scale_curve = SubResource("CurveTexture_2c5cg")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tjd68"]
-streams_count = 5
-stream_0/stream = ExtResource("9_axbn3")
-stream_1/stream = ExtResource("10_yixxi")
-stream_2/stream = ExtResource("11_wjndy")
-stream_3/stream = ExtResource("12_4lajf")
-stream_4/stream = ExtResource("13_k5b65")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cphpq"]
-streams_count = 3
-stream_0/stream = ExtResource("14_3ekal")
-stream_1/stream = ExtResource("15_og10o")
-stream_2/stream = ExtResource("16_1h2xk")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wjndy"]
-streams_count = 5
-stream_0/stream = ExtResource("17_yul4c")
-stream_1/stream = ExtResource("18_epktj")
-stream_2/stream = ExtResource("19_enxas")
-stream_3/stream = ExtResource("20_7ocb7")
-stream_4/stream = ExtResource("21_5gnq5")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_w6hvo"]
-streams_count = 1
-stream_0/stream = ExtResource("22_yixxi")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4lajf"]
-streams_count = 1
-stream_0/stream = ExtResource("23_wjndy")
 
 [node name="Fish" type="Node3D"]
 script = ExtResource("1_nub35")
@@ -256,28 +211,26 @@ autoplay = "idle"
 lifetime = 0.5
 
 [node name="LootParticles" parent="." instance=ExtResource("4_pgks6")]
-material_override = SubResource("StandardMaterial3D_yixxi")
+material_override = SubResource("StandardMaterial3D_21k1a")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_wpvan")
 
-[node name="SpawnAudio" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_tjd68")
-volume_db = -12.0
-bus = &"SFX"
+[node name="SpawnAudio" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/SFX/Fish/Fish_Spawn"
+event_guid = "{5b67f95f-eb96-4ec1-94a0-4680782de6d2}"
 
-[node name="LandAudio" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_cphpq")
-volume_db = -12.0
-bus = &"SFX"
+[node name="LootAudio" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/SFX/Fish/Fish_Loot"
+event_guid = "{ea0e18f8-a3a3-401d-ba22-79451f54b9fe}"
 
-[node name="LootAudio" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_wjndy")
-bus = &"SFX"
+[node name="LandAudio" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/SFX/Fish/Fish_Land"
+event_guid = "{8f681538-318d-4bc6-b140-090e91bb977e}"
 
-[node name="PortalLootAudio" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_w6hvo")
-bus = &"SFX"
+[node name="PortalLootAudio" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/SFX/Portal/Portal_Loot"
+event_guid = "{ddcfe85f-ddb7-4199-aa81-3b2d7096ebc6}"
 
-[node name="UpgradeLootAudio" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_4lajf")
-bus = &"SFX"
+[node name="UpgradeLootAudio" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/SFX/Upgrade/Upgrade_Loot"
+event_guid = "{fd692b43-f382-446b-8489-373a3fd9420e}"

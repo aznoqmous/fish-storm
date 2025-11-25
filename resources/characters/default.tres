@@ -9,8 +9,7 @@ script = ExtResource("1_hrhmk")
 character_name = "Ooqo"
 head_sprite = ExtResource("1_8j8q6")
 active_effect_sprite = ExtResource("1_ucav4")
-description = "More fishes
-Power : More fishes"
+description = "Power : More fishes"
 active_effect = 3
 value = 2.0
 active_cooldown = 4

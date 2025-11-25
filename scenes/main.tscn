@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=63 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://bflmrepi3u4v2" path="res://resources/levels/level_2.tres" id="5_dgi5k"]
 [ext_resource type="Resource" uid="uid://bj6rjtusa32mn" path="res://resources/levels/level_3.tres" id="6_j8jky"]
 [ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="7_kmb1v"]
+[ext_resource type="Resource" uid="uid://cjsg205e7njim" path="res://resources/levels/level_4.tres" id="7_vc5cj"]
 [ext_resource type="Resource" uid="uid://bsj34scaej83e" path="res://resources/fishes/fish.tres" id="8_fuf3a"]
 [ext_resource type="Resource" uid="uid://do44ensh4t8uk" path="res://resources/fishes/big_fish.tres" id="9_pibwh"]
 [ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/cane.tres" id="10_c6pm6"]
@@ -14,7 +15,6 @@
 [ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="12_5poiv"]
 [ext_resource type="Resource" uid="uid://d2acphkags8fd" path="res://resources/clover.tres" id="14_chjal"]
 [ext_resource type="Resource" uid="uid://cuerunb6u1f1g" path="res://resources/end_portal.tres" id="15_cjqg0"]
-[ext_resource type="AudioStream" uid="uid://bu5q0prpba67d" path="res://assets/audio/GameOff_Mus_01 Loop.wav" id="16_fv21b"]
 [ext_resource type="Script" uid="uid://b87jek5xw2ya2" path="res://scripts/colors.gd" id="16_vchkt"]
 [ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="17_txyw0"]
 [ext_resource type="PackedScene" uid="uid://ckp64p0ofal5m" path="res://scenes/character.tscn" id="18_2f3dj"]
@@ -44,6 +44,7 @@
 [ext_resource type="Script" uid="uid://b6dir60bs2k8u" path="res://scripts/uis/unlock_control_container.gd" id="41_2cjbq"]
 [ext_resource type="PackedScene" uid="uid://coi6pa3wr02p4" path="res://scenes/uis/unlock_control.tscn" id="42_chjal"]
 [ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="43_cjqg0"]
+[ext_resource type="Script" uid="uid://cup54nyno2wss" path="res://scripts/uis/settings_menu.gd" id="44_txyw0"]
 [ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="44_vchkt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
@@ -171,18 +172,18 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_fv21b")
-levels = Array[ExtResource("2_tel4y")]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky")])
+levels = Array[ExtResource("2_tel4y")]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky"), ExtResource("7_vc5cj")])
 fishes = Array[ExtResource("7_kmb1v")]([ExtResource("8_fuf3a"), ExtResource("9_pibwh")])
 upgrades = Array[ExtResource("7_kmb1v")]([ExtResource("14_chjal"), ExtResource("10_c6pm6"), ExtResource("11_5he1u"), ExtResource("12_5poiv")])
 end_portal = ExtResource("15_cjqg0")
 
+[node name="FmodMainTheme" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Music/Mus_InGame"
+event_guid = "{8c5581d8-6e5c-4b3a-831b-98ac3a1399c2}"
+autoplay = true
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.65307707, 0.75729156, 0, -0.75729156, 0.65307707, 1.3848572, 7.136898, 6.4730587)
-
-[node name="Theme" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("16_fv21b")
-autoplay = true
-bus = &"Music"
 
 [node name="Colors" type="Node3D" parent="."]
 script = ExtResource("16_vchkt")
@@ -423,6 +424,7 @@ stream = SubResource("AudioStreamRandomizer_ty1g6")
 bus = &"SFX"
 
 [node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -556,6 +558,52 @@ layout_mode = 2
 text = "CHARACTERS"
 
 [node name="MainMenu" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="SettingsMenu" type="Control" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("44_txyw0")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/SettingsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_txyw0")
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/SettingsMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -425.5
+offset_top = -132.5
+offset_right = 425.5
+offset_bottom = 132.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="RestartButton" parent="CanvasLayer/Control/SettingsMenu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "RESTART"
+
+[node name="CharactersButton" parent="CanvasLayer/Control/SettingsMenu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "CHARACTERS"
+
+[node name="MainMenu" parent="CanvasLayer/Control/SettingsMenu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "MAIN MENU"
 

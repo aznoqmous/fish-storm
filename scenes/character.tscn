@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ckp64p0ofal5m"]
+[gd_scene load_steps=18 format=3 uid="uid://ckp64p0ofal5m"]
 
 [ext_resource type="Script" uid="uid://cpoqbaks81yin" path="res://scripts/character.gd" id="1_0dpix"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="2_2hyy3"]
@@ -9,24 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://boyic6scpewkt" path="res://assets/sprites/characters/body.png" id="7_lagn4"]
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="8_x8k1v"]
 [ext_resource type="Texture2D" uid="uid://c7vpwdacxlq5v" path="res://assets/sprites/shadow.png" id="9_ih8y6"]
-[ext_resource type="AudioStream" uid="uid://ckaw4ns3fpixo" path="res://assets/audio/sfx/Jump_Launch_001.wav" id="10_rbud2"]
-[ext_resource type="AudioStream" uid="uid://bmam22sqpv13i" path="res://assets/audio/sfx/Jump_Launch_002.wav" id="11_vovfy"]
-[ext_resource type="AudioStream" uid="uid://pa5edkc3rcgy" path="res://assets/audio/sfx/Jump_Launch_003.wav" id="12_u0pwc"]
-[ext_resource type="AudioStream" uid="uid://ccb220vm6uv7p" path="res://assets/audio/sfx/Jump_Launch_004.wav" id="13_cicko"]
-[ext_resource type="AudioStream" uid="uid://happy2ftf3ws" path="res://assets/audio/sfx/Jump_Launch_005.wav" id="14_bj47h"]
-[ext_resource type="AudioStream" uid="uid://b3to8t2s2uff8" path="res://assets/audio/sfx/Jump_Launch_006.wav" id="15_4lh0q"]
-[ext_resource type="AudioStream" uid="uid://bfdrtxke47c8" path="res://assets/audio/sfx/Jump_Launch_007.wav" id="16_7qyni"]
-[ext_resource type="AudioStream" uid="uid://dakll7rw0rlmw" path="res://assets/audio/sfx/Jump_Launch_008.wav" id="17_sougf"]
-[ext_resource type="AudioStream" uid="uid://dt2b216q0p0lq" path="res://assets/audio/sfx/Jump_Launch_009.wav" id="18_p478o"]
-[ext_resource type="AudioStream" uid="uid://5qke2kt2rrnu" path="res://assets/audio/sfx/Jump_Land_001.wav" id="19_2y1m1"]
-[ext_resource type="AudioStream" uid="uid://c1fftblhysg14" path="res://assets/audio/sfx/Jump_Land_002.wav" id="20_41u22"]
-[ext_resource type="AudioStream" uid="uid://bfuletvvv6gpi" path="res://assets/audio/sfx/Jump_Land_003.wav" id="21_8vsun"]
-[ext_resource type="AudioStream" uid="uid://cjejjtgkv4ma4" path="res://assets/audio/sfx/Jump_Land_004.wav" id="22_8rpqn"]
-[ext_resource type="AudioStream" uid="uid://6jr3fg8h556w" path="res://assets/audio/sfx/Jump_Land_005.wav" id="23_i0gp7"]
-[ext_resource type="AudioStream" uid="uid://civiqpqya1im3" path="res://assets/audio/sfx/Jump_Land_006.wav" id="24_imt6f"]
-[ext_resource type="AudioStream" uid="uid://bu53j10n7p1na" path="res://assets/audio/sfx/Jump_Land_007.wav" id="25_ofy33"]
-[ext_resource type="AudioStream" uid="uid://47rgvgjxxnqh" path="res://assets/audio/sfx/Jump_Land_008.wav" id="26_3et6r"]
-[ext_resource type="AudioStream" uid="uid://bwop72veiw440" path="res://assets/audio/sfx/Jump_Land_009.wav" id="27_so3kc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_efxa6"]
 render_priority = 0
@@ -73,30 +55,6 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.39999998
 scale_max = 0.39999998
 scale_curve = SubResource("CurveTexture_w48qg")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2y1m1"]
-streams_count = 9
-stream_0/stream = ExtResource("10_rbud2")
-stream_1/stream = ExtResource("11_vovfy")
-stream_2/stream = ExtResource("12_u0pwc")
-stream_3/stream = ExtResource("13_cicko")
-stream_4/stream = ExtResource("14_bj47h")
-stream_5/stream = ExtResource("15_4lh0q")
-stream_6/stream = ExtResource("16_7qyni")
-stream_7/stream = ExtResource("17_sougf")
-stream_8/stream = ExtResource("18_p478o")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ohau6"]
-streams_count = 9
-stream_0/stream = ExtResource("19_2y1m1")
-stream_1/stream = ExtResource("20_41u22")
-stream_2/stream = ExtResource("21_8vsun")
-stream_3/stream = ExtResource("22_8rpqn")
-stream_4/stream = ExtResource("23_i0gp7")
-stream_5/stream = ExtResource("24_imt6f")
-stream_6/stream = ExtResource("25_ofy33")
-stream_7/stream = ExtResource("26_3et6r")
-stream_8/stream = ExtResource("27_so3kc")
 
 [node name="Character" type="Node3D"]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
@@ -152,10 +110,10 @@ visible = false
 light_energy = 0.5
 omni_range = 7.3351545
 
-[node name="JumpLaunchAudio" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_2y1m1")
-bus = &"SFX"
+[node name="JumpLaunchAudio" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Player/Jump/Jump_Launch"
+event_guid = "{cb7420e8-6a19-461b-8306-678260775318}"
 
-[node name="JumpLandAudio" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_ohau6")
-bus = &"SFX"
+[node name="JumpLandAudio" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Player/Jump/Jump_Land"
+event_guid = "{914ffbf2-65f8-4a06-aca5-cdcd3f00ca98}"

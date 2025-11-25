@@ -1,16 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://ljyqaok0p7pa"]
+[gd_scene load_steps=12 format=3 uid="uid://ljyqaok0p7pa"]
 
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="1_3q610"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="2_i7y4x"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="3_1bdt2"]
 [ext_resource type="Script" uid="uid://cpkr2b4k5lxbx" path="res://scripts/custom_button.gd" id="4_8r4pl"]
-[ext_resource type="AudioStream" uid="uid://4o2l10cw8l2w" path="res://assets/audio/sfx/Button_Click_001.wav" id="5_s0xya"]
-[ext_resource type="AudioStream" uid="uid://betpib7wwdels" path="res://assets/audio/sfx/Button_Click_002.wav" id="6_6tupn"]
-[ext_resource type="AudioStream" uid="uid://dfbley2cop6xf" path="res://assets/audio/sfx/Button_Click_003.wav" id="7_dogef"]
-[ext_resource type="AudioStream" uid="uid://bbom8rbe6iqri" path="res://assets/audio/sfx/Button_Click_004.wav" id="8_vk00k"]
-[ext_resource type="AudioStream" uid="uid://dy0wolgv52csv" path="res://assets/audio/sfx/Button_Hover A_001.wav" id="9_a0m74"]
-[ext_resource type="AudioStream" uid="uid://dekpaf6n3ljyu" path="res://assets/audio/sfx/Button_Hover A_002.wav" id="10_fuovr"]
-[ext_resource type="AudioStream" uid="uid://e04kqxjffqa6" path="res://assets/audio/sfx/Button_Hover A_003.wav" id="11_1hvc6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]
 shader = ExtResource("1_3q610")
@@ -43,19 +36,6 @@ Button/styles/hover = SubResource("StyleBoxEmpty_ygloa")
 Button/styles/normal = SubResource("StyleBoxEmpty_6civk")
 Button/styles/pressed = SubResource("StyleBoxEmpty_7af2g")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_exjkt"]
-streams_count = 4
-stream_0/stream = ExtResource("5_s0xya")
-stream_1/stream = ExtResource("6_6tupn")
-stream_2/stream = ExtResource("7_dogef")
-stream_3/stream = ExtResource("8_vk00k")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_64bf4"]
-streams_count = 3
-stream_0/stream = ExtResource("9_a0m74")
-stream_1/stream = ExtResource("10_fuovr")
-stream_2/stream = ExtResource("11_1hvc6")
-
 [node name="PlayButton" type="Button"]
 material = SubResource("ShaderMaterial_4rr2b")
 mouse_default_cursor_shape = 2
@@ -63,10 +43,10 @@ theme = SubResource("Theme_yql1r")
 text = "PLAY"
 script = ExtResource("4_8r4pl")
 
-[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_exjkt")
-bus = &"SFX"
+[node name="ButtonClick" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/UI/Button_Click"
+event_guid = "{23a7f53a-2d25-4063-80cd-409eb71f33ab}"
 
-[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_64bf4")
-bus = &"SFX"
+[node name="ButtonHover" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/UI/Button_Hover"
+event_guid = "{4a303407-8f07-4520-81f1-a174a083d5fa}"

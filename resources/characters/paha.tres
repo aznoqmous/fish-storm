@@ -11,7 +11,6 @@ head_sprite = ExtResource("1_rw115")
 active_effect_sprite = ExtResource("1_3o5qn")
 description = "Power : Collect 2 farest fishes"
 active_effect = 5
-value = 2.0
 active_cooldown = 2
 unlock_description = "Reach level 4"
 unlock_value = 4

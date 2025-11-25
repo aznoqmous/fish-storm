@@ -7,6 +7,6 @@
 script = ExtResource("1_ia1ul")
 grid_size = Vector2(10, 6)
 base_color = Color(0.47215074, 0.3019608, 0.69803923, 1)
-fish_before_end_portal = 12
+fish_before_end_portal = 13
 starting_credits = 7
 levels = Array[PackedScene]([ExtResource("1_or7n4")])

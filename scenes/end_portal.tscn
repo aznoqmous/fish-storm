@@ -31,8 +31,8 @@ particles_anim_loop = false
 
 [node name="EndPortal" instance=ExtResource("1_jq5yh")]
 script = ExtResource("2_noqqd")
-disabled_color = Color(1, 1, 1, 0.39215687)
 colors = Array[Color]([Color(1, 1, 1, 1)])
+disabled_color = Color(1, 1, 1, 0.39215687)
 resource = ExtResource("2_o30k5")
 is_portal = true
 

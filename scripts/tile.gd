@@ -6,6 +6,7 @@ class_name Tile extends Area3D
 @onready var algae_sprite: Sprite3D = $AlgaeSprite
 @onready var csg_box_3d: CSGBox3D = $CSGBox3D
 @onready var cube: MeshInstance3D = $TileModel/Cube
+@onready var last_position_sprite: Sprite3D = $LastPositionSprite
 
 @export var color: Color
 @export var available_color: Color
@@ -17,7 +18,7 @@ var rseed := 0.0
 var fish_weight := 0.0
 var is_hovered := false
 var is_available := false
-
+var is_last_position := false
 var current_color: Color
 var target_color: Color
 
@@ -41,13 +42,16 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta):
 	update_color()
+	last_position_sprite.set_visible(is_last_position)
 	
-	scale = lerp(scale, Vector3.ONE, delta * 5.0)
 	
 	current_color = lerp(current_color, target_color, delta * 5.0)
 	sprite_3d.material_override.set("shader_parameter/color", current_color)
+	last_position_sprite.material_override.set("shader_parameter/color", current_color)
 	algae_sprite.material_override.set("shader_parameter/color", current_color.lightened(0.4))
 	cube.material_override.set("albedo_color", current_color.darkened(0.6))
+	
+	scale = lerp(scale, Vector3.ONE, delta * 5.0)
 
 func bump():
 	scale = Vector3(1.2, 1.0/1.2, 1.2);

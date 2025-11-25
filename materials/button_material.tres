@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://biuelfgbaxa51"]
+
+[ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="1_tr0ac"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="2_t2pqr"]
+
+[resource]
+shader = ExtResource("1_tr0ac")
+shader_parameter/texture_flow_map = ExtResource("2_t2pqr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 3
+shader_parameter/displacement_power = 300.0
+shader_parameter/displacement_size = 600.0

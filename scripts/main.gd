@@ -5,15 +5,13 @@ class_name Main extends Node3D
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var combo_label: Label = $CanvasLayer/Control/Combo
 @onready var moves_left_label: Label = $CanvasLayer/Control/MovesLeft
-@onready var final_score_control: Control = $CanvasLayer/Control/FinalScoreControl
-@onready var final_score_label: Label = $CanvasLayer/Control/FinalScoreControl/FinalScoreLabel
 @onready var combo_control: ComboControl = $CanvasLayer/Control/ComboControl
 @onready var colors: Colors = $Colors
 @onready var scene_transition_control: SceneTransitionControl = $CanvasLayer/SceneTransitionControl
-@onready var restart_button: Button = $CanvasLayer/Control/FinalScoreControl/RestartButton
 @onready var score_label: Label = $CanvasLayer/Control/Control/ScoreLabel
 @onready var level_label: Label = $CanvasLayer/Control/LevelLabel
 @onready var character_moves_left_label: Label3D = $Character/SpriteContainer/CharacterMovesLeftLabel
+@onready var final_score_control: FinalScoreControl = $CanvasLayer/Control/FinalScoreControl
 
 const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
@@ -57,7 +55,6 @@ var current_level: LevelResource
 
 func _ready() -> void:
 	upgrade_random = FixedRandom.new()
-	restart_button.pressed.connect(restart)
 	character.moved.connect(handle_movement)
 	
 	active_control.gui_input.connect(func(event: InputEvent):
@@ -155,7 +152,7 @@ func handle_movement():
 		character_moves_left_label.scale = Vector3.ONE * 2.0
 		if moves_left <= 0:
 			final_score_control.set_visible(true)
-			final_score_label.text = str(score)
+			final_score_control.animate()
 			
 	update_moves_left()
 	update_tiles_color()
@@ -163,7 +160,7 @@ func handle_movement():
 	
 	if not current_fish_count >= fish_before_end_portal:
 		gain_credits()
-				
+		
 func gain_credits():
 	credits += credits_gain;
 	if credits > 1.0:

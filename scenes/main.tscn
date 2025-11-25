@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=60 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -20,12 +20,12 @@
 [ext_resource type="PackedScene" uid="uid://ckp64p0ofal5m" path="res://scenes/character.tscn" id="18_2f3dj"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="21_j2jfr"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="22_bjg73"]
+[ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/button.tscn" id="24_2cjbq"]
 [ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="25_0loja"]
 [ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://assets/sprites/voronoi.png" id="26_ids8r"]
 [ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="26_tel4y"]
 [ext_resource type="Script" uid="uid://drt20frltyy3q" path="res://scripts/uis/combo_control.gd" id="27_dnhof"]
 [ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/combo_unit_control.tscn" id="28_1v6qk"]
-[ext_resource type="Texture2D" uid="uid://c5mtqu3wildfu" path="res://assets/sprites/star.png" id="29_augu2"]
 [ext_resource type="Texture2D" uid="uid://dtftqwpvc5vtl" path="res://assets/sprites/ui/actions/umbrella.png" id="29_c6pm6"]
 [ext_resource type="Texture2D" uid="uid://wh6vcej6t1ho" path="res://assets/sprites/ui/cross.png" id="30_5he1u"]
 [ext_resource type="AudioStream" uid="uid://ckaw4ns3fpixo" path="res://assets/audio/sfx/Jump_Launch_001.wav" id="32_5he1u"]
@@ -39,7 +39,10 @@
 [ext_resource type="AudioStream" uid="uid://b3to8t2s2uff8" path="res://assets/audio/sfx/Jump_Launch_006.wav" id="37_vchkt"]
 [ext_resource type="AudioStream" uid="uid://bfdrtxke47c8" path="res://assets/audio/sfx/Jump_Launch_007.wav" id="38_txyw0"]
 [ext_resource type="AudioStream" uid="uid://dakll7rw0rlmw" path="res://assets/audio/sfx/Jump_Launch_008.wav" id="39_vc5cj"]
+[ext_resource type="Script" uid="uid://bvudd4e0t6jb5" path="res://scripts/final_score_control.gd" id="40_chjal"]
 [ext_resource type="AudioStream" uid="uid://dt2b216q0p0lq" path="res://assets/audio/sfx/Jump_Launch_009.wav" id="40_nvyfr"]
+[ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="43_cjqg0"]
+[ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="44_vchkt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
@@ -78,49 +81,6 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("22_bjg73")
 font_size = 64
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
-font = ExtResource("22_bjg73")
-font_size = 144
-outline_size = 30
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_4c57u"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_kek77"]
-resource_name = "score_idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 3.1415927]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_efxa6"]
-_data = {
-&"RESET": SubResource("Animation_4c57u"),
-&"score_idle": SubResource("Animation_kek77")
-}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5q0nq"]
 resource_local_to_scene = true
@@ -163,6 +123,49 @@ stream_5/stream = ExtResource("37_vchkt")
 stream_6/stream = ExtResource("38_txyw0")
 stream_7/stream = ExtResource("39_vc5cj")
 stream_8/stream = ExtResource("40_nvyfr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txyw0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.8627451)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vc5cj"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("43_cjqg0")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 8
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvyfr"]
+resource_local_to_scene = true
+shader = ExtResource("26_tel4y")
+shader_parameter/texture_albedo = ExtResource("32_5q0nq")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ty1g6"]
+font = ExtResource("22_bjg73")
+font_size = 59
+font_color = Color(0.359375, 0.359375, 0.359375, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
+font = ExtResource("22_bjg73")
+font_size = 144
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_fv21b")
@@ -306,97 +309,6 @@ layout_mode = 2
 [node name="ComboUnitControl5" parent="CanvasLayer/Control/ComboControl/UnitContainer" instance=ExtResource("28_1v6qk")]
 layout_mode = 2
 
-[node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl"]
-modulate = Color(0.8515625, 0.8336174, 0.71517944, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(128, 128)
-texture = ExtResource("29_augu2")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/TextureRect"]
-modulate = Color(0, 0, 0, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -127.999985
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.1, 1.1)
-pivot_offset = Vector2(128, 128)
-texture = ExtResource("29_augu2")
-
-[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -72.5
-offset_right = 103.5
-offset_bottom = 72.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "125"
-label_settings = SubResource("LabelSettings_4c57u")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/FinalScoreControl"]
-libraries = {
-&"": SubResource("AnimationLibrary_efxa6")
-}
-
-[node name="RestartButton" type="Button" parent="CanvasLayer/Control/FinalScoreControl"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.5
-offset_top = 124.0
-offset_right = 32.5
-offset_bottom = 149.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("22_bjg73")
-theme_override_font_sizes/font_size = 64
-text = "RESTART ?"
-
 [node name="ActiveControl" type="Control" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 7
@@ -507,3 +419,140 @@ gap = 5
 [node name="TriggerEffectAudio" type="AudioStreamPlayer" parent="CanvasLayer/Control/ActiveControl"]
 stream = SubResource("AudioStreamRandomizer_ty1g6")
 bus = &"SFX"
+
+[node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("40_chjal")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_txyw0")
+
+[node name="ScoreContainer" type="Control" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -129.0
+offset_right = 379.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterControl" type="Control" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -54.5
+offset_right = 110.0
+offset_bottom = 54.5
+grow_vertical = 2
+
+[node name="CharacterTexture" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/CharacterControl"]
+material = SubResource("ShaderMaterial_vc5cj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -48.0
+offset_right = 34.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("43_cjqg0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/CharacterControl"]
+material = SubResource("ShaderMaterial_nvyfr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -63.0
+offset_top = -57.0
+offset_right = 63.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_5q0nq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 163.0
+offset_top = -89.0
+offset_right = 525.0
+offset_bottom = 89.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/Control"]
+material = ExtResource("44_vchkt")
+layout_mode = 1
+offset_top = 10.0
+offset_right = 378.0
+offset_bottom = 78.0
+text = "SCORE"
+label_settings = SubResource("LabelSettings_ty1g6")
+vertical_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/Control"]
+material = ExtResource("44_vchkt")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -44.0
+offset_right = 476.0
+offset_bottom = 101.0
+grow_vertical = 2
+text = "222222"
+label_settings = SubResource("LabelSettings_4c57u")
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="CanvasLayer/Control/FinalScoreControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -379.5
+offset_top = 114.0
+offset_right = 379.5
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="RestartButton" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "RESTART"
+
+[node name="CharactersButton" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "CHARACTERS"
+
+[node name="MainMenu" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "MAIN MENU"

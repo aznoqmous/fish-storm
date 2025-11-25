@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8qagtsxqxcw2"]
 
-[ext_resource type="Script" uid="uid://by2jcxhusj7ei" path="res://scenes/combo.gd" id="1_7qon6"]
+[ext_resource type="Script" uid="uid://by2jcxhusj7ei" path="res://scripts/combo.gd" id="1_7qon6"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="1_gtdbx"]
 
 [sub_resource type="Animation" id="Animation_gyh3u"]

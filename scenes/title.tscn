@@ -14,12 +14,12 @@
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="13_blk4q"]
 [ext_resource type="Resource" uid="uid://b0v358lg7qpbk" path="res://resources/characters/default.tres" id="14_8magm"]
 [ext_resource type="Resource" uid="uid://cljw1d0fw8t6b" path="res://resources/characters/ikk.tres" id="15_pmcd8"]
-[ext_resource type="PackedScene" uid="uid://fgs77dbhgmfo" path="res://scenes/character_select_control.tscn" id="16_6rcc6"]
 [ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/YV.tres" id="16_e75f2"]
+[ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/uis/button.tscn" id="16_fgbvm"]
 [ext_resource type="Resource" uid="uid://dqlwd5tymo60x" path="res://resources/characters/oye.tres" id="17_wtvjo"]
 [ext_resource type="Resource" uid="uid://cgyvpdxxyqfg5" path="res://resources/characters/paha.tres" id="18_t8o15"]
+[ext_resource type="PackedScene" uid="uid://fgs77dbhgmfo" path="res://scenes/uis/character_select_control.tscn" id="19_vjr5h"]
 [ext_resource type="Texture2D" uid="uid://dt3i0nx6owjfj" path="res://assets/sprites/ui/actions/back.png" id="20_fgbvm"]
-[ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/button.tscn" id="21_wtvjo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vjr5h"]
 shader = ExtResource("4_kcc3o")
@@ -194,14 +194,14 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="PlayButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("21_wtvjo")]
+[node name="PlayButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
 layout_mode = 2
 
-[node name="SettingsButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("21_wtvjo")]
+[node name="SettingsButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
 layout_mode = 2
 text = "SETTINGS"
 
-[node name="QuitButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("21_wtvjo")]
+[node name="QuitButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
 layout_mode = 2
 text = "QUIT"
 
@@ -267,25 +267,25 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 6
 
-[node name="CharacterSelectControl" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("19_vjr5h")]
 layout_mode = 2
 
-[node name="CharacterSelectControl2" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl2" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("19_vjr5h")]
 layout_mode = 2
 
-[node name="CharacterSelectControl3" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl3" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("19_vjr5h")]
 layout_mode = 2
 
-[node name="CharacterSelectControl4" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl4" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("19_vjr5h")]
 layout_mode = 2
 
-[node name="CharacterSelectControl5" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl5" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("19_vjr5h")]
 layout_mode = 2
 
-[node name="CharacterSelectControl6" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("16_6rcc6")]
+[node name="CharacterSelectControl6" parent="CanvasLayer/TitleControl/CharacterSelect/CharactersContainer" instance=ExtResource("19_vjr5h")]
 layout_mode = 2
 
-[node name="ReturnButton" parent="CanvasLayer/TitleControl/CharacterSelect" instance=ExtResource("21_wtvjo")]
+[node name="ReturnButton" parent="CanvasLayer/TitleControl/CharacterSelect" instance=ExtResource("16_fgbvm")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

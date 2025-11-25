@@ -2,7 +2,7 @@ class_name ComboControl extends Control
 
 @onready var combo_label: Label = $ComboLabel
 @onready var unit_container: GridContainer = $UnitContainer
-const COMBO_UNIT_CONTROL = preload("res://scenes/combo_unit_control.tscn")
+const COMBO_UNIT_CONTROL = preload("res://scenes/uis/combo_unit_control.tscn")
 
 func clear():
 	for child in unit_container.get_children(): child.queue_free()

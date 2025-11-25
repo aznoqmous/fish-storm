@@ -12,6 +12,12 @@ class_name FinalScoreControl extends Control
 func _ready():
 	character_texture.material.set("shader_parameter/texture_albedo", Game.selected_character.head_sprite)
 	restart_button.pressed.connect(main.restart)
+	characters_button.pressed.connect(func():
+		SceneManager.load_character_select()
+	)
+	main_menu.pressed.connect(func():
+		SceneManager.load_title()
+	)
 
 func animate():
 	buttons_container.set_visible(false)

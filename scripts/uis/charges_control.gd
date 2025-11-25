@@ -1,6 +1,6 @@
 @tool
 class_name ChargesControl extends Control
-const CHARGE_CONTROL = preload("res://scenes/charge_control.tscn")
+const CHARGE_CONTROL = preload("res://scenes/uis/charge_control.tscn")
 @onready var charges_container: Control = $ChargesContainer
 @export var gap:= 16:
 	set(value):

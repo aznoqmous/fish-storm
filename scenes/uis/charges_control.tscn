@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cc5lbkhk10ino"]
 
 [ext_resource type="Script" uid="uid://c02oyx2oku7tp" path="res://scripts/uis/charges_control.gd" id="1_4hisx"]
-[ext_resource type="PackedScene" uid="uid://c2tmpxol1oeno" path="res://scenes/charge_control.tscn" id="2_fa3vu"]
+[ext_resource type="PackedScene" uid="uid://c2tmpxol1oeno" path="res://scenes/uis/charge_control.tscn" id="2_fa3vu"]
 
 [node name="ChargesControl" type="Control"]
 layout_mode = 3

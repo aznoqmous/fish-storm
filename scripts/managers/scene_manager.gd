@@ -9,7 +9,7 @@ var coin_count = 0
 var max_coins = 0
 var reset_count = 0
 
-const SCENE_TRANSITION_CONTROL = preload("res://scenes/scene_transition_control.tscn")
+const SCENE_TRANSITION_CONTROL = preload("res://scenes/uis/scene_transition_control.tscn")
 var scene_transition_control
 
 func _ready():

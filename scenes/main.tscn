@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=62 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -20,12 +20,12 @@
 [ext_resource type="PackedScene" uid="uid://ckp64p0ofal5m" path="res://scenes/character.tscn" id="18_2f3dj"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="21_j2jfr"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="22_bjg73"]
-[ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/button.tscn" id="24_2cjbq"]
+[ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/uis/button.tscn" id="24_2cjbq"]
 [ext_resource type="Shader" uid="uid://pve4rsyth5m4" path="res://shaders/water.gdshader" id="25_0loja"]
 [ext_resource type="Texture2D" uid="uid://eukcsnhvbgkv" path="res://assets/sprites/voronoi.png" id="26_ids8r"]
 [ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="26_tel4y"]
 [ext_resource type="Script" uid="uid://drt20frltyy3q" path="res://scripts/uis/combo_control.gd" id="27_dnhof"]
-[ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/combo_unit_control.tscn" id="28_1v6qk"]
+[ext_resource type="PackedScene" uid="uid://brwaam4on8k8b" path="res://scenes/uis/combo_unit_control.tscn" id="28_1v6qk"]
 [ext_resource type="Texture2D" uid="uid://dtftqwpvc5vtl" path="res://assets/sprites/ui/actions/umbrella.png" id="29_c6pm6"]
 [ext_resource type="Texture2D" uid="uid://wh6vcej6t1ho" path="res://assets/sprites/ui/cross.png" id="30_5he1u"]
 [ext_resource type="AudioStream" uid="uid://ckaw4ns3fpixo" path="res://assets/audio/sfx/Jump_Launch_001.wav" id="32_5he1u"]
@@ -33,7 +33,7 @@
 [ext_resource type="Script" uid="uid://evjj08c3krjn" path="res://scripts/active_control.gd" id="32_j8jky"]
 [ext_resource type="AudioStream" uid="uid://bmam22sqpv13i" path="res://assets/audio/sfx/Jump_Launch_002.wav" id="33_5poiv"]
 [ext_resource type="AudioStream" uid="uid://pa5edkc3rcgy" path="res://assets/audio/sfx/Jump_Launch_003.wav" id="34_2cjbq"]
-[ext_resource type="PackedScene" uid="uid://cc5lbkhk10ino" path="res://scenes/charges_control.tscn" id="34_dgi5k"]
+[ext_resource type="PackedScene" uid="uid://cc5lbkhk10ino" path="res://scenes/uis/charges_control.tscn" id="34_dgi5k"]
 [ext_resource type="AudioStream" uid="uid://ccb220vm6uv7p" path="res://assets/audio/sfx/Jump_Launch_004.wav" id="35_chjal"]
 [ext_resource type="AudioStream" uid="uid://happy2ftf3ws" path="res://assets/audio/sfx/Jump_Launch_005.wav" id="36_cjqg0"]
 [ext_resource type="AudioStream" uid="uid://b3to8t2s2uff8" path="res://assets/audio/sfx/Jump_Launch_006.wav" id="37_vchkt"]
@@ -559,97 +559,6 @@ text = "CHARACTERS"
 layout_mode = 2
 text = "MAIN MENU"
 
-[node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl"]
-modulate = Color(0.8515625, 0.8336174, 0.71517944, 1)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(128, 128)
-texture = ExtResource("29_augu2")
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/TextureRect"]
-modulate = Color(0, 0, 0, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -127.999985
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.1, 1.1)
-pivot_offset = Vector2(128, 128)
-texture = ExtResource("29_augu2")
-
-[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -72.5
-offset_right = 103.5
-offset_bottom = 72.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "125"
-label_settings = SubResource("LabelSettings_4c57u")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/FinalScoreControl"]
-libraries = {
-&"": SubResource("AnimationLibrary_efxa6")
-}
-
-[node name="RestartButton" type="Button" parent="CanvasLayer/Control/FinalScoreControl"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.5
-offset_top = 124.0
-offset_right = 32.5
-offset_bottom = 149.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("22_bjg73")
-theme_override_font_sizes/font_size = 64
-text = "RESTART ?"
-
 [node name="UnlockControlContainer" type="Control" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 11
@@ -662,6 +571,7 @@ offset_right = -19.0
 offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("41_2cjbq")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/UnlockControlContainer"]
@@ -669,16 +579,21 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 79.0
 offset_top = 146.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 18
 
 [node name="UnlockControl" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+visible = false
 layout_mode = 2
 
 [node name="UnlockControl2" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+visible = false
 layout_mode = 2
 
 [node name="UnlockControl3" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
+visible = false
 layout_mode = 2

@@ -44,7 +44,7 @@ shader = ExtResource("3_qpiw4")
 shader_parameter/texture_albedo = ExtResource("6_pgudw")
 shader_parameter/texture_flow_map = ExtResource("5_mq72j")
 shader_parameter/color = Color(1, 1, 1, 1)
-shader_parameter/displacement_steps = 4
+shader_parameter/displacement_steps = 8
 shader_parameter/displacement_power = 2.0
 shader_parameter/displacement_size = 16.0
 
@@ -100,7 +100,7 @@ texture = ExtResource("1_wito6")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StartTexture" type="TextureRect" parent="BorderTextureRect"]
+[node name="StarTexture" type="TextureRect" parent="BorderTextureRect"]
 visible = false
 material = SubResource("ShaderMaterial_r3qcu")
 layout_mode = 1

@@ -1,4 +1,3 @@
-@tool
 class_name Grid extends Node3D
 
 @onready var main: Main = $/root/Main

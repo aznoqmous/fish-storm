@@ -14,7 +14,8 @@ func save():
 
 func load():
 	if not FileAccess.file_exists(save_path):
-		return # Error! We don't have a save to load.
+		unlocked_characters = characters.filter(func(a: CharacterResource): return not a.locked) 
+		return
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	var data = JSON.parse_string(save_file.get_as_text())
 	unlocked_characters = characters.filter(func(a: CharacterResource): return not a.locked or data.characters.has(a.id)) 

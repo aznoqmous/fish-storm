@@ -11,7 +11,7 @@ class_name TitleControl extends Control
 @onready var return_button: Button = $CanvasLayer/TitleControl/CharacterSelect/ReturnButton
 
 @export var character_resources: Array[CharacterResource]
-const CHARACTER_SELECT_CONTROL = preload("res://scenes/character_select_control.tscn")
+const CHARACTER_SELECT_CONTROL = preload("res://scenes/uis/character_select_control.tscn")
 
 func _ready() -> void:
 	Game.characters = character_resources

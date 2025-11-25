@@ -14,7 +14,6 @@ const CHARACTER_SELECT_CONTROL = preload("res://scenes/character_select_control.
 
 func _ready() -> void:
 	Game.characters = character_resources
-	Game.clear()
 	Game.load()
 	
 	character_select.set_visible(false)

@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://blwxqm5ndheeg"]
+
+[ext_resource type="Script" uid="uid://dyxv0u6d3t2ox" path="res://scripts/uis/leader_board_container_control.gd" id="1_cv4mw"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="2_cv4mw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wc6jp"]
+font = ExtResource("2_cv4mw")
+font_size = 64
+
+[node name="LeaderBoardContainerControl" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.0
+offset_top = -161.0
+offset_right = 337.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cv4mw")
+
+[node name="UploadResultsRequest" type="HTTPRequest" parent="."]
+
+[node name="UpdateRequest" type="HTTPRequest" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -6
+
+[node name="LoadingLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -32.5
+offset_right = 132.0
+offset_bottom = 32.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading..."
+label_settings = SubResource("LabelSettings_wc6jp")

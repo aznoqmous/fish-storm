@@ -21,6 +21,6 @@ func _process(delta):
 	update_color()
 	
 func update_color():
-	water.material_override.set("shader_parameter/light_foam_color", current_color.darkened(0.8))
-	water.material_override.set("shader_parameter/water_color", current_color.darkened(0.85))
-	water.material_override.set("shader_parameter/dark_foam_color", current_color.darkened(0.9))
+	water.material_override.set("shader_parameter/light_foam_color", current_color.darkened(0.92))
+	water.material_override.set("shader_parameter/water_color", current_color.darkened(0.95))
+	water.material_override.set("shader_parameter/dark_foam_color", current_color.darkened(0.97))

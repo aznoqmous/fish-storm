@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://dmqaletmxr5yx"]
+
+[ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="1_jjo37"]
+[ext_resource type="Script" uid="uid://ds8c7xk8351jq" path="res://scripts/uis/leaderboard_control.gd" id="1_te8i0"]
+[ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="2_te8i0"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="3_0eshh"]
+[ext_resource type="Texture2D" uid="uid://bab5aa4p74xda" path="res://assets/sprites/ui/nine-patch-border.png" id="4_h554b"]
+[ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="5_q01g1"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="6_4nid7"]
+[ext_resource type="Script" uid="uid://c0qmct83h2gb6" path="res://scripts/tile_scale_container.gd" id="8_h554b"]
+[ext_resource type="Texture2D" uid="uid://ctile7rukjpjc" path="res://assets/sprites/ui/nine-patch.png" id="9_q01g1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vc5cj"]
+resource_local_to_scene = true
+shader = ExtResource("1_jjo37")
+shader_parameter/texture_albedo = ExtResource("2_te8i0")
+shader_parameter/texture_flow_map = ExtResource("3_0eshh")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 8
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nvyfr"]
+resource_local_to_scene = true
+shader = ExtResource("1_jjo37")
+shader_parameter/texture_albedo = ExtResource("4_h554b")
+shader_parameter/texture_flow_map = ExtResource("3_0eshh")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 4
+shader_parameter/displacement_power = 2.0
+shader_parameter/displacement_size = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_txyw0"]
+font = ExtResource("6_4nid7")
+font_size = 32
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LeaderboardControl" type="Control"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 470.0
+offset_bottom = 50.0
+script = ExtResource("1_te8i0")
+
+[node name="CharacterControl" type="Control" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="CharacterTexture" type="TextureRect" parent="CharacterControl"]
+material = SubResource("ShaderMaterial_vc5cj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_te8i0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BorderTexture" type="TextureRect" parent="CharacterControl"]
+material = SubResource("ShaderMaterial_nvyfr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_h554b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Control" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RankLabel" type="Label" parent="Control"]
+material = ExtResource("5_q01g1")
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "#1"
+label_settings = SubResource("LabelSettings_txyw0")
+vertical_alignment = 1
+
+[node name="NameLabel" type="Label" parent="Control"]
+material = ExtResource("5_q01g1")
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "aznq"
+label_settings = SubResource("LabelSettings_txyw0")
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Control"]
+material = ExtResource("5_q01g1")
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "222222"
+label_settings = SubResource("LabelSettings_txyw0")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Background" type="Container" parent="."]
+modulate = Color(18.892157, 18.892157, 18.892157, 0.05882353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 7.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_h554b")
+tile_scale = 0.2
+metadata/_custom_type_script = "uid://c0qmct83h2gb6"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Background"]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_q01g1")
+patch_margin_left = 82
+patch_margin_top = 97
+patch_margin_right = 94
+patch_margin_bottom = 103

@@ -13,6 +13,7 @@ class_name Main extends Node3D
 @onready var character_moves_left_label: Label3D = $Character/SpriteContainer/CharacterMovesLeftLabel
 @onready var unlock_control_container: UnlockControlContainer = $CanvasLayer/Control/UnlockControlContainer
 @onready var final_score_control: FinalScoreControl = $CanvasLayer/Control/FinalScoreControl
+@onready var leader_board_container_control: LeaderBoardContainerControl = $CanvasLayer/Control/FinalScoreControl/LeaderBoardContainerControl
 
 @onready var fmod_main_theme: FmodEventEmitter2D = $FmodMainTheme
 
@@ -39,6 +40,11 @@ var credits_gain = 1.0
 var is_combo : bool : 
 	get: return combo > 1
 var last_color: Color
+
+var loop_index: int:
+	get: return floor(float(current_level_index) / levels.size())
+var level_in_loop: int:
+	get: return current_level_index % levels.size()
 
 @export_category("Fishes")
 @export var fish_before_end_portal := 5
@@ -69,6 +75,7 @@ func _ready() -> void:
 			trigger_active_effect()
 	)
 	
+	max_moves_left = Game.selected_character.max_moves_left
 	moves_left = max_moves_left
 	load_level(levels[current_level_index])
 	reset_upgrades()
@@ -94,10 +101,14 @@ func load_character(res: CharacterResource):
 	active_control.active_effect_sprite.material.set("shader_parameter/texture_albedo", res.active_effect_sprite)
 	
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_down"):
+	if event.is_action_pressed("ui_up"):
 		next_level()
 	if event.is_action_pressed("ui_down"):
 		Game.clear()
+	if event.is_action_pressed("ui_right"):
+		gain_combo(1)
+	if event.is_action_pressed("ui_left"):
+		reset_combo()
 	if event.is_action_pressed("Power"):
 		trigger_active_effect()
 		
@@ -130,7 +141,6 @@ func gain_combo(value):
 		new_combo.global_position = character.global_position
 	on_combo.emit()
 	fmod_main_theme.set_parameter("ComboIntensity", int(min(combo, 10.0) / 10.0 * 7.0))
-	#print(fmod_main_theme.get_parameter("ComboIntensity"))
 		
 func reset_combo():
 	combo = 0
@@ -177,11 +187,20 @@ func handle_movement():
 		character_moves_left_label.scale = Vector3.ONE * 2.0
 		character.damage_particles_3d.emitting = true
 		if moves_left <= 0:
+			#leader_board_container_control.update()
 			final_score_control.set_visible(true)
 			final_score_control.animate()
+			await leader_board_container_control.send_data(
+				Game.selected_character,
+				"aznoqmous",
+				score,
+				current_level_index
+			)
+			leader_board_container_control.update()
 			
 	update_moves_left()
 	update_tiles_color()
+	
 	
 	
 	if not current_fish_count >= fish_before_end_portal:
@@ -374,7 +393,7 @@ func load_level(level: LevelResource):
 	upgrade_random.rate = upgrade_chance
 	
 	current_level = level
-	level_label.text = str("Level ", current_level_index + 1)
+	level_label.text = str("Level ", loop_index + 1, "-", level_in_loop + 1)
 	
 	final_score_control.set_visible(false)
 
@@ -384,10 +403,9 @@ func load_level(level: LevelResource):
 	grid.load_level(current_level.levels.pick_random())
 	
 	colors.base_color = level.base_color
-	max_moves_left = level.max_moves_left
-	fish_before_end_portal = level.fish_before_end_portal
-	credits = level.starting_credits
-		
+	fish_before_end_portal = floor(level.fish_before_end_portal * (1.0 + pow(loop_index * 1.6, 1.6) / 10.0))
+	credits = level.starting_credits * 1.0 / (1.0 + pow(loop_index * 1.2, 1.2)/10.0)
+
 	current_fish_count = 0
 	reset_combo()
 	last_color = colors.default_color

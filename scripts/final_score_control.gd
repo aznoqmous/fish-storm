@@ -3,7 +3,7 @@ class_name FinalScoreControl extends Control
 @onready var main:Main = $/root/Main
 @onready var character_texture: TextureRect = $ScoreContainer/CharacterControl/CharacterTexture
 @onready var final_score_label: Label = $ScoreContainer/Control/FinalScoreLabel
-@onready var buttons_container: HBoxContainer = $ButtonsContainer
+@onready var buttons_container: VBoxContainer = $ButtonsContainer
 @onready var restart_button: Button = $ButtonsContainer/RestartButton
 @onready var characters_button: Button = $ButtonsContainer/CharactersButton
 @onready var main_menu: Button = $ButtonsContainer/MainMenu

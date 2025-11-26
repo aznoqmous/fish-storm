@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=64 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -45,14 +45,15 @@
 [ext_resource type="PackedScene" uid="uid://coi6pa3wr02p4" path="res://scenes/uis/unlock_control.tscn" id="42_chjal"]
 [ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="43_cjqg0"]
 [ext_resource type="Script" uid="uid://cup54nyno2wss" path="res://scripts/uis/settings_menu.gd" id="44_txyw0"]
+[ext_resource type="PackedScene" uid="uid://blwxqm5ndheeg" path="res://scenes/uis/leader_board_container_control.tscn" id="44_vc5cj"]
 [ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="44_vchkt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
 shader = ExtResource("25_0loja")
-shader_parameter/water_color = Color(0.045294113, 0.07294116, 0.10470587, 1)
-shader_parameter/light_foam_color = Color(0.060392156, 0.097254895, 0.13960783, 1)
-shader_parameter/dark_foam_color = Color(0.030196087, 0.048627462, 0.06980394, 1)
+shader_parameter/water_color = Color(0.015098044, 0.024313731, 0.03490197, 1)
+shader_parameter/light_foam_color = Color(0.02415686, 0.03890195, 0.055843126, 1)
+shader_parameter/dark_foam_color = Color(0.009058815, 0.014588221, 0.020941157, 1)
 shader_parameter/voronoi_texture = ExtResource("26_ids8r")
 shader_parameter/voronoi_size = 0.06
 
@@ -161,13 +162,13 @@ shader_parameter/displacement_size = 16.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ty1g6"]
 font = ExtResource("22_bjg73")
-font_size = 59
+font_size = 32
 font_color = Color(0.359375, 0.359375, 0.359375, 1)
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4c57u"]
 font = ExtResource("22_bjg73")
-font_size = 144
+font_size = 64
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
@@ -424,7 +425,6 @@ stream = SubResource("AudioStreamRandomizer_ty1g6")
 bus = &"SFX"
 
 [node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -449,10 +449,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -249.0
-offset_top = -129.0
-offset_right = 379.0
-offset_bottom = 43.0
+offset_left = -480.0
+offset_top = -143.0
+offset_right = -193.0
+offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -461,9 +461,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -54.5
-offset_right = 110.0
-offset_bottom = 54.5
+offset_left = 12.0
+offset_top = -36.5
+offset_right = 44.29358
+offset_bottom = -4.5
 grow_vertical = 2
 
 [node name="CharacterTexture" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/CharacterControl"]
@@ -488,10 +489,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -63.0
-offset_top = -57.0
-offset_right = 63.0
-offset_bottom = 57.0
+offset_left = -42.70642
+offset_top = -39.0
+offset_right = 42.70642
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("32_5q0nq")
@@ -503,18 +504,17 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 163.0
-offset_top = -89.0
-offset_right = 525.0
-offset_bottom = 89.0
+offset_left = 80.0
+offset_top = -57.5
+offset_right = 259.0
+offset_bottom = 120.5
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/Control"]
 material = ExtResource("44_vchkt")
 layout_mode = 1
-offset_top = 10.0
-offset_right = 378.0
-offset_bottom = 78.0
+offset_right = 155.0
+offset_bottom = 33.0
 text = "SCORE"
 label_settings = SubResource("LabelSettings_ty1g6")
 vertical_alignment = 1
@@ -522,44 +522,39 @@ vertical_alignment = 1
 [node name="FinalScoreLabel" type="Label" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/Control"]
 material = ExtResource("44_vchkt")
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -44.0
-offset_right = 476.0
-offset_bottom = 101.0
-grow_vertical = 2
+offset_left = -6.0
+offset_top = -19.5
+offset_right = 482.0
+offset_bottom = 125.5
 text = "222222"
 label_settings = SubResource("LabelSettings_4c57u")
 vertical_alignment = 1
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="CanvasLayer/Control/FinalScoreControl"]
+[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/FinalScoreControl"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -379.5
-offset_top = 114.0
-offset_right = 379.5
-offset_bottom = 169.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 50
+offset_left = 81.0
+offset_top = 267.0
+offset_right = 406.0
+offset_bottom = 532.0
+theme_override_constants/separation = 0
 
 [node name="RestartButton" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "RESTART"
+alignment = 0
 
 [node name="CharactersButton" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "CHARACTERS"
+alignment = 0
 
 [node name="MainMenu" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "MAIN MENU"
+alignment = 0
+
+[node name="LeaderBoardContainerControl" parent="CanvasLayer/Control/FinalScoreControl" instance=ExtResource("44_vc5cj")]
+layout_mode = 1
 
 [node name="SettingsMenu" type="Control" parent="CanvasLayer/Control"]
 visible = false

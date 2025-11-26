@@ -4,11 +4,11 @@ class_name CharacterResource extends Resource
 @export var head_sprite: CompressedTexture2D
 @export var active_effect_sprite: CompressedTexture2D
 @export_multiline var description: String
+@export var max_moves_left := 6
 
 
 @export_category("Passive Effect")
 @export var max_combo := 0.0
-@export var max_moves_left := 0
 @export var max_move_distance := 0.0
 @export var max_combo_move_distance := 0.0
 @export var move_per_combo := 1.0

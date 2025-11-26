@@ -18,6 +18,7 @@ class_name Main extends Node3D
 
 const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
+const HEART = preload("res://scenes/heart.tscn")
 
 @export var levels: Array[LevelResource]
 var score := 0
@@ -57,7 +58,7 @@ var current_level: LevelResource
 @onready var active_control: ActiveControl = $CanvasLayer/Control/ActiveControl
 var is_free_move := false
 
-
+var start_time := 0.0
 
 func _ready() -> void:
 	upgrade_random = FixedRandom.new()
@@ -75,6 +76,7 @@ func _ready() -> void:
 	reset_active_charges()
 	bind_character_unlocks()
 
+	start_time = get_time()
 	
 func load_character(res: CharacterResource):
 	max_combo += res.max_combo
@@ -100,6 +102,8 @@ func _input(event: InputEvent) -> void:
 		trigger_active_effect()
 		
 func next_level():
+	print("Level ", current_level_index, " : ", get_time() - start_time)
+	start_time = get_time()
 	current_level_index += 1
 	load_level(levels[current_level_index % levels.size()])
 	reset_upgrades()
@@ -125,8 +129,8 @@ func gain_combo(value):
 		new_combo.set_combo(combo)
 		new_combo.global_position = character.global_position
 	on_combo.emit()
-	fmod_main_theme.set_parameter("ComboIntensity", min(combo, 10.0) / 10.0 * 7.0)
-	print(fmod_main_theme.get_parameter("ComboIntensity"))
+	fmod_main_theme.set_parameter("ComboIntensity", int(min(combo, 10.0) / 10.0 * 7.0))
+	#print(fmod_main_theme.get_parameter("ComboIntensity"))
 		
 func reset_combo():
 	combo = 0
@@ -219,6 +223,9 @@ func handle_loot(fish: Fish):
 			temporary_mov_distance += fish.resource.value
 		ObjectResource.ObjectEffect.UpgradeDropChance:
 			upgrade_chance += fish.resource.value
+		ObjectResource.ObjectEffect.RegainMovesLeft:
+			moves_left = min(moves_left + fish.resource.value, max_moves_left)
+			update_moves_left()
 		ObjectResource.ObjectEffect.EndLevel:
 			next_level()
 	
@@ -227,7 +234,7 @@ func handle_loot(fish: Fish):
 	if not fish: return
 	
 	if not end_portal_instance.is_active:
-		active_control.charges_control.gain_charge(1)
+		active_control.charges_control.gain_charge(fish.resource.charge_gain)
 		active_control.update()
 	
 	fish.loot()
@@ -361,6 +368,7 @@ func reset_upgrades():
 	upgrade_chance = 0.1
 
 func load_level(level: LevelResource):
+
 	
 	upgrade_random.reset()
 	upgrade_random.rate = upgrade_chance
@@ -384,12 +392,21 @@ func load_level(level: LevelResource):
 	reset_combo()
 	last_color = colors.default_color
 	
+	# Character
 	var empty_tiles = grid.get_empty_tiles().filter(func(t):
 		return grid.get_tile_neighbours(t).size() > 2
 	)
 	var tile = empty_tiles.pick_random()
 	camera_3d.global_position.x = character.global_position.x
 	character.set_tile(tile)
+	
+	if moves_left < max_moves_left:
+		var heart_tile = grid.get_empty_tiles().pick_random()
+		var heart := HEART.instantiate() as Fish
+		add_child(heart)
+		heart_tile.object = heart
+		heart.global_position = heart_tile.global_position
+		
 	update_tiles_color()
 	update_moves_left()
 	
@@ -400,6 +417,8 @@ func load_level(level: LevelResource):
 	#await spend_credits_spaced()
 	
 	on_enter_level.emit()
+	
+
 
 func restart():
 	score = 0
@@ -492,31 +511,37 @@ func bind_character_unlocks():
 			CharacterResource.UnlockType.Level: 
 				on_enter_level.connect(func():
 					if not current_level_index >= c.unlock_min_level: return;
+					if c.unlock_with_character and c.unlock_with_character != Game.selected_character: return;
 					if current_level_index >= c.unlock_value: unlock_character(c)
 				)
 			CharacterResource.UnlockType.Combo:
 				on_combo.connect(func():
 					if not current_level_index >= c.unlock_min_level: return;
+					if c.unlock_with_character and c.unlock_with_character != Game.selected_character: return;
 					if combo >= c.unlock_value: unlock_character(c)
 				)
 			CharacterResource.UnlockType.Score:
 				on_combo.connect(func():
 					if not current_level_index >= c.unlock_min_level: return;
+					if c.unlock_with_character and c.unlock_with_character != Game.selected_character: return;
 					if score >= c.unlock_value: unlock_character(c)
 				)
 			CharacterResource.UnlockType.Flawless: 
 				on_flawless.connect(func():
 					if not current_level_index >= c.unlock_min_level: return;
+					if c.unlock_with_character and c.unlock_with_character != Game.selected_character: return;
 					unlock_character(c)
 				)
 			CharacterResource.UnlockType.Perfect: 
 				on_perfect.connect(func():
 					if not current_level_index >= c.unlock_min_level: return;
+					if c.unlock_with_character and c.unlock_with_character != Game.selected_character: return;
 					unlock_character(c)
 				)
 			CharacterResource.UnlockType.Wooow: 
 				on_wooow.connect(func():
 					if not current_level_index >= c.unlock_min_level: return;
+					if c.unlock_with_character and c.unlock_with_character != Game.selected_character: return;
 					unlock_character(c)
 				)
 			#CharacterResource.UnlockType.FishCount: pass

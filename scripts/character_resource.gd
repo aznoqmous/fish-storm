@@ -27,6 +27,7 @@ class_name CharacterResource extends Resource
 @export var unlock_min_level := 0
 @export var unlock_type : UnlockType
 @export var unlock_value := 0
+@export var unlock_with_character: CharacterResource
 
 var id : String :
 	get: return get_path().split("/")[-1].replace(".tres", "")

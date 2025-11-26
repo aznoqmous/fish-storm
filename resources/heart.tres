@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bgvmi4403bmvh"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_s7c06"]
+[ext_resource type="Texture2D" uid="uid://lebkb33ejx8g" path="res://assets/sprites/upgrades/heart.png" id="2_gsdok"]
+
+[resource]
+script = ExtResource("1_s7c06")
+texture = ExtResource("2_gsdok")
+effect = 7
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

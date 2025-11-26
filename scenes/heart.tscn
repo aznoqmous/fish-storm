@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://brcjc2rtxt3ec"]
+
+[ext_resource type="PackedScene" uid="uid://bfwdsaqvhdqhg" path="res://scenes/fish.tscn" id="1_txm48"]
+[ext_resource type="Resource" uid="uid://bgvmi4403bmvh" path="res://resources/heart.tres" id="2_4mtg8"]
+[ext_resource type="Texture2D" uid="uid://lebkb33ejx8g" path="res://assets/sprites/upgrades/heart.png" id="2_8nnyc"]
+[ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="3_4mtg8"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="4_u10h0"]
+
+[sub_resource type="Shader" id="Shader_oquu7"]
+code = "shader_type spatial;
+render_mode cull_disabled;
+uniform sampler2D texture_albedo;
+uniform sampler2D texture_flow_map;
+uniform vec3 color: source_color = vec3(1.0);
+uniform float alpha = 1.0;
+const int displacement_steps = 10;
+const float displacement_power = 1.5;
+const float displacement_size = 5.0;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+	vec3 displacement = texture(texture_flow_map, UV / displacement_size + vec2(float(int(TIME * 8.0) % displacement_steps) / 10.0)).xyz;
+	vec2 pos = UV + displacement.xy * 0.02 * displacement_power;
+	vec4 tex = texture(texture_albedo, pos);
+    ALBEDO = tex.rgb * color;
+    ALPHA = pow(tex.a * alpha, 3);
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the material.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fb81"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_oquu7")
+shader_parameter/texture_albedo = ExtResource("2_8nnyc")
+shader_parameter/texture_flow_map = ExtResource("3_4mtg8")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uj202"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
+albedo_texture = ExtResource("4_u10h0")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Heart" instance=ExtResource("1_txm48")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+colors = Array[Color]([Color(0.50980395, 1, 0.7472427, 1)])
+resource = ExtResource("2_4mtg8")
+is_upgrade = true
+
+[node name="Sprite3D" parent="ShadowSpriteContainer/SpriteContainer" index="0"]
+material_override = SubResource("ShaderMaterial_0fb81")
+texture = ExtResource("2_8nnyc")
+
+[node name="LootParticles" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_uj202")

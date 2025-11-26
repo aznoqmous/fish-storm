@@ -4,6 +4,7 @@ class_name ObjectResource extends Resource
 @export var score := 1.0
 @export var combo : bool = false
 @export var walkable: bool = true
+@export var charge_gain := 0
 
 @export_category("Effect")
 @export var effect: ObjectEffect
@@ -33,6 +34,9 @@ enum ObjectEffect {
 	
 #	Meta
 	EndLevel,
+	
+	#Health
+	RegainMovesLeft
 }
 
 enum ChargeEffect {

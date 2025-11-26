@@ -168,7 +168,7 @@ direction = Vector3(0, 1, 0)
 spread = 30.0
 initial_velocity_min = 2.0
 initial_velocity_max = 6.0
-scale_min = 0.39999998
+scale_min = 0.29999998
 scale_curve = SubResource("CurveTexture_2c5cg")
 
 [node name="Fish" type="Node3D"]

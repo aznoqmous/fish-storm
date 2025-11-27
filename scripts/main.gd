@@ -170,7 +170,7 @@ func handle_movement():
 		
 	character.target_tile.bump()
 	for tile in grid.tiles.values():
-		tile.bump_strength = 1.0 - min(tile.global_position.distance_to(character.global_position) / 5.0, 1.0)
+		tile.bump_strength = (1.0 - min(tile.global_position.distance_to(character.global_position) / 5.0, 1.0)) * ((combo / 10.0) * 2.0)
 	if character.target_tile.object:
 		var fish := character.target_tile.object as Fish
 		handle_loot(fish)
@@ -270,14 +270,15 @@ func handle_loot(fish: Fish):
 			temporary_mov_distance += fish.resource.value
 		ObjectResource.ObjectEffect.AttractFishes:
 				var char_pos = grid.world_to_grid_position(character.global_position)
-				var _fishes = grid.get_fish_tiles()
-				if _fishes.size():
-					_fishes.shuffle()
-					_fishes.sort_custom(func(a,b): return a.global_position.distance_to(character.global_position) < b.global_position.distance_to(character.global_position))
-					for i in range(0, min(fish.resource.value, _fishes.size())):
-						var f := _fishes[i].object as Fish
+				var tile = grid.get_fish_tiles()
+				if tile.size():
+					tile.shuffle()
+					tile.sort_custom(func(a,b): return a.global_position.distance_to(character.global_position) < b.global_position.distance_to(character.global_position))
+					for i in range(0, min(fish.resource.value, tile.size())):
+						var f := tile[i].object as Fish
+						if not f: continue
 						f.move_toward_grid_position(char_pos)
-						await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
+						#await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 		ObjectResource.ObjectEffect.CollectFarestFishes:
 			for i in range(0, fish.resource.value):
 				var tiles = grid.get_fish_tiles()

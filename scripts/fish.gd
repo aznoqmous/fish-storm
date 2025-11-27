@@ -107,7 +107,8 @@ func move_to_grid_position(grid_position):
 	var target_tile = main.grid.get_tile(grid_position)
 	
 	if not target_tile or not target_tile.is_empty(): return;
-	global_position = main.grid.grid_to_world_position(grid_position)
+	#global_position = main.grid.grid_to_world_position(grid_position)
+	get_tree().create_tween().tween_property(self, "global_position", main.grid.grid_to_world_position(grid_position), 0.2)
 	target_tile.object = self
 	
 	var current_tile = main.grid.get_tile(current_pos)

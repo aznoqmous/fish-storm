@@ -2,7 +2,7 @@ class_name LeaderBoardContainerControl extends Control
 const LEADERBOARD_CONTROL = preload("res://scenes/uis/leaderboard_control.tscn")
 @onready var upload_results_request: HTTPRequest = $UploadResultsRequest
 @onready var update_request: HTTPRequest = $UpdateRequest
-@export var domain_url := "http://localhost:3000"
+@export var domain_url := "https://ooqo.aznoqmous.com"
 @onready var v_box_container: VBoxContainer = $VBoxContainer
 @onready var loading_label: Label = $LoadingLabel
 

@@ -492,22 +492,22 @@ func trigger_active_effect():
 			combo_control.set_combo(combo)
 			update_tiles_color()
 		CharacterResource.ActiveEffect.LootFishesForMaxMoves:
-			for i in range(0, ch.value):
-				var tiles = grid.get_fish_tiles()
-				if not tiles.size(): break;
+			var tiles = grid.get_fish_tiles()
+			if tiles.size():
 				tiles.shuffle()
 				tiles.sort_custom(func(a,b): return a.global_position.distance_to(character.global_position) > b.global_position.distance_to(character.global_position))
-				var tile = tiles[0]
-				if tile and tile.object:
-					handle_loot(tile.object)
-					tile.object = null
-					update_tiles_color()
-					if not end_portal_instance.is_active:
-						gain_credits()
-					await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
-				else: break
-				
-			update_tiles_color()
+				for i in range(0, ch.value):
+					var tile = tiles[i]
+					if tile and tile.object:
+						handle_loot(tile.object)
+						tile.object = null
+						update_tiles_color()
+						if not end_portal_instance.is_active:
+							gain_credits()
+						await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
+					else: break
+					
+				update_tiles_color()
 			
 		CharacterResource.ActiveEffect.ReturnToLastPosition:
 			var pos = grid.world_to_grid_position(character.last_position)

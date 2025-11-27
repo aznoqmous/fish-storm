@@ -79,7 +79,7 @@ tile_scale = 0.48
 metadata/_custom_type_script = "uid://c0qmct83h2gb6"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="TileScaleContainer"]
-modulate = Color(0.21484375, 0.21484375, 0.21484375, 1)
+modulate = Color(0.078125, 0.078125, 0.078125, 1)
 material = SubResource("ShaderMaterial_nvyfr")
 layout_mode = 2
 texture = ExtResource("5_n7y8s")

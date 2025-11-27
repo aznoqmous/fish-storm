@@ -6,6 +6,8 @@ const LEADERBOARD_CONTROL = preload("res://scenes/uis/leaderboard_control.tscn")
 @onready var v_box_container: VBoxContainer = $VBoxContainer
 @onready var loading_label: Label = $LoadingLabel
 
+var scores: Array[LeaderboardControl]
+
 func _ready() -> void:
 	v_box_container.set_visible(false)
 
@@ -22,8 +24,10 @@ func send_data(character: CharacterResource, _name: String, score: int, level: i
 		HTTPClient.METHOD_POST,
 		json
 	)
-	await upload_results_request.request_completed
-
+	var res = await upload_results_request.request_completed
+	var data = JSON.parse_string(res[3].get_string_from_utf8())
+	return int(data["id"])
+	
 func update():
 	update_request.request(
 		str(domain_url, "/leaderboard"),
@@ -35,7 +39,8 @@ func update():
 	var i = 0
 	
 	for child in v_box_container.get_children(): child.queue_free()
-	
+
+	scores.clear()
 	for run_data in data["Runs"]:
 		i += 1
 		var new_score = LEADERBOARD_CONTROL.instantiate() as LeaderboardControl
@@ -45,5 +50,13 @@ func update():
 		new_score.name_label.text = str(run_data["Name"])
 		new_score.rank_label.text = str("#", i)
 		new_score.background.set_visible(i % 2)
+		new_score.run_id = int(run_data["id"])
+		
+		
+		scores.append(new_score)
 	v_box_container.set_visible(true)
 	loading_label.set_visible(false)
+
+func set_current(id):
+	for new_score in scores:
+		new_score.is_current = new_score.run_id == id

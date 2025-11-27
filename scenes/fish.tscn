@@ -160,7 +160,7 @@ _data = {
 &"looted": SubResource("Animation_wpvan")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ex20v"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yixxi"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
@@ -248,7 +248,7 @@ autoplay = "idle"
 lifetime = 0.5
 
 [node name="LootParticles" parent="." instance=ExtResource("4_pgks6")]
-material_override = SubResource("StandardMaterial3D_ex20v")
+material_override = SubResource("StandardMaterial3D_yixxi")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_wpvan")
 

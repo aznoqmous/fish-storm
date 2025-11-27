@@ -114,6 +114,12 @@ func next_level():
 	print("Level ", current_level_index, " : ", get_time() - start_time)
 	start_time = get_time()
 	current_level_index += 1
+	if current_level_index >= levels.size():
+		end_game()
+		combo = 100
+		for tile in grid.tiles.values():
+			tile.bump_strength = 10.0
+		return
 	load_level(levels[current_level_index % levels.size()])
 	reset_upgrades()
 	load_character(Game.selected_character)
@@ -183,17 +189,7 @@ func handle_movement():
 		character_moves_left_label.scale = Vector3.ONE * 2.0
 		character.damage_particles_3d.emitting = true
 		if moves_left <= 0:
-			final_score_control.set_visible(true)
-			final_score_control.animate()
-			
-			if Game.username.length():
-				await leader_board_container_control.send_data(
-					Game.selected_character,
-					Game.username,
-					score,
-					current_level_index
-				)
-			leader_board_container_control.update()
+			end_game()
 			
 	update_moves_left()
 	update_tiles_color()
@@ -578,3 +574,20 @@ func unlock_character(cr: CharacterResource):
 	if Game.unlocked_characters.has(cr): return;
 	unlock_control_container.display_unlock(cr)
 	Game.unlock_character(cr)
+
+func end_game():
+	moves_left = 0
+	
+	final_score_control.set_visible(true)
+	final_score_control.animate()
+	
+	var id := 0
+	if Game.username.length():
+		id = await leader_board_container_control.send_data(
+			Game.selected_character,
+			Game.username,
+			score,
+			current_level_index
+		)
+	await leader_board_container_control.update()
+	if id: leader_board_container_control.set_current(id)

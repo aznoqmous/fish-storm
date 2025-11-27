@@ -566,7 +566,7 @@ alignment = 0
 [node name="LeaderBoardContainerControl" parent="CanvasLayer/Control/FinalScoreControl" instance=ExtResource("44_vc5cj")]
 layout_mode = 1
 
-[node name="SettingsMenu" type="Control" parent="CanvasLayer/Control"]
+[node name="Menu" type="Control" parent="CanvasLayer/Control"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -576,7 +576,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("44_txyw0")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/Control/SettingsMenu"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/Menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -585,7 +585,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_txyw0")
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/SettingsMenu"]
+[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -600,15 +600,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
 
-[node name="RestartButton" parent="CanvasLayer/Control/SettingsMenu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+[node name="ResumeGameButton" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "RESUME"
+
+[node name="RestartButton" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "RESTART"
 
-[node name="CharactersButton" parent="CanvasLayer/Control/SettingsMenu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+[node name="CharactersButton" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "CHARACTERS"
 
-[node name="MainMenu" parent="CanvasLayer/Control/SettingsMenu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+[node name="MainMenu" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "MAIN MENU"
 

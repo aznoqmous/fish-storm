@@ -1,10 +1,15 @@
 class_name SettingsMenu extends Control
+@onready var resume_game_button: Button = $ButtonsContainer/ResumeGameButton
 @onready var restart_button: Button = $ButtonsContainer/RestartButton
 @onready var characters_button: Button = $ButtonsContainer/CharactersButton
 @onready var main_menu: Button = $ButtonsContainer/MainMenu
 @onready var main : Main = $/root/Main
 
 func _ready():
+	
+	resume_game_button.pressed.connect(func():
+		set_visible(false)
+	)
 	restart_button.pressed.connect(func():
 		main.restart()
 		set_visible(false)

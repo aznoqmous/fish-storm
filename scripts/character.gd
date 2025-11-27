@@ -60,16 +60,17 @@ func set_tile(tile: Tile):
 	target_position = tile.global_position
 	global_position = target_tile.global_position
 	jump_life = 1.0
-	
+
 func _process(delta: float) -> void:
-	if target_tile and is_jumping and (main.get_time() - last_jump) / jump_duration > 1.0:
+	var jlife = (main.get_time() - last_jump) / jump_duration
+	if target_tile and is_jumping and jlife >= 1.0:
 		global_position = target_tile.global_position
 		moved.emit()
 		jump_land_audio.play()
 		
 	head_sprite.rotation.y = lerp(head_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
 	body_sprite.rotation.y = lerp(body_sprite.rotation.y, PI if flip_sprites else 0.0, delta * 10.0)
-	jump_life = (main.get_time() - last_jump) / jump_duration
+	jump_life = jlife
 
 	
 	if is_jumping:

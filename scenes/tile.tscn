@@ -51,6 +51,7 @@ texture = ExtResource("1_n3f48")
 
 [node name="LastPositionSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_j8k5k")
 shaded = true
 texture = ExtResource("5_284l3")

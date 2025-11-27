@@ -13,6 +13,7 @@ class_name TitleControl extends Control
 @onready var leader_board_container_control_container: Control = $CanvasLayer/TitleControl/LeaderBoardContainerControlContainer
 @onready var leader_board_container_control: LeaderBoardContainerControl = $CanvasLayer/TitleControl/LeaderBoardContainerControlContainer/LeaderBoardContainerControl
 @onready var leader_board_return_button: Button = $CanvasLayer/TitleControl/LeaderBoardContainerControlContainer/LeaderBoardReturnButton
+@onready var title: Control = $CanvasLayer/TitleControl/Panel/Title
 
 @export var character_resources: Array[CharacterResource]
 const CHARACTER_SELECT_CONTROL = preload("res://scenes/uis/character_select_control.tscn")
@@ -53,14 +54,17 @@ func update_characters():
 func select_character():
 	character_select.set_visible(true)
 	buttons_container.set_visible(false)
+	title.set_visible(true)
 	
 func return_to_title():
 	character_select.set_visible(false)
 	buttons_container.set_visible(true)
 	leader_board_container_control_container.set_visible(false)
-
+	title.set_visible(true)
 
 func show_leaderboard():
 	leader_board_container_control_container.set_visible(true)
 	leader_board_container_control.update()
 	buttons_container.set_visible(false)
+	title.set_visible(false)
+	

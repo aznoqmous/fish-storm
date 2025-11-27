@@ -68,7 +68,8 @@ func load_level(scene:PackedScene):
 	for tile in level.tiles_container.get_children():
 		#tile.reparent(self)
 		var pos = Vector2(tile.position.x, tile.position.z) - Vector2(width, height) / 2.0
-		tile.global_position = Vector3(pos.x * tile_size.x, randf_range(0, tile_height_variation), pos.y * tile_size.y)
+		tile.pos_y = randf_range(0, tile_height_variation)
+		tile.global_position = Vector3(pos.x * tile_size.x, tile.pos_y, pos.y * tile_size.y)
 		tiles[pos] = tile
 	
 	var portal_pos = Vector2(level.end_portal.position.x, level.end_portal.position.z) - Vector2(width, height) / 2.0
@@ -120,5 +121,5 @@ func get_fish_tiles():
 	return tiles.values().filter(func(a: Tile): return a.object and not a.object.is_upgrade and not a.object.is_portal)
 
 func get_empty_tiles():
-	return tiles.values().filter(func(a: Tile): return not a.object and a != main.character.target_tile)
+	return tiles.values().filter(func(a: Tile): return a.is_empty())
 	

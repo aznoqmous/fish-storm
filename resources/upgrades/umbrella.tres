@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://kxqpuauin4u4"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_3inxq"]
+[ext_resource type="Texture2D" uid="uid://bota7cs50yi7y" path="res://assets/sprites/upgrades/upgrade-umbrella.png" id="2_ueujb"]
+
+[resource]
+script = ExtResource("1_3inxq")
+texture = ExtResource("2_ueujb")
+score = 0.0
+effect = 1
+value = 3.0
+description = "spawn fishes !"
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

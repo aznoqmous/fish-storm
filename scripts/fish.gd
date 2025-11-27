@@ -9,11 +9,11 @@ class_name Fish extends Node3D
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var loot_particles: GPUParticles3D = $LootParticles
 
-@onready var spawn_audio: FmodEventEmitter2D = $SpawnAudio
-@onready var loot_audio: FmodEventEmitter2D = $LootAudio
-@onready var land_audio: FmodEventEmitter2D = $LandAudio
-@onready var portal_loot_audio: FmodEventEmitter2D = $PortalLootAudio
-@onready var upgrade_loot_audio: FmodEventEmitter2D = $UpgradeLootAudio
+@onready var spawn_audio: AudioStreamPlayer3D = $SpawnAudio
+@onready var loot_audio: AudioStreamPlayer3D = $LootAudio
+@onready var land_audio: AudioStreamPlayer3D = $LandAudio
+@onready var portal_loot_audio: AudioStreamPlayer = $PortalLootAudio
+@onready var upgrade_loot_audio: AudioStreamPlayer = $UpgradeLootAudio
 
 @export var colors: Array[Color]
 @export var upgrade_color: Color
@@ -94,31 +94,36 @@ func load_resource(res: ObjectResource):
 		set_color(end_portal_color)
 	elif res.effect != ObjectResource.ObjectEffect.None:
 		set_color(upgrade_color)
-		
-	if res.charge_effect:
-		max_charges = resource.max_charges
-		main.character.moved.connect(charge)
 
-func charge():
-	charges += 1
-	match resource.charge_trigger:
-			ObjectResource.ChargeTrigger.OnMaxCharge:
-				if charges >= max_charges: charge_effect()
-				pass
-
-func charge_effect():
-	print("Charge Effect")
-	match resource.charge_effect:
-		ObjectResource.ChargeEffect.Spawn:
-			for i in resource.spawned_objects_count:
-				match resource.charge_spawn_position:
-					ObjectResource.SpawnPosition.Self:
-						main.spawn_object_at_position(resource.spawned_objects.pick_random(), global_position)
-	if resource.destroy_on_spawn:
-		queue_free()
 
 func is_available():
 	#not (tile.object and tile.object is Fish and not tile.object.resource.walkable) 
 	if is_portal and not main.current_fish_count >= main.fish_before_end_portal: return false
 	if resource and not resource.walkable: return false
 	return true
+
+func move_to_grid_position(grid_position):
+	var current_pos = main.grid.world_to_grid_position(global_position)
+	var target_tile = main.grid.get_tile(grid_position)
+	
+	if not target_tile or not target_tile.is_empty(): return;
+	global_position = main.grid.grid_to_world_position(grid_position)
+	target_tile.object = self
+	
+	var current_tile = main.grid.get_tile(current_pos)
+	if current_tile: current_tile.object = null
+	
+func move_toward_grid_position(grid_position):
+	var current_pos = main.grid.world_to_grid_position(global_position)
+	var distance = current_pos - grid_position
+	var direction = Vector2(sign(distance.x), sign(distance.y))
+	var directions = []
+	directions = [Vector2(direction.x, 0), Vector2(0, direction.y)]
+	if abs(distance.x) < abs(distance.y): directions = [Vector2(0, direction.y), Vector2(direction.x, 0)]
+	
+	for dir in directions:
+		if not dir.length(): continue
+		var target_tile = main.grid.get_tile(current_pos - dir)
+		if not target_tile or not target_tile.is_empty(): continue
+		move_to_grid_position(current_pos - dir)
+		

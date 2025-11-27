@@ -3,10 +3,10 @@ class_name FinalScoreControl extends Control
 @onready var main:Main = $/root/Main
 @onready var character_texture: TextureRect = $ScoreContainer/CharacterControl/CharacterTexture
 @onready var final_score_label: Label = $ScoreContainer/Control/FinalScoreLabel
-@onready var buttons_container: VBoxContainer = $ButtonsContainer
-@onready var restart_button: Button = $ButtonsContainer/RestartButton
-@onready var characters_button: Button = $ButtonsContainer/CharactersButton
-@onready var main_menu: Button = $ButtonsContainer/MainMenu
+@onready var buttons_container: VBoxContainer = $ScoreContainer/ButtonsContainer
+@onready var restart_button: Button = $ScoreContainer/ButtonsContainer/RestartButton
+@onready var characters_button: Button = $ScoreContainer/ButtonsContainer/CharactersButton
+@onready var main_menu: Button = $ScoreContainer/ButtonsContainer/MainMenu
 
 
 func _ready():

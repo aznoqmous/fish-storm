@@ -4,10 +4,15 @@ var selected_character: CharacterResource
 var characters: Array[CharacterResource]
 var unlocked_characters: Array[CharacterResource]
 var save_path := "user://savegame.save"
+var username := "" :
+	set(value):
+		username = value
+		username_changed.emit()
 
 func save():
 	var data = {
-		"characters": unlocked_characters.map(func(a: CharacterResource): return a.id)
+		"characters": unlocked_characters.map(func(a: CharacterResource): return a.id),
+		"username": username
 	}
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(data))
@@ -19,7 +24,10 @@ func load():
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	var data = JSON.parse_string(save_file.get_as_text())
 	unlocked_characters = characters.filter(func(a: CharacterResource): return not a.locked or data.characters.has(a.id)) 
-
+	if data.has("username"): username = data.username
+	
+	loaded.emit()
+	
 func unlock_character(character: CharacterResource):
 	if not unlocked_characters.has(character): unlocked_characters.append(character)
 	save()
@@ -40,3 +48,6 @@ func clear():
 
 func get_locked_characters() -> Array[CharacterResource]:
 	return characters.filter(func(c): return not unlocked_characters.has(c))
+
+signal loaded
+signal username_changed

@@ -48,19 +48,19 @@ shader_parameter/displacement_size = 600.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_bu4jf"]
 font = ExtResource("9_oimgt")
-font_size = 22
+font_size = 20
 font_color = Color(0.671875, 0.671875, 0.671875, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_o7ddy"]
 font = ExtResource("9_oimgt")
-font_size = 84
+font_size = 54
 
 [node name="UnlockControl" type="Control"]
-custom_minimum_size = Vector2(300, 120)
+custom_minimum_size = Vector2(230, 100)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 300.0
-offset_bottom = 120.0
+offset_right = 230.0
+offset_bottom = 80.0
 script = ExtResource("1_iwyur")
 
 [node name="TileScaleContainer" type="Container" parent="."]
@@ -70,8 +70,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -17.0
 offset_top = -19.0
-offset_right = 17.0
-offset_bottom = 19.0
+offset_right = 19.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_dge0j")
@@ -92,7 +92,9 @@ patch_margin_bottom = 96
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 121.0
+offset_left = 3.0
+offset_right = 80.0
+offset_bottom = -9.0
 grow_vertical = 2
 
 [node name="CharacterTexture" type="TextureRect" parent="CharacterSpriteContainer"]
@@ -122,10 +124,10 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="."]
 material = SubResource("ShaderMaterial_bjg73")
 layout_mode = 0
-offset_left = 112.0
-offset_top = 21.0
-offset_right = 332.0
-offset_bottom = 73.0
+offset_left = 77.0
+offset_top = 11.0
+offset_right = 297.0
+offset_bottom = 63.0
 text = "New character !"
 label_settings = SubResource("LabelSettings_bu4jf")
 
@@ -135,10 +137,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 106.0
-offset_top = -89.0
-offset_right = 298.0
-offset_bottom = -4.0
+offset_left = 75.0
+offset_top = -76.0
+offset_right = 267.0
+offset_bottom = 9.0
 grow_vertical = 0
 text = "Ikk"
 label_settings = SubResource("LabelSettings_o7ddy")

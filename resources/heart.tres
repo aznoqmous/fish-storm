@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("1_s7c06")
 texture = ExtResource("2_gsdok")
-effect = 7
+effect = 6
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

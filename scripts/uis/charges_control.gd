@@ -39,10 +39,15 @@ func update():
 		child.size.x = _size
 		child.size.y = charges_container.size.y
 		child.position.x = (_size + gap) * i
+		
+		var charge_control := child as ChargeControl
+		charge_control.set_color(color)
+		charge_control.set_enabled(i < charges)
 
 func gain_charge(value:=1):
 	if charges >= max_charges: return;
-	var current = charges_container.get_child(charges)
-	current.scale = Vector2.ONE * (1.0 + value / 10.0)
-	current.set_enabled(true)
+	#var current = charges_container.get_child(charges)
+	#current.scale = Vector2.ONE * (1.0 + value / 10.0)
+	#current.set_enabled(true)
 	charges += value
+	update()

@@ -9,7 +9,7 @@ var is_active: bool:
 func _process(delta: float) -> void:
 	super(delta)
 	color = lerp(color, disabled_color if not is_active else end_portal_color, delta * 5.0)
-	sprite_3d.material_override.set("shader_parameter/alpha", color.a)
+	sprite_3d.material_override.set("shader_parameter/color", color)
 	count_label.text = str(main.fish_before_end_portal - main.current_fish_count)
 	count_label.set_visible(not is_active)
 	sprite_3d.rotate_z(delta * TAU * (0.5 if is_active else 0.1))

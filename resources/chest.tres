@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=8 format=3 uid="uid://duhkw1hqan1h7"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=8 format=3 uid="uid://db0xl0y0kcv65"]
 
 [ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_dqesb"]
 [ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="2_7roof"]

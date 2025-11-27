@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=31 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/uis/title_control.gd" id="1_p6dhs"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://kk5eotwckwoj" path="res://shaders/scene_transition.gdshader" id="4_kcc3o"]
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="5_w65of"]
 [ext_resource type="Texture2D" uid="uid://ptwnvkclhydm" path="res://assets/sprites/upgrades/fish.png" id="7_hiwto"]
+[ext_resource type="AudioStream" uid="uid://dlbr15o2xmvfg" path="res://assets/audio/GameOff_Mus_02 MainTitle 143bpm Loop.wav" id="9_pmcd8"]
 [ext_resource type="Resource" uid="uid://dtswsmddjfa73" path="res://resources/characters/nohz.tres" id="11_8magm"]
 [ext_resource type="Texture2D" uid="uid://dep7pgsiwc7x3" path="res://assets/sprites/rect.png" id="11_fgbvm"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="13_blk4q"]
@@ -20,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://fgs77dbhgmfo" path="res://scenes/uis/character_select_control.tscn" id="19_vjr5h"]
 [ext_resource type="Texture2D" uid="uid://dt3i0nx6owjfj" path="res://assets/sprites/ui/actions/back.png" id="20_fgbvm"]
 [ext_resource type="PackedScene" uid="uid://blwxqm5ndheeg" path="res://scenes/uis/leader_board_container_control.tscn" id="20_vjr5h"]
+[ext_resource type="PackedScene" uid="uid://cl71cmsp4v0d4" path="res://scenes/uis/username_container.tscn" id="21_vjr5h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vjr5h"]
 shader = ExtResource("4_kcc3o")
@@ -110,10 +112,10 @@ grow_vertical = 2
 script = ExtResource("1_p6dhs")
 character_resources = Array[ExtResource("13_blk4q")]([ExtResource("14_8magm"), ExtResource("18_t8o15"), ExtResource("17_wtvjo"), ExtResource("11_8magm"), ExtResource("16_e75f2"), ExtResource("15_pmcd8")])
 
-[node name="MainTitle2" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/Music/Mus_MainTitle"
-event_guid = "{0ed5c7b5-d166-4ab2-b735-f0dfd12bef3c}"
+[node name="MainTitle2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_pmcd8")
 autoplay = true
+bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -143,7 +145,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hiwto")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TitleControl/Panel"]
+[node name="Title" type="Control" parent="CanvasLayer/TitleControl/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.5
+offset_top = -267.0
+offset_right = 273.5
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TitleControl/Panel/Title"]
 material = SubResource("ShaderMaterial_fgbvm")
 layout_mode = 1
 anchors_preset = 8
@@ -151,17 +167,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -232.62677
-offset_top = -259.0
-offset_right = 232.62677
-offset_bottom = -77.0
+offset_left = -232.62674
+offset_top = -91.0
+offset_right = 232.62674
+offset_bottom = 91.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_4rr2b")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Fish" type="TextureRect" parent="CanvasLayer/TitleControl/Panel"]
+[node name="Fish" type="TextureRect" parent="CanvasLayer/TitleControl/Panel/Title"]
 material = SubResource("ShaderMaterial_ygloa")
 layout_mode = 1
 anchors_preset = 8
@@ -169,10 +185,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -132.0
-offset_top = -224.0
-offset_right = -79.17392
-offset_bottom = -179.0
+offset_left = -130.5
+offset_top = -51.0
+offset_right = -77.67395
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_hiwto")
@@ -185,9 +201,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 491.0
-offset_right = -491.0
-offset_bottom = 319.0
+offset_left = 419.0
+offset_top = -42.0
+offset_right = -419.0
+offset_bottom = 277.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
@@ -220,9 +237,9 @@ grow_vertical = 2
 [node name="LeaderBoardContainerControl" parent="CanvasLayer/TitleControl/LeaderBoardContainerControlContainer" instance=ExtResource("20_vjr5h")]
 layout_mode = 1
 offset_left = -234.0
-offset_top = -147.0
+offset_top = -204.0
 offset_right = 234.0
-offset_bottom = 261.0
+offset_bottom = 204.0
 
 [node name="LeaderBoardReturnButton" parent="CanvasLayer/TitleControl/LeaderBoardContainerControlContainer" instance=ExtResource("16_fgbvm")]
 layout_mode = 1
@@ -325,3 +342,10 @@ offset_right = 246.0
 grow_vertical = 0
 text = "RETURN"
 icon = ExtResource("20_fgbvm")
+
+[node name="UsernameContainer" parent="CanvasLayer/TitleControl" instance=ExtResource("21_vjr5h")]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 18.0
+offset_right = 244.0
+offset_bottom = 95.0

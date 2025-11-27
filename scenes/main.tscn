@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=66 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -10,11 +10,12 @@
 [ext_resource type="Resource" uid="uid://cjsg205e7njim" path="res://resources/levels/level_4.tres" id="7_vc5cj"]
 [ext_resource type="Resource" uid="uid://bsj34scaej83e" path="res://resources/fishes/fish.tres" id="8_fuf3a"]
 [ext_resource type="Resource" uid="uid://do44ensh4t8uk" path="res://resources/fishes/big_fish.tres" id="9_pibwh"]
-[ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/cane.tres" id="10_c6pm6"]
-[ext_resource type="Resource" uid="uid://sy0tuxwk5ayk" path="res://resources/shoe.tres" id="11_5he1u"]
-[ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/magnet.tres" id="12_5poiv"]
-[ext_resource type="Resource" uid="uid://d2acphkags8fd" path="res://resources/clover.tres" id="14_chjal"]
+[ext_resource type="Resource" uid="uid://5q5awopw727u" path="res://resources/upgrades/cane.tres" id="10_c6pm6"]
+[ext_resource type="Resource" uid="uid://sy0tuxwk5ayk" path="res://resources/upgrades/shoe.tres" id="11_5he1u"]
+[ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/upgrades/magnet.tres" id="12_5poiv"]
+[ext_resource type="Resource" uid="uid://kxqpuauin4u4" path="res://resources/upgrades/umbrella.tres" id="14_nvyfr"]
 [ext_resource type="Resource" uid="uid://cuerunb6u1f1g" path="res://resources/end_portal.tres" id="15_cjqg0"]
+[ext_resource type="AudioStream" uid="uid://bu5q0prpba67d" path="res://assets/audio/GameOff_Mus_01 Loop.wav" id="16_ty1g6"]
 [ext_resource type="Script" uid="uid://b87jek5xw2ya2" path="res://scripts/colors.gd" id="16_vchkt"]
 [ext_resource type="Script" uid="uid://bqr50b8a5prtd" path="res://scripts/grid.gd" id="17_txyw0"]
 [ext_resource type="PackedScene" uid="uid://ckp64p0ofal5m" path="res://scenes/character.tscn" id="18_2f3dj"]
@@ -47,13 +48,14 @@
 [ext_resource type="Script" uid="uid://cup54nyno2wss" path="res://scripts/uis/settings_menu.gd" id="44_txyw0"]
 [ext_resource type="PackedScene" uid="uid://blwxqm5ndheeg" path="res://scenes/uis/leader_board_container_control.tscn" id="44_vc5cj"]
 [ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="44_vchkt"]
+[ext_resource type="PackedScene" uid="uid://cl71cmsp4v0d4" path="res://scenes/uis/username_container.tscn" id="45_nvyfr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
 shader = ExtResource("25_0loja")
-shader_parameter/water_color = Color(0.015098044, 0.024313731, 0.03490197, 1)
-shader_parameter/light_foam_color = Color(0.02415686, 0.03890195, 0.055843126, 1)
-shader_parameter/dark_foam_color = Color(0.009058815, 0.014588221, 0.020941157, 1)
+shader_parameter/water_color = Color(0.030196087, 0.048627462, 0.06980394, 1)
+shader_parameter/light_foam_color = Color(0.045294113, 0.07294116, 0.10470587, 1)
+shader_parameter/dark_foam_color = Color(0.015098044, 0.024313731, 0.03490197, 1)
 shader_parameter/voronoi_texture = ExtResource("26_ids8r")
 shader_parameter/voronoi_size = 0.06
 
@@ -175,13 +177,13 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_fv21b")
 levels = Array[ExtResource("2_tel4y")]([ExtResource("3_qkpxi"), ExtResource("4_5q0nq"), ExtResource("5_dgi5k"), ExtResource("6_j8jky"), ExtResource("7_vc5cj")])
 fishes = Array[ExtResource("7_kmb1v")]([ExtResource("8_fuf3a"), ExtResource("9_pibwh")])
-upgrades = Array[ExtResource("7_kmb1v")]([ExtResource("14_chjal"), ExtResource("10_c6pm6"), ExtResource("11_5he1u"), ExtResource("12_5poiv")])
+upgrades = Array[ExtResource("7_kmb1v")]([ExtResource("10_c6pm6"), ExtResource("11_5he1u"), ExtResource("12_5poiv"), ExtResource("14_nvyfr")])
 end_portal = ExtResource("15_cjqg0")
 
-[node name="FmodMainTheme" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/Music/Mus_InGame"
-event_guid = "{8c5581d8-6e5c-4b3a-831b-98ac3a1399c2}"
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_ty1g6")
 autoplay = true
+bus = &"Music"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.65307707, 0.75729156, 0, -0.75729156, 0.65307707, 1.3848572, 7.136898, 6.4730587)
@@ -249,6 +251,7 @@ grow_horizontal = 0
 mouse_filter = 2
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/Control/Control"]
+material = ExtResource("44_vchkt")
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -530,25 +533,32 @@ text = "222222"
 label_settings = SubResource("LabelSettings_4c57u")
 vertical_alignment = 1
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/FinalScoreControl"]
+[node name="UsernameContainer" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer" instance=ExtResource("45_nvyfr")]
 layout_mode = 1
-offset_left = 81.0
-offset_top = 267.0
-offset_right = 406.0
-offset_bottom = 532.0
+offset_left = -11.0
+offset_top = 58.0
+offset_right = 274.0
+offset_bottom = 135.0
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer"]
+layout_mode = 1
+offset_left = -11.0
+offset_top = 135.0
+offset_right = 314.0
+offset_bottom = 400.0
 theme_override_constants/separation = 0
 
-[node name="RestartButton" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+[node name="RestartButton" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "RESTART"
 alignment = 0
 
-[node name="CharactersButton" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+[node name="CharactersButton" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "CHARACTERS"
 alignment = 0
 
-[node name="MainMenu" parent="CanvasLayer/Control/FinalScoreControl/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+[node name="MainMenu" parent="CanvasLayer/Control/FinalScoreControl/ScoreContainer/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "MAIN MENU"
 alignment = 0
@@ -622,21 +632,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 79.0
+offset_left = 149.0
 offset_top = 146.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 0
 
 [node name="UnlockControl" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
-visible = false
 layout_mode = 2
 
 [node name="UnlockControl2" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
-visible = false
 layout_mode = 2
 
 [node name="UnlockControl3" parent="CanvasLayer/Control/UnlockControlContainer/VBoxContainer" instance=ExtResource("42_chjal")]
-visible = false
 layout_mode = 2

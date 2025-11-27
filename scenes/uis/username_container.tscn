@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl71cmsp4v0d4"]
+
+[ext_resource type="Script" uid="uid://b7v3bsjc3baxq" path="res://scripts/username_container.gd" id="1_5itix"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="2_lwhh5"]
+[ext_resource type="Texture2D" uid="uid://c572oq1hp3qss" path="res://assets/sprites/pen.png" id="3_cluid"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5itix"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_j2jfr"]
+font = ExtResource("2_lwhh5")
+font_size = 18
+font_color = Color(1, 0.4262085, 0.3828125, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5itix"]
+line_spacing = -8.18
+font = ExtResource("2_lwhh5")
+font_size = 18
+font_color = Color(0.4296875, 0.4296875, 0.4296875, 1)
+
+[node name="UsernameContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 81.0
+offset_top = 247.0
+offset_right = 307.0
+offset_bottom = 324.0
+script = ExtResource("1_5itix")
+
+[node name="UsernameEdit" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_right = -16.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("2_lwhh5")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_5itix")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5itix")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_5itix")
+text = "azertyuiopml"
+placeholder_text = "username"
+
+[node name="Pen" type="TextureRect" parent="."]
+modulate = Color(0.5647059, 0.5647059, 0.5647059, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.24000001
+anchor_bottom = 0.76000005
+offset_top = -7.4800014
+offset_right = 27.0
+offset_bottom = -20.520004
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("3_cluid")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = 36.0
+offset_right = 38.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MinLengthAlert" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+offset_right = 311.0
+offset_bottom = 33.0
+text = "At least x characters !"
+label_settings = SubResource("LabelSettings_j2jfr")
+
+[node name="UsernameExplanation" type="Label" parent="Control"]
+layout_mode = 1
+offset_right = 164.0
+offset_bottom = 183.0
+text = "provide a username to send your score to the leaderboard"
+label_settings = SubResource("LabelSettings_5itix")
+autowrap_mode = 3

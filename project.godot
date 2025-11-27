@@ -19,12 +19,10 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://scripts/managers/scene_manager.gd"
 Game="*res://scripts/managers/game.gd"
-FmodManager="*res://addons/fmod/FmodManager.gd"
-GlobalFmodBankLoader="*res://scenes/fmod_bank_loader.tscn"
 
-[editor_plugins]
+[display]
 
-enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
+window/stretch/mode="canvas_items"
 
 [input]
 

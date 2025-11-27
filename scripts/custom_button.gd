@@ -1,7 +1,7 @@
 extends Button
 
-@onready var button_click: FmodEventEmitter2D = $ButtonClick
-@onready var button_hover: FmodEventEmitter2D = $ButtonHover
+@onready var button_click: AudioStreamPlayer = $ButtonClick
+@onready var button_hover: AudioStreamPlayer = $ButtonHover
 
 
 func _on_pressed() -> void:

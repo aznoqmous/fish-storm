@@ -6,6 +6,9 @@ const LEADERBOARD_CONTROL = preload("res://scenes/uis/leaderboard_control.tscn")
 @onready var v_box_container: VBoxContainer = $VBoxContainer
 @onready var loading_label: Label = $LoadingLabel
 
+func _ready() -> void:
+	v_box_container.set_visible(false)
+
 func send_data(character: CharacterResource, _name: String, score: int, level: int):
 	var json = JSON.stringify({
 		"Character": character.id,
@@ -42,4 +45,5 @@ func update():
 		new_score.name_label.text = str(run_data["Name"])
 		new_score.rank_label.text = str("#", i)
 		new_score.background.set_visible(i % 2)
+	v_box_container.set_visible(true)
 	loading_label.set_visible(false)

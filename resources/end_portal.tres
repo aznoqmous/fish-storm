@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_mrywp")
 texture = ExtResource("2_2gcdi")
-effect = 6
+effect = 5
 description = "well played !"
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

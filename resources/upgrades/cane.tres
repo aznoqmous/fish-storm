@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://bc2afxq7ejch4"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://5q5awopw727u"]
 
 [ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_hshjn"]
 [ext_resource type="Texture2D" uid="uid://5iqctfc5awl6" path="res://assets/sprites/upgrades/upgrade-cane.png" id="2_hshjn"]
@@ -6,6 +6,8 @@
 [resource]
 script = ExtResource("1_hshjn")
 texture = ExtResource("2_hshjn")
-effect = 2
-description = "+1 combo move"
+score = 0.0
+effect = 4
+value = 2.0
+description = "collect fishes !"
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

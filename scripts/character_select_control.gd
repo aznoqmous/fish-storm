@@ -7,8 +7,8 @@ class_name CharacterSelectControl extends Control
 @export var disabled_color: Color
 @export var lock_texture: CompressedTexture2D
 
-@onready var button_click: FmodEventEmitter2D = $ButtonClick
-@onready var button_hover: FmodEventEmitter2D = $ButtonHover
+@onready var button_click: AudioStreamPlayer = $ButtonClick
+@onready var button_hover: AudioStreamPlayer = $ButtonHover
 
 var resource : CharacterResource
 var hovered := false

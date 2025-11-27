@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://cdo12eriwyy3k"]
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=3 format=3 uid="uid://b14uynij41wa7"]
 
 [ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_rguya"]
 [ext_resource type="Texture2D" uid="uid://mle8rjelmqhx" path="res://assets/sprites/upgrades/portal.png" id="2_rguya"]

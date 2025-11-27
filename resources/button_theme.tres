@@ -1,0 +1,29 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cg2ej3e6audh"]
+
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="1_54e5j"]
+[ext_resource type="Texture2D" uid="uid://uj63baf28585" path="res://assets/sprites/particle-small.png" id="2_8nq33"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hiwto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w65of"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ygloa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6civk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7af2g"]
+
+[resource]
+Button/colors/font_color = Color(0.40234375, 0.40234375, 0.40234375, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+Button/constants/icon_max_width = 70
+Button/font_sizes/font_size = 54
+Button/fonts/font = ExtResource("1_54e5j")
+Button/styles/disabled = SubResource("StyleBoxEmpty_hiwto")
+Button/styles/focus = SubResource("StyleBoxEmpty_w65of")
+Button/styles/hover = SubResource("StyleBoxEmpty_ygloa")
+Button/styles/normal = SubResource("StyleBoxEmpty_6civk")
+Button/styles/pressed = SubResource("StyleBoxEmpty_7af2g")
+HSlider/icons/grabber = ExtResource("2_8nq33")
+HSlider/icons/grabber_highlight = ExtResource("2_8nq33")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=32 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/uis/title_control.gd" id="1_p6dhs"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://cljw1d0fw8t6b" path="res://resources/characters/ikk.tres" id="15_pmcd8"]
 [ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/YV.tres" id="16_e75f2"]
 [ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/uis/button.tscn" id="16_fgbvm"]
+[ext_resource type="PackedScene" uid="uid://3dkqxknb3p7p" path="res://scenes/uis/settings_control.tscn" id="17_e75f2"]
 [ext_resource type="Resource" uid="uid://dqlwd5tymo60x" path="res://resources/characters/oye.tres" id="17_wtvjo"]
 [ext_resource type="Resource" uid="uid://cgyvpdxxyqfg5" path="res://resources/characters/paha.tres" id="18_t8o15"]
 [ext_resource type="PackedScene" uid="uid://fgs77dbhgmfo" path="res://scenes/uis/character_select_control.tscn" id="19_vjr5h"]
@@ -224,6 +225,31 @@ text = "SETTINGS"
 [node name="QuitButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
 layout_mode = 2
 text = "QUIT"
+
+[node name="SettingsContainer" type="Control" parent="CanvasLayer/TitleControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsControl" parent="CanvasLayer/TitleControl/SettingsContainer" instance=ExtResource("17_e75f2")]
+layout_mode = 1
+offset_top = -8.0
+offset_bottom = 234.0
+
+[node name="SettingsReturnButton" parent="CanvasLayer/TitleControl/SettingsContainer" instance=ExtResource("16_fgbvm")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -71.1254
+offset_right = 246.0
+grow_vertical = 0
+text = "RETURN"
+icon = ExtResource("20_fgbvm")
 
 [node name="LeaderBoardContainerControlContainer" type="Control" parent="CanvasLayer/TitleControl"]
 visible = false

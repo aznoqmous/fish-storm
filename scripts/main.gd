@@ -16,6 +16,7 @@ class_name Main extends Node3D
 const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
 const HEART = preload("res://scenes/heart.tscn")
+const HEART_LOSS = preload("res://scenes/heart_loss.tscn")
 
 @export var levels: Array[LevelResource]
 var score := 0
@@ -116,7 +117,7 @@ func next_level():
 	current_level_index += 1
 	if current_level_index >= levels.size():
 		end_game()
-		combo = 100
+		combo = 10
 		for tile in grid.tiles.values():
 			tile.bump_strength = 10.0
 		return
@@ -173,10 +174,11 @@ func handle_movement():
 	
 	#for tile in grid.tiles.values():
 		#tile.label_3d.text = str(floor(character.global_position.distance_to(tile.global_position) / grid.tile_size.x * 10.0) / 10.0)
-		
 	character.target_tile.bump()
-	for tile in grid.tiles.values():
-		tile.bump_strength = (1.0 - min(tile.global_position.distance_to(character.global_position) / 5.0, 1.0)) * ((combo / 10.0) * 2.0)
+	if Game.visuals_value:
+		for tile in grid.tiles.values():
+			tile.bump_strength = (1.0 - min(tile.global_position.distance_to(character.global_position) / 5.0, 1.0)) * ((combo / 10.0) * 2.0)
+	
 	if character.target_tile.object:
 		var fish := character.target_tile.object as Fish
 		handle_loot(fish)
@@ -186,6 +188,9 @@ func handle_movement():
 		reset_combo()
 		colors.base_color = colors.default_color
 		moves_left -= 1
+		var heart_loss = HEART_LOSS.instantiate()
+		add_child(heart_loss)
+		heart_loss.global_position = character.global_position
 		character_moves_left_label.scale = Vector3.ONE * 2.0
 		character.damage_particles_3d.emitting = true
 		if moves_left <= 0:
@@ -497,6 +502,7 @@ func trigger_active_effect():
 				tiles.shuffle()
 				tiles.sort_custom(func(a,b): return a.global_position.distance_to(character.global_position) > b.global_position.distance_to(character.global_position))
 				for i in range(0, ch.value):
+					if i >= tiles.size(): break
 					var tile = tiles[i]
 					if tile and tile.object:
 						handle_loot(tile.object)

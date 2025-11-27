@@ -9,10 +9,19 @@ var username := "" :
 		username = value
 		username_changed.emit()
 
+var master_value := 1.0
+var music_value := 1.0
+var sfx_value := 1.0
+var visuals_value := true
+
 func save():
 	var data = {
 		"characters": unlocked_characters.map(func(a: CharacterResource): return a.id),
-		"username": username
+		"username": username,
+		"master_value": master_value,
+		"music_value": music_value,
+		"sfx_value": sfx_value,
+		"visuals_value": visuals_value,
 	}
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(data))
@@ -25,7 +34,10 @@ func load():
 	var data = JSON.parse_string(save_file.get_as_text())
 	unlocked_characters = characters.filter(func(a: CharacterResource): return not a.locked or data.characters.has(a.id)) 
 	if data.has("username"): username = data.username
-	
+	if data.has("master_value"): master_value = data.master_value
+	if data.has("music_value"): music_value = data.music_value
+	if data.has("sfx_value"): sfx_value = data.sfx_value
+	if data.has("visuals_value"): visuals_value = data.visuals_value
 	loaded.emit()
 	
 func unlock_character(character: CharacterResource):

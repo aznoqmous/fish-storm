@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmeamt5xggo3x"]
+
+[ext_resource type="Script" uid="uid://7kiymcloss0q" path="res://scripts/heart.gd" id="1_bifig"]
+[ext_resource type="Texture2D" uid="uid://lebkb33ejx8g" path="res://assets/sprites/upgrades/heart.png" id="2_vlfy5"]
+
+[node name="HeartLoss" type="Node3D"]
+script = ExtResource("1_bifig")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.1672854, 0)
+modulate = Color(0.5019608, 0.972549, 0.7294118, 1)
+texture = ExtResource("2_vlfy5")

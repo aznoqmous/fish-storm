@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=67 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -49,6 +49,7 @@
 [ext_resource type="PackedScene" uid="uid://blwxqm5ndheeg" path="res://scenes/uis/leader_board_container_control.tscn" id="44_vc5cj"]
 [ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="44_vchkt"]
 [ext_resource type="PackedScene" uid="uid://cl71cmsp4v0d4" path="res://scenes/uis/username_container.tscn" id="45_nvyfr"]
+[ext_resource type="PackedScene" uid="uid://3dkqxknb3p7p" path="res://scenes/uis/settings_control.tscn" id="50_j2jfr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mycd"]
 render_priority = 0
@@ -428,6 +429,7 @@ stream = SubResource("AudioStreamRandomizer_ty1g6")
 bus = &"SFX"
 
 [node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -585,6 +587,36 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_txyw0")
 
+[node name="SettingsContainer" type="Control" parent="CanvasLayer/Control/Menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Menu/SettingsContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -121.0
+offset_right = 175.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsControl" parent="CanvasLayer/Control/Menu/SettingsContainer/VBoxContainer" instance=ExtResource("50_j2jfr")]
+layout_mode = 2
+
+[node name="SettingsReturnButton" parent="CanvasLayer/Control/Menu/SettingsContainer/VBoxContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "RETURN"
+
 [node name="ButtonsContainer" type="VBoxContainer" parent="CanvasLayer/Control/Menu"]
 layout_mode = 1
 anchors_preset = 8
@@ -598,7 +630,7 @@ offset_right = 425.5
 offset_bottom = 132.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 35
 
 [node name="ResumeGameButton" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
@@ -611,6 +643,10 @@ text = "RESTART"
 [node name="CharactersButton" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2
 text = "CHARACTERS"
+
+[node name="SettingsButton" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
+layout_mode = 2
+text = "SETTINGS"
 
 [node name="MainMenu" parent="CanvasLayer/Control/Menu/ButtonsContainer" instance=ExtResource("24_2cjbq")]
 layout_mode = 2

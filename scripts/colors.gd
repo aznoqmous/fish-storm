@@ -16,7 +16,7 @@ func _ready():
 	
 func _process(delta):
 	current_color = lerp(current_color, base_color, delta)
-	if main and main.combo >= main.max_combo:
+	if main and Game.visuals_value and main.combo >= main.max_combo:
 		current_color = Color.from_hsv(main.get_time() / 2.0, 0.5, 1.0)
 	update_color()
 	

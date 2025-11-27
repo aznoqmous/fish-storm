@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=3 uid="uid://3dkqxknb3p7p"]
+
+[ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="1_00hdp"]
+[ext_resource type="Script" uid="uid://qisppwcjgdum" path="res://scripts/uis/settings_control.gd" id="1_m8f51"]
+[ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="2_m8f51"]
+[ext_resource type="Theme" uid="uid://cg2ej3e6audh" path="res://resources/button_theme.tres" id="3_xpj3o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m8f51"]
+font = ExtResource("2_m8f51")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_t8o15"]
+font = ExtResource("2_m8f51")
+font_size = 32
+
+[node name="SettingsControl" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -10.0
+offset_right = 175.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+alignment = 1
+script = ExtResource("1_m8f51")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_m8f51")
+horizontal_alignment = 1
+
+[node name="Master" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Master"]
+material = ExtResource("1_00hdp")
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Master"
+label_settings = SubResource("LabelSettings_t8o15")
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="Master"]
+material = ExtResource("1_00hdp")
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_xpj3o")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Music" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Music"]
+material = ExtResource("1_00hdp")
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "Music"
+label_settings = SubResource("LabelSettings_t8o15")
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="Music"]
+material = ExtResource("1_00hdp")
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_xpj3o")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFX" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="SFX"]
+material = ExtResource("1_00hdp")
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "SFX"
+label_settings = SubResource("LabelSettings_t8o15")
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="SFX"]
+material = ExtResource("1_00hdp")
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_xpj3o")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Visuals" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Visuals"]
+material = ExtResource("1_00hdp")
+layout_mode = 2
+text = "Combo visual effects"
+label_settings = SubResource("LabelSettings_t8o15")
+vertical_alignment = 1
+
+[node name="VisualsCheckbox" type="CheckBox" parent="Visuals"]
+material = ExtResource("1_00hdp")
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_xpj3o")
+button_pressed = true

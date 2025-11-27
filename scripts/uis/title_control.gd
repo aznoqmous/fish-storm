@@ -1,19 +1,25 @@
 class_name TitleControl extends Control
 
 @export var texture_map: Texture2DArray
+@onready var title: Control = $CanvasLayer/TitleControl/Panel/Title
 @onready var play_button: Button = $CanvasLayer/TitleControl/ButtonsContainer/PlayButton
 @onready var settings_button: Button = $CanvasLayer/TitleControl/ButtonsContainer/SettingsButton
 @onready var quit_button: Button = $CanvasLayer/TitleControl/ButtonsContainer/QuitButton
 @onready var leaderboard_button: Button = $CanvasLayer/TitleControl/ButtonsContainer/LeaderboardButton
 @onready var buttons_container: VBoxContainer = $CanvasLayer/TitleControl/ButtonsContainer
+
 @onready var character_select: Control = $CanvasLayer/TitleControl/CharacterSelect
 @onready var characters_container: GridContainer = $CanvasLayer/TitleControl/CharacterSelect/CharactersContainer
 @onready var character_description: Label = $CanvasLayer/TitleControl/CharacterSelect/CharacterDescription
 @onready var return_button: Button = $CanvasLayer/TitleControl/CharacterSelect/ReturnButton
+
 @onready var leader_board_container_control_container: Control = $CanvasLayer/TitleControl/LeaderBoardContainerControlContainer
 @onready var leader_board_container_control: LeaderBoardContainerControl = $CanvasLayer/TitleControl/LeaderBoardContainerControlContainer/LeaderBoardContainerControl
 @onready var leader_board_return_button: Button = $CanvasLayer/TitleControl/LeaderBoardContainerControlContainer/LeaderBoardReturnButton
-@onready var title: Control = $CanvasLayer/TitleControl/Panel/Title
+
+@onready var settings_container: Control = $CanvasLayer/TitleControl/SettingsContainer
+@onready var settings_return_button: Button = $CanvasLayer/TitleControl/SettingsContainer/SettingsReturnButton
+
 
 @export var character_resources: Array[CharacterResource]
 const CHARACTER_SELECT_CONTROL = preload("res://scenes/uis/character_select_control.tscn")
@@ -26,7 +32,10 @@ func _ready() -> void:
 	play_button.pressed.connect(select_character)
 	leaderboard_button.pressed.connect(show_leaderboard)
 	return_button.pressed.connect(func(): return_to_title())
+	quit_button.pressed.connect(func(): get_tree().quit())
 	leader_board_return_button.pressed.connect(func(): return_to_title())
+	settings_button.pressed.connect(func(): show_settings())
+	settings_return_button.pressed.connect(func(): return_to_title())
 	SceneManager.scene_transition_control.close()
 	update_characters()
 	character_description.text = ""
@@ -58,10 +67,15 @@ func select_character():
 	
 func return_to_title():
 	character_select.set_visible(false)
-	buttons_container.set_visible(true)
 	leader_board_container_control_container.set_visible(false)
+	settings_container.set_visible(false)
+	buttons_container.set_visible(true)
 	title.set_visible(true)
-
+	
+func show_settings():
+	buttons_container.set_visible(false)
+	settings_container.set_visible(true)
+	
 func show_leaderboard():
 	leader_board_container_control_container.set_visible(true)
 	leader_board_container_control.update()

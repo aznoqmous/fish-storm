@@ -57,6 +57,8 @@ var upgrade_random: FixedRandom
 var current_level_index = 0
 var current_level: LevelResource
 
+var available_upgrades : Array[ObjectResource]
+
 @export_category("Actions")
 @onready var active_control: ActiveControl = $CanvasLayer/Control/ActiveControl
 var is_free_move := false
@@ -98,6 +100,8 @@ func load_character(res: CharacterResource):
 	active_control.charges_control.update()
 	active_control.update()
 	active_control.active_effect_sprite.material.set("shader_parameter/texture_albedo", res.active_effect_sprite)
+	
+	available_upgrades = upgrades.filter(func(u): return not res.banned_upgrades.has(u))
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
@@ -312,7 +316,7 @@ func spawn_random_spaced_fish():
 	var fish = spawn_spaced_fish()
 	if fish:
 		if upgrade_random.pick():
-			fish.load_resource(upgrades.pick_random())
+			fish.load_resource(available_upgrades.pick_random())
 			fish.is_upgrade = true
 			upgrade_random.reset()
 		else:
@@ -389,7 +393,7 @@ func spawn_random_fish()-> Fish:
 	var fish = spawn_fish()
 	if fish:
 		if upgrade_random.pick():
-			fish.load_resource(upgrades.pick_random())
+			fish.load_resource(available_upgrades.pick_random())
 			fish.is_upgrade = true
 		else:
 			fish.load_resource(fishes[min(floor(randf() * fish_level), fishes.size()-1)])
@@ -484,7 +488,7 @@ func trigger_active_effect():
 			credits = 0
 			var fish = spawn_fish()
 			if fish: 
-				fish.load_resource(upgrades.pick_random())
+				fish.load_resource(available_upgrades.pick_random())
 				fish.is_upgrade = true
 		CharacterResource.ActiveEffect.SpawnFishes:
 			for i in range(0, ch.value):

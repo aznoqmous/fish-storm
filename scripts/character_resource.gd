@@ -29,6 +29,9 @@ class_name CharacterResource extends Resource
 @export var unlock_value := 0
 @export var unlock_with_character: CharacterResource
 
+@export_category("Upgrades")
+@export var banned_upgrades : Array[ObjectResource]
+
 var id : String :
 	get: return get_path().split("/")[-1].replace(".tres", "")
 

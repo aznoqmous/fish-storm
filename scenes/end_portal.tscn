@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://4b56lr8uoqj2"]
+[gd_scene load_steps=13 format=3 uid="uid://4b56lr8uoqj2"]
 
 [ext_resource type="PackedScene" uid="uid://bfwdsaqvhdqhg" path="res://scenes/fish.tscn" id="1_jq5yh"]
 [ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="2_byhhq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://px765xxxbw7f" path="res://assets/sprites/FlowMap.png" id="4_noqqd"]
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="5_5ke07"]
 [ext_resource type="FontFile" uid="uid://ch42vpyata3mw" path="res://Gaegu-Bold.ttf" id="8_noqqd"]
+[ext_resource type="Texture2D" uid="uid://25lqdkhpgk87" path="res://assets/sprites/bubble-particle.png" id="9_5ke07"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byhhq"]
 resource_local_to_scene = true
@@ -23,6 +24,16 @@ resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
 albedo_texture = ExtResource("5_5ke07")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noqqd"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = ExtResource("9_5ke07")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -51,3 +62,7 @@ outline_size = 0
 
 [node name="LootParticles" parent="." index="3"]
 material_override = SubResource("StandardMaterial3D_5751l")
+
+[node name="BubbleParticles" parent="." index="4"]
+visible = false
+material_override = SubResource("StandardMaterial3D_noqqd")

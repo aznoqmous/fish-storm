@@ -12,6 +12,8 @@ class_name Tile extends Area3D
 @export var available_color: Color
 @export var hover_color: Color
 
+@export var algae_sprites : Array[CompressedTexture2D]
+
 var object: Node3D
 
 var rseed := 0.0
@@ -34,7 +36,8 @@ func _ready() -> void:
 		is_hovered = false
 		update_color()
 	)
-	algae_sprite.set_visible(randf() < 0.1)
+	algae_sprite.set_visible(randf() < 0.2)
+	#algae_sprite.material_override.set("shader_parameter/texture_albedo", algae_sprites.pick_random())
 
 func _input(event: InputEvent) -> void:
 	if not is_available or not is_hovered: return;
@@ -56,7 +59,10 @@ func _process(delta):
 	
 	bump_strength = lerp(bump_strength, 0.0, delta)
 	global_position.y = lerp(global_position.y, pos_y + sin(main.get_time() * TAU + global_position.x) * 0.2 * bump_strength, delta * 5.0)
-
+	
+	if object: object.global_position.y = global_position.y
+	if main.character.target_tile == self: main.character.global_position.y = global_position.y
+	
 func bump(size:=1.2):
 	scale = Vector3(size, 1.0/size, size);
 	global_position.y -= size / 5.0

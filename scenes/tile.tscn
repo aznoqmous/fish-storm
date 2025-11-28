@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://cpwvylcnp8wi6"]
+[gd_scene load_steps=18 format=3 uid="uid://cpwvylcnp8wi6"]
 
 [ext_resource type="Texture2D" uid="uid://3f4mefwv367p" path="res://assets/sprites/tile.png" id="1_n3f48"]
 [ext_resource type="Script" uid="uid://cn06fnu4ouyxj" path="res://scripts/tile.gd" id="1_ywnoi"]
+[ext_resource type="Texture2D" uid="uid://4da05k0vcpup" path="res://assets/sprites/foliages/algae-1.png" id="2_jm5cm"]
 [ext_resource type="Material" uid="uid://dn66vhkd36puj" path="res://materials/wobbly_material.tres" id="2_jy7pm"]
+[ext_resource type="Texture2D" uid="uid://dw0qbv12h8uws" path="res://assets/sprites/foliages/algae-2.png" id="3_vknvr"]
 [ext_resource type="Shader" uid="uid://cx74fsjntm10f" path="res://shaders/wobbly.gdshader" id="4_gtpg2"]
+[ext_resource type="Texture2D" uid="uid://v05lt2lnsil" path="res://assets/sprites/foliages/algae-3.png" id="4_jdkp0"]
 [ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="5_284l3"]
 [ext_resource type="Texture2D" uid="uid://1j3pbr27ky8v" path="res://assets/sprites/algae.png" id="5_a2bny"]
 [ext_resource type="Texture2D" uid="uid://dt3i0nx6owjfj" path="res://assets/sprites/ui/actions/back.png" id="5_j3iir"]
@@ -42,6 +45,7 @@ albedo_color = Color(0.17166138, 0.23041964, 0.29296875, 1)
 script = ExtResource("1_ywnoi")
 available_color = Color(0.66015625, 0.66015625, 0.66015625, 1)
 hover_color = Color(1, 1, 1, 1)
+algae_sprites = Array[CompressedTexture2D]([ExtResource("2_jm5cm"), ExtResource("3_vknvr"), ExtResource("4_jdkp0")])
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)

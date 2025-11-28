@@ -160,7 +160,7 @@ _data = {
 &"looted": SubResource("Animation_wpvan")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yixxi"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lajf"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.96862745, 0.9607843, 0.8117647, 1)
@@ -187,7 +187,7 @@ scale_curve = SubResource("CurveTexture_2c5cg")
 turbulence_noise_strength = 0.1
 turbulence_noise_scale = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wjndy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k5b65"]
 resource_local_to_scene = true
 transparency = 1
 albedo_texture = ExtResource("7_21k1a")
@@ -273,13 +273,13 @@ autoplay = "idle"
 lifetime = 0.5
 
 [node name="LootParticles" parent="." instance=ExtResource("4_pgks6")]
-material_override = SubResource("StandardMaterial3D_yixxi")
+material_override = SubResource("StandardMaterial3D_4lajf")
 lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_yixxi")
 
 [node name="BubbleParticles" parent="." instance=ExtResource("4_pgks6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41109276, 0.5652524, 0)
-material_override = SubResource("StandardMaterial3D_wjndy")
+material_override = SubResource("StandardMaterial3D_k5b65")
 emitting = true
 amount = 10
 amount_ratio = 0.05

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dl8w77uxmq0if"]
+[gd_scene load_steps=38 format=3 uid="uid://dl8w77uxmq0if"]
 
 [ext_resource type="Script" uid="uid://cxnfrff5gkkbx" path="res://scripts/uis/title_control.gd" id="1_p6dhs"]
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="2_pyl7j"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="13_blk4q"]
 [ext_resource type="Resource" uid="uid://b0v358lg7qpbk" path="res://resources/characters/default.tres" id="14_8magm"]
 [ext_resource type="Resource" uid="uid://cljw1d0fw8t6b" path="res://resources/characters/ikk.tres" id="15_pmcd8"]
+[ext_resource type="Texture2D" uid="uid://bunvlygd1uik3" path="res://assets/sprites/particle.png" id="15_wtvjo"]
 [ext_resource type="Resource" uid="uid://b3e8by7tdbx8h" path="res://resources/characters/YV.tres" id="16_e75f2"]
 [ext_resource type="PackedScene" uid="uid://ljyqaok0p7pa" path="res://scenes/uis/button.tscn" id="16_fgbvm"]
 [ext_resource type="PackedScene" uid="uid://3dkqxknb3p7p" path="res://scenes/uis/settings_control.tscn" id="17_e75f2"]
@@ -77,6 +78,22 @@ shader_parameter/displacement_steps = 10
 shader_parameter/displacement_power = 0.6
 shader_parameter/displacement_size = 15.0
 
+[sub_resource type="Curve" id="Curve_t8o15"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25247526, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_opmo2"]
+curve = SubResource("Curve_t8o15")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_owywo"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, -98, 0)
+scale_min = 0.049999997
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_opmo2")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ygloa"]
 resource_local_to_scene = true
 shader = SubResource("Shader_w65of")
@@ -102,6 +119,18 @@ font_size = 42
 [sub_resource type="LabelSettings" id="LabelSettings_e75f2"]
 font = ExtResource("3_b3w7a")
 font_size = 32
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtvjo"]
+shader = ExtResource("2_pyl7j")
+shader_parameter/texture_flow_map = ExtResource("5_w65of")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 3
+shader_parameter/displacement_power = 150.0
+shader_parameter/displacement_size = 300.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_t8o15"]
+font = ExtResource("3_b3w7a")
+font_color = Color(0.421875, 0.421875, 0.421875, 1)
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -177,6 +206,15 @@ grow_vertical = 2
 texture = ExtResource("3_4rr2b")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/TitleControl/Panel/Title"]
+position = Vector2(193.5, 126)
+amount = 10
+amount_ratio = 0.1
+texture = ExtResource("15_wtvjo")
+lifetime = 3.0
+explosiveness = 0.1
+process_material = SubResource("ParticleProcessMaterial_owywo")
 
 [node name="Fish" type="TextureRect" parent="CanvasLayer/TitleControl/Panel/Title"]
 material = SubResource("ShaderMaterial_ygloa")
@@ -376,3 +414,19 @@ offset_left = 17.0
 offset_top = 18.0
 offset_right = 244.0
 offset_bottom = 95.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TitleControl"]
+material = SubResource("ShaderMaterial_wtvjo")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "aznoqmous x jeremie.fremont"
+label_settings = SubResource("LabelSettings_t8o15")

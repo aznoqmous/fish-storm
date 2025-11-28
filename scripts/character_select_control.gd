@@ -29,8 +29,10 @@ func _ready():
 
 func _process(delta):
 	scale = lerp(scale, Vector2.ONE * 1.2 if hovered and is_enabled else Vector2.ONE, delta * 20.0)
-	star_texture.material.set("shader_parameter/color", Color.from_hsv(rseed + Time.get_ticks_msec() / 1000.0 / 10.0, 0.5, 1.0))
+	var color = Color.from_hsv(rseed / 5.0 + Time.get_ticks_msec() / 1000.0 / 10.0, 0.5, 1.0)
+	star_texture.material.set("shader_parameter/color", color)
 	star_texture.position.y = -134.0 + sin((Time.get_ticks_msec() / 1000.0 + rseed) * TAU) * 3.0
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and hovered and is_enabled and event.is_pressed():
 		button_click.play()

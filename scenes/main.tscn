@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=70 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -43,6 +43,7 @@
 [ext_resource type="Script" uid="uid://bvudd4e0t6jb5" path="res://scripts/final_score_control.gd" id="40_chjal"]
 [ext_resource type="AudioStream" uid="uid://dt2b216q0p0lq" path="res://assets/audio/sfx/Jump_Launch_009.wav" id="40_nvyfr"]
 [ext_resource type="Script" uid="uid://b6dir60bs2k8u" path="res://scripts/uis/unlock_control_container.gd" id="41_2cjbq"]
+[ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="42_bjg73"]
 [ext_resource type="PackedScene" uid="uid://coi6pa3wr02p4" path="res://scenes/uis/unlock_control.tscn" id="42_chjal"]
 [ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="43_cjqg0"]
 [ext_resource type="Script" uid="uid://cup54nyno2wss" path="res://scripts/uis/settings_menu.gd" id="44_txyw0"]
@@ -59,6 +60,9 @@ shader_parameter/light_foam_color = Color(0.045294113, 0.07294116, 0.10470587, 1
 shader_parameter/dark_foam_color = Color(0.015098044, 0.024313731, 0.03490197, 1)
 shader_parameter/voronoi_texture = ExtResource("26_ids8r")
 shader_parameter/voronoi_size = 0.06
+shader_parameter/speed = 1.0
+shader_parameter/amplitude = 0.3
+shader_parameter/frequency = 0.3
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
 size = Vector2(100, 100)
@@ -130,6 +134,18 @@ stream_5/stream = ExtResource("37_vchkt")
 stream_6/stream = ExtResource("38_txyw0")
 stream_7/stream = ExtResource("39_vc5cj")
 stream_8/stream = ExtResource("40_nvyfr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bu4jf"]
+shader = ExtResource("42_bjg73")
+shader_parameter/texture_flow_map = ExtResource("21_j2jfr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/displacement_steps = 3
+shader_parameter/displacement_power = 150.0
+shader_parameter/displacement_size = 100.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7ddy"]
+font = ExtResource("22_bjg73")
+font_size = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txyw0"]
 content_margin_left = 0.0
@@ -207,7 +223,7 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.009594381, 0, 0)
 transform = Transform3D(0.9321217, -0.12628701, 0.33941236, 0, 0.93722725, 0.34871927, -0.36214522, -0.3250488, 0.87360984, 0, 0, 0)
 
 [node name="Water" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7620473, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2623286, 0)
 material_override = SubResource("ShaderMaterial_7mycd")
 mesh = SubResource("PlaneMesh_1bvp3")
 
@@ -427,6 +443,23 @@ gap = 5
 [node name="TriggerEffectAudio" type="AudioStreamPlayer" parent="CanvasLayer/Control/ActiveControl"]
 stream = SubResource("AudioStreamRandomizer_ty1g6")
 bus = &"SFX"
+
+[node name="SpaceLabel" type="Label" parent="CanvasLayer/Control/ActiveControl"]
+material = SubResource("ShaderMaterial_bu4jf")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -3.0
+offset_right = 45.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[SPACE]"
+label_settings = SubResource("LabelSettings_o7ddy")
 
 [node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
 visible = false

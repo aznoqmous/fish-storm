@@ -12,6 +12,7 @@ character_name = "Ooqo"
 head_sprite = ExtResource("1_8j8q6")
 active_effect_sprite = ExtResource("1_ucav4")
 description = "Power : More fishes"
+max_moves_left = 5
 active_effect = 3
 value = 2.0
 active_cooldown = 4

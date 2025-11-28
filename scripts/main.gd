@@ -12,6 +12,7 @@ class_name Main extends Node3D
 @onready var unlock_control_container: UnlockControlContainer = $CanvasLayer/Control/UnlockControlContainer
 @onready var final_score_control: FinalScoreControl = $CanvasLayer/Control/FinalScoreControl
 @onready var leader_board_container_control: LeaderBoardContainerControl = $CanvasLayer/Control/FinalScoreControl/LeaderBoardContainerControl
+@onready var water: MeshInstance3D = $Water
 
 const FISH = preload("res://scenes/fish.tscn")
 const COMBO = preload("res://scenes/combo.tscn")
@@ -64,6 +65,7 @@ var available_upgrades : Array[ObjectResource]
 var is_free_move := false
 
 var start_time := 0.0
+var water_strength := 0.0
 
 func _ready() -> void:
 	upgrade_random = FixedRandom.new()
@@ -137,6 +139,12 @@ func _process(delta: float) -> void:
 	camera_3d.global_position.x = lerp(camera_3d.global_position.x, character.global_position.x + pos.x * 8.0, delta * 2.0)
 	score_display = lerp(score_display, float(score), delta * 5.0)
 	score_label.text = str(int(ceil(score_display)))
+	
+	water_strength = lerp(water_strength, clamp(combo/10.0, 0.0, 1.0), delta)
+	if not Game.visuals_value: water_strength = 0.0
+	water.material_override.set("shader_parameter/amplitude", 0.3 + water_strength * 0.3)
+	water.material_override.set("shader_parameter/speed", 1.0 + water_strength * 0.2)
+	water.material_override.set("shader_parameter/frequency", 0.1 + water_strength * 0.2)
 	
 func gain_score(value):
 	score += value * (combo + 1.0)
@@ -277,16 +285,9 @@ func handle_loot(fish: Fish):
 		ObjectResource.ObjectEffect.TemporaryMoveDistance:
 			temporary_mov_distance += fish.resource.value
 		ObjectResource.ObjectEffect.AttractFishes:
-				var char_pos = grid.world_to_grid_position(character.global_position)
-				var tile = grid.get_fish_tiles()
-				if tile.size():
-					tile.shuffle()
-					tile.sort_custom(func(a,b): return a.global_position.distance_to(character.global_position) < b.global_position.distance_to(character.global_position))
-					for i in range(0, min(fish.resource.value, tile.size())):
-						var f := tile[i].object as Fish
-						if not f: continue
-						f.move_toward_grid_position(char_pos)
-						#await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
+			for i in range(0, fish.resource.value):
+				attract_fishes()
+				await get_tree().create_timer(0.5).timeout
 		ObjectResource.ObjectEffect.CollectFarestFishes:
 			for i in range(0, fish.resource.value):
 				var tiles = grid.get_fish_tiles()
@@ -453,7 +454,10 @@ func load_level(level: LevelResource):
 	update_moves_left()
 	
 	
+	water_strength = 0.0
+	
 	await SceneManager.scene_transition_control.close()
+	
 	
 	await spend_credits()
 	#await spend_credits_spaced()
@@ -498,6 +502,10 @@ func trigger_active_effect():
 				var fish = spawn_fish()
 				if fish: fish.load_resource(fishes[min(floor(randf() * fish_level), fishes.size()-1)])
 				await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
+		CharacterResource.ActiveEffect.AttractFishes:
+			for i in range(0, ch.value):
+				attract_fishes()
+				await get_tree().create_timer(0.5).timeout
 		CharacterResource.ActiveEffect.TemporaryMovementIncrease:
 			temporary_mov_distance += ch.value
 			combo = floor(combo/2.0)
@@ -528,7 +536,6 @@ func trigger_active_effect():
 			is_free_move = true
 			character.move_to(tile)
 
-	reset_active_charges()
 	
 func get_time():
 	return Time.get_ticks_msec() / 1000.0
@@ -604,3 +611,15 @@ func end_game():
 		)
 	await leader_board_container_control.update()
 	if id: leader_board_container_control.set_current(id)
+
+func attract_fishes():
+	var char_pos = grid.world_to_grid_position(character.global_position)
+	var tiles = grid.get_fish_tiles()
+	if tiles.size():
+		tiles.shuffle()
+		tiles.sort_custom(func(a,b): return a.global_position.distance_to(character.global_position) < b.global_position.distance_to(character.global_position))
+		for tile in tiles:
+			var f := tile.object as Fish
+			if not f: continue
+			f.move_toward_grid_position(char_pos)
+			#await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout

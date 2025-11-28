@@ -5,6 +5,7 @@ const LEADERBOARD_CONTROL = preload("res://scenes/uis/leaderboard_control.tscn")
 @export var domain_url := "https://ooqo.aznoqmous.com"
 @onready var v_box_container: VBoxContainer = $VBoxContainer
 @onready var loading_label: Label = $LoadingLabel
+@onready var no_response_label: Label = $NoResponse
 
 var scores: Array[LeaderboardControl]
 
@@ -41,6 +42,11 @@ func update():
 	for child in v_box_container.get_children(): child.queue_free()
 
 	scores.clear()
+	
+	loading_label.set_visible(false)
+	no_response_label.set_visible(not data)
+	if not data: return;
+	
 	for run_data in data["Runs"]:
 		i += 1
 		var new_score = LEADERBOARD_CONTROL.instantiate() as LeaderboardControl
@@ -49,13 +55,13 @@ func update():
 		new_score.score_label.text = str(int(run_data["Score"]))
 		new_score.name_label.text = str(run_data["Name"])
 		new_score.rank_label.text = str("#", i)
+		new_score.level_label.text = str("level ", int(run_data["Level"] + 1.0))
 		new_score.background.set_visible(i % 2)
 		new_score.run_id = int(run_data["id"])
 		
 		
 		scores.append(new_score)
 	v_box_container.set_visible(true)
-	loading_label.set_visible(false)
 
 func set_current(id):
 	for new_score in scores:

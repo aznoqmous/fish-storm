@@ -23,7 +23,7 @@ func _ready() -> void:
 	
 func build():
 	if not charges_container: return;
-	for child in charges_container.get_children(): child.queue_free()
+	for child in charges_container.get_children(): child.free()
 	for i in max_charges:
 		var charge_control:= CHARGE_CONTROL.instantiate() as ChargeControl
 		charges_container.add_child(charge_control)
@@ -34,6 +34,7 @@ func update():
 	if not charges_container: return;
 	var children = charges_container.get_children()
 	var _size = (charges_container.size.x - gap * (children.size() - 1.0)) / children.size()
+	
 	for i in children.size():
 		var child = children[i]
 		child.size.x = _size
@@ -46,8 +47,5 @@ func update():
 
 func gain_charge(value:=1):
 	if charges >= max_charges: return;
-	#var current = charges_container.get_child(charges)
-	#current.scale = Vector2.ONE * (1.0 + value / 10.0)
-	#current.set_enabled(true)
 	charges += value
 	update()

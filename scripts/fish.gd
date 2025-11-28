@@ -8,6 +8,7 @@ class_name Fish extends Node3D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var splash_particles: GPUParticles3D = $SplashParticles
 @onready var loot_particles: GPUParticles3D = $LootParticles
+@onready var bubble_particles: GPUParticles3D = $BubbleParticles
 
 @onready var spawn_audio: AudioStreamPlayer3D = $SpawnAudio
 @onready var loot_audio: AudioStreamPlayer3D = $LootAudio
@@ -27,6 +28,8 @@ var animation_depth := -10.0
 
 @export var is_upgrade := false
 @export var is_portal := false
+var is_fish : bool :
+	get: return not is_upgrade and not is_portal
 
 var charges = 0
 var max_charges = 0
@@ -60,6 +63,7 @@ func _process(delta: float) -> void:
 	
 	if not is_portal: animation_player.speed_scale = main.combo / 20.0 + 1.0
 	sprite_3d.scale = lerp(sprite_3d.scale, Vector3.ONE, delta * 5.0)
+	bubble_particles.emitting = is_fish
 	
 func loot():
 	if is_portal: portal_loot_audio.play()
@@ -82,6 +86,7 @@ func bump(value:=1.5):
 func set_color(value):
 	color = value
 	sprite_3d.material_override.set("shader_parameter/color", value)
+	#bubble_particles.material_override.set("albedo_color", value)
 	splash_particles.material_override.set("albedo_color", value)
 	loot_particles.material_override.set("albedo_color", value)
 	

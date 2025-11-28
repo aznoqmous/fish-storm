@@ -84,6 +84,18 @@ func _ready() -> void:
 
 	start_time = get_time()
 	
+func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_up"):
+		#next_level()
+	if event.is_action_pressed("ui_down"):
+		Game.clear()
+	#if event.is_action_pressed("ui_right"):
+		#gain_combo(1)
+	#if event.is_action_pressed("ui_left"):
+		#reset_combo()
+	if event.is_action_pressed("Power"):
+		trigger_active_effect()
+		
 func load_character(res: CharacterResource):
 	max_combo += res.max_combo
 	#max_moves_left += res.max_moves_left
@@ -103,23 +115,14 @@ func load_character(res: CharacterResource):
 	
 	available_upgrades = upgrades.filter(func(u): return not res.banned_upgrades.has(u))
 	
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_up"):
-		next_level()
-	if event.is_action_pressed("ui_down"):
-		Game.clear()
-	if event.is_action_pressed("ui_right"):
-		gain_combo(1)
-	if event.is_action_pressed("ui_left"):
-		reset_combo()
-	if event.is_action_pressed("Power"):
-		trigger_active_effect()
+
 		
 func next_level():
 	print("Level ", current_level_index, " : ", get_time() - start_time)
 	start_time = get_time()
 	current_level_index += 1
 	if current_level_index >= levels.size():
+		Game.complete_run(Game.selected_character)
 		end_game()
 		combo = 10
 		for tile in grid.tiles.values():

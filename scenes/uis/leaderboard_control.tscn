@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmqaletmxr5yx"]
+[gd_scene load_steps=15 format=3 uid="uid://dmqaletmxr5yx"]
 
 [ext_resource type="Shader" uid="uid://dw1kwdj7ajxo5" path="res://shaders/canvas_wobbly_shader.gdshader" id="1_jjo37"]
 [ext_resource type="Script" uid="uid://ds8c7xk8351jq" path="res://scripts/uis/leaderboard_control.gd" id="1_te8i0"]
@@ -34,6 +34,17 @@ shader_parameter/displacement_size = 16.0
 font = ExtResource("6_4nid7")
 font_size = 32
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h554b"]
+font = ExtResource("6_4nid7")
+font_size = 32
+font_color = Color(0.58984375, 0.58984375, 0.58984375, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q01g1"]
+font = ExtResource("6_4nid7")
+font_size = 32
+outline_size = 2
 
 [node name="LeaderboardControl" type="Control"]
 custom_minimum_size = Vector2(0, 50)
@@ -93,18 +104,26 @@ vertical_alignment = 1
 
 [node name="NameLabel" type="Label" parent="Control"]
 material = ExtResource("5_q01g1")
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(164.225, 0)
 layout_mode = 2
-text = "aznq"
+text = "azertyuiopqs"
 label_settings = SubResource("LabelSettings_txyw0")
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="Control"]
+material = ExtResource("5_q01g1")
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "level 5"
+label_settings = SubResource("LabelSettings_h554b")
 vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="Control"]
 material = ExtResource("5_q01g1")
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(113.4, 0)
 layout_mode = 2
 text = "222222"
-label_settings = SubResource("LabelSettings_txyw0")
+label_settings = SubResource("LabelSettings_q01g1")
 horizontal_alignment = 2
 vertical_alignment = 1
 

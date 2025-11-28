@@ -223,6 +223,7 @@ layout_mode = 2
 text = "SETTINGS"
 
 [node name="QuitButton" parent="CanvasLayer/TitleControl/ButtonsContainer" instance=ExtResource("16_fgbvm")]
+visible = false
 layout_mode = 2
 text = "QUIT"
 

@@ -3,6 +3,7 @@ extends Node
 var selected_character: CharacterResource
 var characters: Array[CharacterResource]
 var unlocked_characters: Array[CharacterResource]
+var completed_runs: Dictionary
 var save_path := "user://savegame.save"
 var username := "" :
 	set(value):
@@ -22,6 +23,7 @@ func save():
 		"music_value": music_value,
 		"sfx_value": sfx_value,
 		"visuals_value": visuals_value,
+		"completed_runs": completed_runs
 	}
 	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(data))
@@ -38,6 +40,7 @@ func load():
 	if data.has("music_value"): music_value = data.music_value
 	if data.has("sfx_value"): sfx_value = data.sfx_value
 	if data.has("visuals_value"): visuals_value = data.visuals_value
+	if data.has("completed_runs"): completed_runs = data.completed_runs
 	loaded.emit()
 	
 func unlock_character(character: CharacterResource):
@@ -56,10 +59,18 @@ func get_character_resource_by_id(id: String):
 	
 func clear():
 	unlocked_characters.clear()
+	completed_runs.clear()
 	save()
 
 func get_locked_characters() -> Array[CharacterResource]:
 	return characters.filter(func(c): return not unlocked_characters.has(c))
 
+func complete_run(character: CharacterResource):
+	completed_runs[character.id] = true
+	save()
+	
+func has_completed_run(character: CharacterResource):
+	return completed_runs.has(character.id) and completed_runs[character.id]
+	
 signal loaded
 signal username_changed

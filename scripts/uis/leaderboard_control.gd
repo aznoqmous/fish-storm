@@ -6,6 +6,7 @@ class_name LeaderboardControl extends Control
 @onready var name_label: Label = $Control/NameLabel
 @onready var score_label: Label = $Control/ScoreLabel
 @onready var background: TileScaleContainer = $Background
+@onready var level_label: Label = $Control/LevelLabel
 
 var run_id := 0
 

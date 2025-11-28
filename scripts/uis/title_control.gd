@@ -46,11 +46,13 @@ func _ready() -> void:
 func update_characters():
 	for child in characters_container.get_children():
 		child.queue_free()
+	var i = 0.0
 	for cr in character_resources:
 		var nchar := CHARACTER_SELECT_CONTROL.instantiate() as CharacterSelectControl
 		characters_container.add_child(nchar)
 		nchar.load_resource(cr)
 		nchar.set_state(Game.unlocked_characters.has(cr))
+		nchar.star_texture.set_visible(Game.has_completed_run(cr))
 		nchar.mouse_entered.connect(func():
 			var text = cr.description
 			if not Game.unlocked_characters.has(cr): text = str("Unlock : ", cr.unlock_description)
@@ -59,7 +61,9 @@ func update_characters():
 		nchar.mouse_exited.connect(func():
 			character_description.text = ""
 		)
-
+		nchar.rseed = i / character_resources.size()
+		i += 1.0
+		
 func select_character():
 	character_select.set_visible(true)
 	buttons_container.set_visible(false)

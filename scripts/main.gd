@@ -120,14 +120,14 @@ func load_character(res: CharacterResource):
 func next_level():
 	print("Level ", current_level_index, " : ", get_time() - start_time)
 	start_time = get_time()
-	current_level_index += 1
-	if current_level_index >= levels.size():
+	if current_level_index + 1 >= levels.size():
 		Game.complete_run(Game.selected_character)
 		end_game()
 		combo = 10
 		for tile in grid.tiles.values():
 			tile.bump_strength = 10.0
 		return
+	current_level_index += 1
 	load_level(levels[current_level_index % levels.size()])
 	reset_upgrades()
 	load_character(Game.selected_character)

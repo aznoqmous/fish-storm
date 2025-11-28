@@ -6,55 +6,56 @@
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_bts3x")
+tiles_count_display = 16
 
 [node name="EndPortal" parent="." instance=ExtResource("2_3skcl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
 [node name="TilesContainer" type="Node3D" parent="."]
 
 [node name="Tile14" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-
-[node name="Tile15" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-
-[node name="Tile16" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
-
-[node name="Tile17" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
-
-[node name="Tile18" parent="TilesContainer" instance=ExtResource("3_d88r1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 
-[node name="Tile19" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1)
+[node name="Tile15" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 
-[node name="Tile20" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+[node name="Tile16" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
-[node name="Tile21" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+[node name="Tile17" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
 
-[node name="Tile22" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
-
-[node name="Tile25" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
-
-[node name="Tile26" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
-[node name="Tile27" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1)
-
-[node name="Tile28" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+[node name="Tile18" parent="TilesContainer" instance=ExtResource("3_d88r1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 
+[node name="Tile19" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Tile20" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Tile21" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="Tile22" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+
+[node name="Tile25" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="Tile26" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+
+[node name="Tile27" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="Tile28" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+
 [node name="Tile31" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="Tile32" parent="TilesContainer" instance=ExtResource("3_d88r1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="Tile33" parent="TilesContainer" instance=ExtResource("3_d88r1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)

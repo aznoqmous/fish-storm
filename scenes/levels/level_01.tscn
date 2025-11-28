@@ -6,6 +6,7 @@
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_sqmmq")
+tiles_count_display = 13
 
 [node name="EndPortal" parent="." instance=ExtResource("2_sqmmq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)

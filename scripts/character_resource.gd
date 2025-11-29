@@ -31,6 +31,7 @@ class_name CharacterResource extends Resource
 
 @export_category("Upgrades")
 @export var banned_upgrades : Array[ObjectResource]
+@export var spawned_upgrades: Array[ObjectResource]
 
 var id : String :
 	get: return get_path().split("/")[-1].replace(".tres", "")

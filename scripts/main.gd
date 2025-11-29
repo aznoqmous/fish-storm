@@ -286,6 +286,8 @@ func handle_loot(fish: Fish):
 				await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 		ObjectResource.ObjectEffect.TemporaryMoveDistance:
 			temporary_mov_distance += fish.resource.value
+		ObjectResource.ObjectEffect.GainCombo:
+			gain_combo(fish.resource.value)
 		ObjectResource.ObjectEffect.AttractFishes:
 			for i in range(0, fish.resource.value):
 				attract_fishes()
@@ -497,7 +499,8 @@ func trigger_active_effect():
 			credits = 0
 			var fish = spawn_fish()
 			if fish: 
-				fish.load_resource(available_upgrades.pick_random())
+				var upgrade = available_upgrades.pick_random() if not ch.spawned_upgrades.size() else ch.spawned_upgrades.pick_random()
+				fish.load_resource(upgrade)
 				fish.is_upgrade = true
 		CharacterResource.ActiveEffect.SpawnFishes:
 			for i in range(0, ch.value):

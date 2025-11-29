@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObjectResource" load_steps=8 format=3 uid="uid://cm07v10447eft"]
+
+[ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="1_q3aw0"]
+[ext_resource type="Texture2D" uid="uid://x6h65hfbdaj0" path="res://assets/sprites/upgrades/combooo-2.png" id="2_oil2w"]
+[ext_resource type="Texture2D" uid="uid://boyro02yuktqj" path="res://assets/sprites/upgrades/combooo-1.png" id="2_q3aw0"]
+[ext_resource type="Texture2D" uid="uid://cqd4pph1ca8jq" path="res://assets/sprites/upgrades/combooo-3.png" id="3_casb0"]
+[ext_resource type="Texture2D" uid="uid://c3vufgvge37xf" path="res://assets/sprites/upgrades/combooo-4.png" id="4_iqmvx"]
+[ext_resource type="Texture2D" uid="uid://cp5ly3fasl2v8" path="res://assets/sprites/upgrades/combooo-5.png" id="5_81jxc"]
+[ext_resource type="Texture2D" uid="uid://brdlycgd5a8u2" path="res://assets/sprites/upgrades/combooo-6.png" id="6_fpnv4"]
+
+[resource]
+script = ExtResource("1_q3aw0")
+texture = ExtResource("2_q3aw0")
+alternate_textures = Array[CompressedTexture2D]([ExtResource("2_q3aw0"), ExtResource("2_oil2w"), ExtResource("3_casb0"), ExtResource("4_iqmvx"), ExtResource("5_81jxc"), ExtResource("6_fpnv4")])
+score = 0.0
+effect = 7
+value = 3.0
+metadata/_custom_type_script = "uid://b71n7qcf355ov"

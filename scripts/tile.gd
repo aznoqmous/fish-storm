@@ -42,7 +42,7 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if not is_available or not is_hovered: return;
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		if event.is_pressed() and event.button_index == 1:
 			main.character.move_to(self)
 
 func _process(delta):

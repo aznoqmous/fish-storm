@@ -93,8 +93,9 @@ func set_color(value):
 	
 func load_resource(res: ObjectResource):
 	resource = res
-	sprite_3d.material_override.set("shader_parameter/texture_albedo", res.texture)
-	sprite_3d.texture = res.texture
+	var texture = res.texture if not res.alternate_textures else res.alternate_textures.pick_random()
+	sprite_3d.material_override.set("shader_parameter/texture_albedo", texture)
+	sprite_3d.texture = texture
 	
 	if res.effect == ObjectResource.ObjectEffect.EndLevel:
 		set_color(end_portal_color)

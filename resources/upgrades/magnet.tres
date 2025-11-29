@@ -8,6 +8,6 @@ script = ExtResource("1_r1kjg")
 texture = ExtResource("2_r1kjg")
 score = 0.0
 effect = 3
-value = 999.0
+value = 2.0
 description = "attract fishes !"
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

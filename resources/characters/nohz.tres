@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b0getvtbsg40m" path="res://assets/sprites/characters/bomber.png" id="1_yd8ku"]
 [ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="2_se0y4"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_xyafw"]
-[ext_resource type="Resource" uid="uid://b8dvx5pnoqfwg" path="res://resources/magnet.tres" id="3_uwl4k"]
+[ext_resource type="Resource" uid="uid://cplp8dtfasksm" path="res://resources/upgrades/magnet.tres" id="3_uwl4k"]
 
 [resource]
 script = ExtResource("2_xyafw")

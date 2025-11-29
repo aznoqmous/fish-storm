@@ -7,6 +7,8 @@ class_name FinalScoreControl extends Control
 @onready var restart_button: Button = $ScoreContainer/ButtonsContainer/RestartButton
 @onready var characters_button: Button = $ScoreContainer/ButtonsContainer/CharactersButton
 @onready var main_menu: Button = $ScoreContainer/ButtonsContainer/MainMenu
+@onready var game_over: Label = $Panel/GameOver
+@onready var completed: Label = $Panel/Completed
 
 
 func _ready():

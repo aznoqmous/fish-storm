@@ -1,6 +1,6 @@
 class_name UsernameContainer extends Control
 
-@onready var username_edit: TextEdit = $UsernameEdit
+@onready var username_edit: LineEdit = $UsernameEdit
 @onready var pen: TextureRect = $Pen
 @onready var min_length_alert: Label = $Control/MinLengthAlert
 @onready var username_explanation: Label = $Control/UsernameExplanation

@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://cablalujd6va0"]
+[gd_scene load_steps=71 format=3 uid="uid://cablalujd6va0"]
 
 [ext_resource type="Script" uid="uid://c51dhxq6ccl4g" path="res://scripts/main.gd" id="1_fv21b"]
 [ext_resource type="Script" uid="uid://b2n4reby476q" path="res://scripts/level_resource.gd" id="2_tel4y"]
@@ -46,6 +46,7 @@
 [ext_resource type="Shader" uid="uid://dfres2gk08qge" path="res://shaders/button.gdshader" id="42_bjg73"]
 [ext_resource type="PackedScene" uid="uid://coi6pa3wr02p4" path="res://scenes/uis/unlock_control.tscn" id="42_chjal"]
 [ext_resource type="Texture2D" uid="uid://dalw35n4ch5rk" path="res://assets/sprites/characters/ikke.png" id="43_cjqg0"]
+[ext_resource type="Texture2D" uid="uid://ghymgceqlwkg" path="res://assets/sprites/upgrades/star.png" id="44_bu4jf"]
 [ext_resource type="Script" uid="uid://cup54nyno2wss" path="res://scripts/uis/settings_menu.gd" id="44_txyw0"]
 [ext_resource type="PackedScene" uid="uid://blwxqm5ndheeg" path="res://scenes/uis/leader_board_container_control.tscn" id="44_vc5cj"]
 [ext_resource type="Material" uid="uid://biuelfgbaxa51" path="res://materials/button_material.tres" id="44_vchkt"]
@@ -462,7 +463,6 @@ text = "[SPACE]"
 label_settings = SubResource("LabelSettings_o7ddy")
 
 [node name="FinalScoreControl" type="Control" parent="CanvasLayer/Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -479,6 +479,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_txyw0")
+
+[node name="GameOver" type="Label" parent="CanvasLayer/Control/FinalScoreControl/Panel"]
+visible = false
+material = ExtResource("44_vchkt")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = 33.0
+offset_right = 96.0
+offset_bottom = 126.0
+grow_horizontal = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_kq58d")
+horizontal_alignment = 1
+
+[node name="Completed" type="Label" parent="CanvasLayer/Control/FinalScoreControl/Panel"]
+material = ExtResource("44_vchkt")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = 33.0
+offset_right = 96.0
+offset_bottom = 126.0
+grow_horizontal = 2
+text = "COMPLETED!"
+label_settings = SubResource("LabelSettings_kq58d")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/Panel/Completed"]
+material = ExtResource("44_vchkt")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -31.5
+offset_right = -7.4705963
+offset_bottom = 9.5
+grow_vertical = 2
+texture = ExtResource("44_bu4jf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/FinalScoreControl/Panel/Completed"]
+material = ExtResource("44_vchkt")
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -32.5
+offset_right = 49.02942
+offset_bottom = 8.5
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("44_bu4jf")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ScoreContainer" type="Control" parent="CanvasLayer/Control/FinalScoreControl"]
 layout_mode = 1

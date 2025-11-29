@@ -125,6 +125,8 @@ func next_level():
 	if current_level_index + 1 >= levels.size():
 		Game.complete_run(Game.selected_character)
 		end_game()
+		final_score_control.game_over.set_visible(false)
+		final_score_control.completed.set_visible(true)
 		combo = 10
 		for tile in grid.tiles.values():
 			tile.bump_strength = 10.0
@@ -599,6 +601,8 @@ func end_game():
 	moves_left = 0
 	
 	final_score_control.set_visible(true)
+	final_score_control.game_over.set_visible(true)
+	final_score_control.completed.set_visible(false)
 	final_score_control.animate()
 	
 	var id := 0

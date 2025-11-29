@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_rguya")
 texture = ExtResource("2_rguya")
-effect = 4
-value = 10.0
+effect = 2
+value = 999.0
 description = "teleport !"
 metadata/_custom_type_script = "uid://b71n7qcf355ov"

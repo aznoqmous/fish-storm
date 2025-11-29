@@ -38,7 +38,7 @@ offset_right = 307.0
 offset_bottom = 324.0
 script = ExtResource("1_5itix")
 
-[node name="UsernameEdit" type="TextEdit" parent="."]
+[node name="UsernameEdit" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,10 +52,14 @@ mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_lwhh5")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_5itix")
-theme_override_styles/focus = SubResource("StyleBoxFlat_5itix")
 theme_override_styles/read_only = SubResource("StyleBoxFlat_5itix")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5itix")
 text = "azertyuiopml"
 placeholder_text = "username"
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="Pen" type="TextureRect" parent="."]
 modulate = Color(0.5647059, 0.5647059, 0.5647059, 1)

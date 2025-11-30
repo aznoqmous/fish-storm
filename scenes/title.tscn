@@ -130,6 +130,7 @@ shader_parameter/displacement_size = 300.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8o15"]
 font = ExtResource("3_b3w7a")
+font_size = 26
 font_color = Color(0.421875, 0.421875, 0.421875, 1)
 
 [node name="Title" type="Control"]

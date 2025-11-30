@@ -11,13 +11,14 @@ script = ExtResource("2_kftgp")
 character_name = "Ikk"
 head_sprite = ExtResource("1_c4e0c")
 active_effect_sprite = ExtResource("1_othj5")
-description = "Infinite combo, less combo move
+description = "More max combo, less combo move
 Power : Spawn a 3xcombo piece
 "
-max_combo = 999.0
-move_per_combo = 0.7
+max_combo = 10.0
+move_per_combo = 0.8
 active_effect = 2
-value = 3.0
+value = 2.0
+active_cooldown = 5
 unlock_description = "Wooow a level (perfect + flawless)"
 unlock_type = 5
 spawned_upgrades = Array[ExtResource("2_u8dj6")]([ExtResource("5_dicfr")])

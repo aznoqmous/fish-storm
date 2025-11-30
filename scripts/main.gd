@@ -89,8 +89,8 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("ui_up"):
 		#next_level()
-	if event.is_action_pressed("ui_down"):
-		Game.clear()
+	#if event.is_action_pressed("ui_down"):
+		#Game.clear()
 	#if event.is_action_pressed("ui_right"):
 		#gain_combo(1)
 	#if event.is_action_pressed("ui_left"):
@@ -305,7 +305,7 @@ func handle_loot(fish: Fish):
 					update_tiles_color()
 					if not end_portal_instance.is_active:
 						gain_credits()
-					await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
+					#await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 				else: break
 			update_moves_left()
 		ObjectResource.ObjectEffect.RegainMovesLeft:
@@ -530,9 +530,9 @@ func trigger_active_effect():
 						update_tiles_color()
 						if not end_portal_instance.is_active:
 							gain_credits()
-						await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
+						#await get_tree().create_timer(randf_range(1.0, 2.0) * 0.1).timeout
 					else: break
-					
+				reset_active_charges()
 				update_tiles_color()
 			
 		CharacterResource.ActiveEffect.ReturnToLastPosition:

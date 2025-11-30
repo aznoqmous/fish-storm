@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterResource" load_steps=6 format=3 uid="uid://dtswsmddjfa73"]
 
-[ext_resource type="Texture2D" uid="uid://dt3i0nx6owjfj" path="res://assets/sprites/ui/actions/back.png" id="1_glq3b"]
+[ext_resource type="Texture2D" uid="uid://dxff4a6tk60qf" path="res://assets/sprites/ui/actions/magnet.png" id="1_uwl4k"]
 [ext_resource type="Texture2D" uid="uid://b0getvtbsg40m" path="res://assets/sprites/characters/bomber.png" id="1_yd8ku"]
 [ext_resource type="Script" uid="uid://b71n7qcf355ov" path="res://scripts/object_resource.gd" id="2_se0y4"]
 [ext_resource type="Script" uid="uid://bxsukocx6neog" path="res://scripts/character_resource.gd" id="2_xyafw"]
@@ -10,7 +10,7 @@
 script = ExtResource("2_xyafw")
 character_name = "Nohz"
 head_sprite = ExtResource("1_yd8ku")
-active_effect_sprite = ExtResource("1_glq3b")
+active_effect_sprite = ExtResource("1_uwl4k")
 description = "Power : Attract fishes"
 active_effect = 6
 unlock_description = "Perfect a level (collect all fishes)"

@@ -15,7 +15,7 @@ description = "More max combo, less combo move
 Power : Spawn a 3xcombo piece
 "
 max_combo = 10.0
-move_per_combo = 0.8
+move_per_combo = 0.7
 active_effect = 2
 value = 2.0
 active_cooldown = 5

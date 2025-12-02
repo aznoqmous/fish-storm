@@ -569,7 +569,7 @@ func bind_character_unlocks():
 					if combo >= c.unlock_value: unlock_character(c)
 				)
 			CharacterResource.UnlockType.Score:
-				on_combo.connect(func():
+				on_score.connect(func():
 					if not current_level_index >= c.unlock_min_level: return;
 					if c.unlock_with_character and c.unlock_with_character != Game.selected_character: return;
 					if score >= c.unlock_value: unlock_character(c)
